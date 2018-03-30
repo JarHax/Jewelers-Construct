@@ -3,6 +3,8 @@ package com.jarhax.jewelersconstruct.api;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.jarhax.jewelersconstruct.api.modifier.Modifier;
+
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 public abstract class Material extends IForgeRegistryEntry.Impl<Material> {

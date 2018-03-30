@@ -4,7 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.jarhax.jewelersconstruct.api.Material;
-import com.jarhax.jewelersconstruct.api.Modifier;
+import com.jarhax.jewelersconstruct.api.modifier.Modifier;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Mod;

@@ -1,9 +1,10 @@
-package com.jarhax.jewelersconstruct.api;
+package com.jarhax.jewelersconstruct.api.modifier;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.registries.IForgeRegistryEntry;
@@ -22,9 +23,10 @@ public class Modifier extends IForgeRegistryEntry.Impl<Modifier> {
      * 
      * @param stack The stack that the trait is being applied to.
      * @param wearer The wearer of the item.
+     * @param level The level of the modifer.
      * @return A Multimap of all the attributes.
      */
-    public Multimap<String, AttributeModifier> getAttributeModifiers (ItemStack stack, EntityLiving wearer) {
+    public Multimap<String, AttributeModifier> getAttributeModifiers (ItemStack stack, EntityLivingBase wearer, int level) {
         
         return EMPTY;
     }
@@ -70,9 +72,10 @@ public class Modifier extends IForgeRegistryEntry.Impl<Modifier> {
      * Called every tick when the player is wearing something with this modifier.
      * 
      * @param item The item with the modifier.
-     * @param wearer The player wearing it.
+     * @param user The player wearing it.
+     * @param level The level of the modifier.
      */
-    public void onWearerTick (ItemStack item, EntityLiving wearer) {
+    public void onWearerTick (ItemStack item, EntityLivingBase user, int level) {
         
         // Default does nothing
     }
