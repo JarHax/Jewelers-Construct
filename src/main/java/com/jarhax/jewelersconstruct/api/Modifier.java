@@ -1,0 +1,78 @@
+package com.jarhax.jewelersconstruct.api;
+
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
+
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.registries.IForgeRegistryEntry;
+
+public class Modifier extends IForgeRegistryEntry.Impl<Modifier> {
+    
+    /**
+     * An empty Multimap of attribute modifiers. This is used as the default for
+     * {@link #getAttributeModifiers(ItemStack, EntityLiving)}. New entries should NEVER added
+     * here!!!
+     */
+    private static final Multimap<String, AttributeModifier> EMPTY = HashMultimap.create();
+    
+    /**
+     * Gets the list of attribute modifiers that this trait provides.
+     * 
+     * @param stack The stack that the trait is being applied to.
+     * @param wearer The wearer of the item.
+     * @return A Multimap of all the attributes.
+     */
+    public Multimap<String, AttributeModifier> getAttributeModifiers (ItemStack stack, EntityLiving wearer) {
+        
+        return EMPTY;
+    }
+    
+    /**
+     * Gets the amount to modify the durability by. This will be added on to the original
+     * value.
+     * 
+     * @param item The item being modified.
+     * @param base The base value.
+     * @return The amount to modify the durability by.
+     */
+    public int getModifiedDurability (ItemStack item, int base) {
+        
+        return 0;
+    }
+    
+    /**
+     * Gets the amount to modify the retention by. This will be added on to the original value.
+     * 
+     * @param item The item being modified.
+     * @param base The base value.
+     * @return The amount to modify the retention by.
+     */
+    public int getModifiedRetention (ItemStack item, int base) {
+        
+        return 0;
+    }
+    
+    /**
+     * Gets the amount to modify the purity by. This will be added on to the original value.
+     * 
+     * @param item The item being modified.
+     * @param base The base value.
+     * @return The amount to modify the purity by.
+     */
+    public int getModifiedPurity (ItemStack item, int base) {
+        
+        return 0;
+    }
+    
+    /**
+     * Called every tick when the player is wearing something with this modifier.
+     * 
+     * @param item The item with the modifier.
+     * @param wearer The player wearing it.
+     */
+    public void onWearerTick (ItemStack item, EntityLiving wearer) {
+        
+    }
+}
