@@ -69,6 +69,16 @@ public class Modifier extends IForgeRegistryEntry.Impl<Modifier> {
     }
     
     /**
+     * Gets the maximum amount of levels this modifier has.
+     * 
+     * @return The maximum level of this modifier;
+     */
+    public int getMaxLevel () {
+        
+        return 1;
+    }
+    
+    /**
      * Called every tick when the player is wearing something with this modifier.
      * 
      * @param item The item with the modifier.
