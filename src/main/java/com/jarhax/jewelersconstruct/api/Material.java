@@ -36,9 +36,9 @@ public abstract class Material extends IForgeRegistryEntry.Impl<Material> {
     abstract int getPurity ();
     
     /**
-     * Gets a set of all the traits this material provides.
+     * Gets a set of all the modifiers this material provides by default.
      * 
-     * @return The set of traits this material provides.
+     * @return The set of modifiers this material provides.
      */
     public Set<Modifier> getModifiers () {
         

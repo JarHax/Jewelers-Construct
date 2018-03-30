@@ -74,5 +74,6 @@ public class Modifier extends IForgeRegistryEntry.Impl<Modifier> {
      */
     public void onWearerTick (ItemStack item, EntityLiving wearer) {
         
+        // Default does nothing
     }
 }
