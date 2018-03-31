@@ -7,6 +7,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 public class Modifier extends IForgeRegistryEntry.Impl<Modifier> {
@@ -88,5 +89,16 @@ public class Modifier extends IForgeRegistryEntry.Impl<Modifier> {
     public void onWearerTick (ItemStack item, EntityLivingBase user, int level) {
         
         // Default does nothing
+    }
+    
+    /**
+     * Gets the translation key for the modifiers name.
+     * 
+     * @return The translation key for the midifiers name.
+     */
+    public String getTranslationName () {
+        
+        final ResourceLocation identifier = this.getRegistryName();
+        return "jewlersconstruct.modifier." + identifier.getResourceDomain() + "." + identifier.getResourcePath();
     }
 }

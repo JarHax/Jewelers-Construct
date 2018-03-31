@@ -2,6 +2,7 @@ package com.jarhax.jewelersconstruct.item;
 
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.annotation.Nullable;
 
@@ -10,6 +11,7 @@ import com.jarhax.jewelersconstruct.api.modifier.Modifier;
 
 import baubles.api.BaubleType;
 import baubles.api.IBauble;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -67,14 +69,19 @@ public class ItemJCon extends Item implements IBauble {
     @SideOnly(Side.CLIENT)
     public void addInformation (ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         
-        if (stack.getTagCompound() != null) {
+        Set<Entry<Modifier, Integer>> modifiers = JewelryHelper.getModifiers(stack).entrySet();
+        
+        if (modifiers.isEmpty()) {
             
-            tooltip.add(stack.getTagCompound().toString());
+            tooltip.add(I18n.format("jewlersconstruct.modifier.missing"));
         }
         
-        for (final Entry<Modifier, Integer> s : JewelryHelper.getModifiers(stack).entrySet()) {
+        else {
             
-            tooltip.add(s.getKey().getRegistryName().toString() + " - " + s.getValue());
+            for (final Entry<Modifier, Integer> modifierData : modifiers) {
+                
+                tooltip.add(I18n.format(modifierData.getKey().getTranslationName()) + " " + I18n.format("enchantment.level." + modifierData.getValue()));
+            }
         }
     }
 }

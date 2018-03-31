@@ -1,0 +1,11 @@
+# English Jewelers Construct Translations
+
+# Items
+item.jewelersconstruct.ring.name=Ring
+
+# Blocks
+tile.jewelersconstruct.part.shaper.name=Part Shaper
+
+# Modifiers
+jewlersconstruct.modifier.missing=There are no modifiers!
+jewlersconstruct.modifier.jewelersconstruct.test=Test
