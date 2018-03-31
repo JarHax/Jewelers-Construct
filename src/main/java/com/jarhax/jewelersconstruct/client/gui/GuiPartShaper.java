@@ -52,7 +52,7 @@ public class GuiPartShaper extends GuiContainer {
         
         final int height = (int) ((float) this.tile.getFuel() / this.tile.getFuelTotal() * 13);
         if (height > 0) {
-            this.drawTexturedModalRect(56, 36 + height, this.guiWidth, 15 + height, 14, 14);
+            this.drawTexturedModalRect(56, 36 +13- height, this.guiWidth, 15 +13- height, 14, 14);
         }
         
         final int width = (int) ((float) this.tile.getProgress() / this.tile.getProgressMax() * 23);

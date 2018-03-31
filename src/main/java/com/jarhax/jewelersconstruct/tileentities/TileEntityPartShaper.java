@@ -39,7 +39,6 @@ public class TileEntityPartShaper extends TileEntityBasicTickable {
         if (this.fuel > 0) {
             this.fuel--;
         }
-        this.processing = true;
         if (this.processing) {
             this.progress++;
             if (this.progress >= this.progressMax) {
