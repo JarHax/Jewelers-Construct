@@ -62,6 +62,7 @@ public class JewelersConstruct {
     public void init (FMLInitializationEvent event) {
         
         NetworkRegistry.INSTANCE.registerGuiHandler(JewelersConstruct.INSTANCE, new GuiHandler());
+        PROXY.registerRenders();
     }
     
     @EventHandler
