@@ -29,7 +29,7 @@ public class ModifierTest extends Modifier {
     }
     
     @Override
-    public int getModifiedDurability (ItemStack item, int base) {
+    public int getModifiedDurability (ItemStack item, int level, int base) {
         
         return 100;
     }

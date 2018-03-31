@@ -117,7 +117,7 @@ public class JewelryHelper {
         
         for (final Entry<Modifier, Integer> modifierData : getModifiers(stack).entrySet()) {
             
-            if (modifierData.getKey().countsTowardsLimit()) {
+            if (modifierData.getKey().countsTowardsLimit(stack, modifierData.getValue())) {
                 
                 count += modifierData.getValue();
             }

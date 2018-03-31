@@ -37,10 +37,11 @@ public class Modifier extends IForgeRegistryEntry.Impl<Modifier> {
      * value.
      * 
      * @param item The item being modified.
+     * @param level The current level of the modifier.
      * @param base The base value.
      * @return The amount to modify the durability by.
      */
-    public int getModifiedDurability (ItemStack item, int base) {
+    public int getModifiedDurability (ItemStack item, int level, int base) {
         
         return 0;
     }
@@ -49,10 +50,11 @@ public class Modifier extends IForgeRegistryEntry.Impl<Modifier> {
      * Gets the amount to modify the retention by. This will be added on to the original value.
      * 
      * @param item The item being modified.
+     * @param level The current level of the modifier.
      * @param base The base value.
      * @return The amount to modify the retention by.
      */
-    public int getModifiedRetention (ItemStack item, int base) {
+    public int getModifiedRetention (ItemStack item, int level, int base) {
         
         return 0;
     }
@@ -61,10 +63,11 @@ public class Modifier extends IForgeRegistryEntry.Impl<Modifier> {
      * Gets the amount to modify the purity by. This will be added on to the original value.
      * 
      * @param item The item being modified.
+     * @param level The current level of the modifier.
      * @param base The base value.
      * @return The amount to modify the purity by.
      */
-    public int getModifiedPurity (ItemStack item, int base) {
+    public int getModifiedPurity (ItemStack item, int level, int base) {
         
         return 0;
     }
@@ -83,10 +86,12 @@ public class Modifier extends IForgeRegistryEntry.Impl<Modifier> {
      * Checks if this modifier should count toward the total amount of modifiers on a piece of
      * jewelry.
      * 
+     * @param stack The item being checked.
+     * @param level The level of the modifier.
      * @return Whether or not this modifier counts towards the total modifier limit of a piece
      *         of jewelry.
      */
-    public boolean countsTowardsLimit () {
+    public boolean countsTowardsLimit (ItemStack stack, int level) {
         
         return true;
     }
@@ -94,11 +99,11 @@ public class Modifier extends IForgeRegistryEntry.Impl<Modifier> {
     /**
      * Called every tick when the player is wearing something with this modifier.
      * 
-     * @param item The item with the modifier.
+     * @param stack The item with the modifier.
      * @param user The player wearing it.
      * @param level The level of the modifier.
      */
-    public void onWearerTick (ItemStack item, EntityLivingBase user, int level) {
+    public void onWearerTick (ItemStack stack, EntityLivingBase user, int level) {
         
         // Default does nothing
     }

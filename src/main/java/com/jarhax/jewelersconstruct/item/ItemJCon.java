@@ -56,7 +56,7 @@ public class ItemJCon extends Item implements IBauble {
         
         for (final Entry<Modifier, Integer> modifierData : JewelryHelper.getModifiers(stack).entrySet()) {
             
-            durability += modifierData.getKey().getModifiedDurability(stack, baseDurability);
+            durability += modifierData.getKey().getModifiedDurability(stack, modifierData.getValue(), baseDurability);
         }
         
         return durability;
