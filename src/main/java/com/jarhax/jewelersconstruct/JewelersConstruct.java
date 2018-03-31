@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.jarhax.jewelersconstruct.api.Material;
 import com.jarhax.jewelersconstruct.api.modifier.Modifier;
+import com.jarhax.jewelersconstruct.api.modifier.ModifierAttack;
 import com.jarhax.jewelersconstruct.api.modifier.ModifierTest;
 import com.jarhax.jewelersconstruct.blocks.BlockPartShaper;
 import com.jarhax.jewelersconstruct.client.gui.GuiHandler;
@@ -72,6 +73,7 @@ public class JewelersConstruct {
     public static void onModifierRegister (RegistryEvent.Register<Modifier> event) {
         
         event.getRegistry().register(new ModifierTest());
+        event.getRegistry().register(new ModifierAttack());
     }
     
     private static <T extends IForgeRegistryEntry<T>> IForgeRegistry<T> createForgeRegistry (String name, Class<T> type) {

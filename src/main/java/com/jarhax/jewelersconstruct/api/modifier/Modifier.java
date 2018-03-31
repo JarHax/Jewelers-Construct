@@ -101,4 +101,9 @@ public class Modifier extends IForgeRegistryEntry.Impl<Modifier> {
         final ResourceLocation identifier = this.getRegistryName();
         return "jewlersconstruct.modifier." + identifier.getResourceDomain() + "." + identifier.getResourcePath();
     }
+    
+    public int getLevelInRange (int level) {
+        
+        return Math.max(Math.min(level, this.getMaxLevel()), 0);
+    }
 }
