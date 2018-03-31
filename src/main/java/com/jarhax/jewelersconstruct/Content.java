@@ -6,8 +6,10 @@ import com.jarhax.jewelersconstruct.api.modifier.Modifier;
 import com.jarhax.jewelersconstruct.api.modifier.ModifierAttack;
 import com.jarhax.jewelersconstruct.api.modifier.ModifierTest;
 import com.jarhax.jewelersconstruct.api.part.PartType;
+import com.jarhax.jewelersconstruct.api.part.PartTypeBase;
 import com.jarhax.jewelersconstruct.blocks.BlockPartShaper;
 import com.jarhax.jewelersconstruct.item.ItemJCon;
+import com.jarhax.jewelersconstruct.item.ItemPart;
 import com.jarhax.jewelersconstruct.tileentities.TileEntityPartShaper;
 
 import net.darkhax.bookshelf.registry.RegistryHelper;
@@ -21,23 +23,6 @@ import net.minecraftforge.registries.IForgeRegistry;
 
 @EventBusSubscriber
 public class Content {
-    
-    /* ============================== Blocks ============================== */
-    public static final Block BLOCK_PART_SHAPER = new BlockPartShaper();
-    
-    public static void registerBlocks (RegistryHelper registry) {
-        
-        GameRegistry.registerTileEntity(TileEntityPartShaper.class, "part_shaper");
-        registry.registerBlock(BLOCK_PART_SHAPER, "part_shaper");
-    }
-    
-    /* ============================== Items =============================== */
-    public static final Item ITEM_RING = new ItemJCon(); // TODO replace with specific items
-    
-    public static void registerItems (RegistryHelper registry) {
-        
-        registry.registerItem(ITEM_RING, "ring");
-    }
     
     /* ============================== Modifiers =========================== */
     public static final Modifier MODIFIER_TEST = new ModifierTest();
@@ -69,10 +54,44 @@ public class Content {
         registry.register(MATERIAL_GOLD);
     }
     
+    public static final PartType PART_BAND = new PartTypeBase("band");
+    public static final PartType PART_BINDING = new PartTypeBase("binding");
+    public static final PartType PART_CHAIN = new PartTypeBase("chain");
+    public static final PartType PART_BUCKLE = new PartTypeBase("buckle");
+    
     /* ============================== Part Types ========================== */
     @SubscribeEvent
     public static void registerPartTypes (RegistryEvent.Register<PartType> event) {
         
         final IForgeRegistry<PartType> registry = event.getRegistry();
+        registry.register(PART_BAND);
+        registry.register(PART_BINDING);
+        registry.register(PART_CHAIN);
+        registry.register(PART_BUCKLE);
+    }
+    
+    /* ============================== Blocks ============================== */
+    public static final Block BLOCK_PART_SHAPER = new BlockPartShaper();
+    
+    public static void registerBlocks (RegistryHelper registry) {
+        
+        GameRegistry.registerTileEntity(TileEntityPartShaper.class, "part_shaper");
+        registry.registerBlock(BLOCK_PART_SHAPER, "part_shaper");
+    }
+    
+    /* ============================== Items =============================== */
+    public static final Item ITEM_RING = new ItemJCon(); // TODO replace with specific items
+    public static final ItemPart ITEM_PART_BAND = new ItemPart(PART_BAND);
+    public static final ItemPart ITEM_PART_BINDING = new ItemPart(PART_BINDING);
+    public static final ItemPart ITEM_PART_CHAIN = new ItemPart(PART_CHAIN);
+    public static final ItemPart ITEM_PART_BUCKLE = new ItemPart(PART_BUCKLE);
+    
+    public static void registerItems (RegistryHelper registry) {
+        
+        registry.registerItem(ITEM_RING, "ring");
+        registry.registerItem(ITEM_PART_BAND, "part_band");
+        registry.registerItem(ITEM_PART_BINDING, "part_binding");
+        registry.registerItem(ITEM_PART_CHAIN, "part_chain");
+        registry.registerItem(ITEM_PART_BUCKLE, "part_buckle");
     }
 }

@@ -11,6 +11,19 @@ jewelersconstruct.modifier.missing=There are no modifiers!
 jewelersconstruct.modifier.jewelersconstruct.test=Test
 jewelersconstruct.modifier.jewelersconstruct.attack=Attack
 
+# Materials
+jewelersconstruct.material.jewelersconstruct.wood=Wooden
+jewelersconstruct.material.jewelersconstruct.bone=Bone
+jewelersconstruct.material.jewelersconstruct.stone=Stone
+jewelersconstruct.material.jewelersconstruct.iron=Iron
+jewelersconstruct.material.jewelersconstruct.gold=Gold
+
+# Parts
+jewelersconstruct.part.jewelersconstruct.band=Band
+jewelersconstruct.part.jewelersconstruct.binding=Binding
+jewelersconstruct.part.jewelersconstruct.chain=Chain
+jewelersconstruct.part.jewelersconstruct.buckle=Buckle
+
 # Tooltips
 tooltip.jewelersconstruct.modifiercout=Modifiers %s / ?
 

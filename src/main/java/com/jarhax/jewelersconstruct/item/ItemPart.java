@@ -1,11 +1,22 @@
 package com.jarhax.jewelersconstruct.item;
 
+import java.util.List;
+
+import javax.annotation.Nullable;
+
 import com.jarhax.jewelersconstruct.api.JewelryHelper;
+import com.jarhax.jewelersconstruct.api.material.Material;
 import com.jarhax.jewelersconstruct.api.part.PartType;
 
 import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemPart extends Item {
     
@@ -27,5 +38,26 @@ public class ItemPart extends Item {
     public String getItemStackDisplayName(ItemStack stack) {
         
         return JewelryHelper.getMaterialName(JewelryHelper.getPartMaterial(stack)) + " " + I18n.format(this.getPartType().getTranslationName());
+    }
+    
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void addInformation (ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+        
+        tooltip.add(JewelryHelper.getMaterialName(JewelryHelper.getPartMaterial(stack)));
+    }
+    
+    @Override
+    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+        
+        if (this.isInCreativeTab(tab)) {
+            
+            for (Material material : JewelryHelper.MATERIALS) {
+                
+                final ItemStack stack = new ItemStack(this);
+                JewelryHelper.setMaterial(stack, material);
+                items.add(stack);
+            }
+        }
     }
 }
