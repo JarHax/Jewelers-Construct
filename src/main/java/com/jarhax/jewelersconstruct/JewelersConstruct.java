@@ -1,5 +1,8 @@
 package com.jarhax.jewelersconstruct;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.jarhax.jewelersconstruct.api.Material;
 import com.jarhax.jewelersconstruct.api.modifier.Modifier;
 import com.jarhax.jewelersconstruct.api.modifier.ModifierTest;
@@ -8,6 +11,7 @@ import com.jarhax.jewelersconstruct.client.gui.GuiHandler;
 import com.jarhax.jewelersconstruct.item.ItemJCon;
 import com.jarhax.jewelersconstruct.proxy.CommonProxy;
 import com.jarhax.jewelersconstruct.tileentities.TileEntityPartShaper;
+
 import net.darkhax.bookshelf.registry.RegistryHelper;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.ResourceLocation;
@@ -25,8 +29,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import net.minecraftforge.registries.RegistryBuilder;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 @Mod(modid = "jewelersconstruct", name = "Jewelers Construct", version = "@VERSION@")
 @EventBusSubscriber
@@ -34,7 +36,6 @@ public class JewelersConstruct {
     
     public static final Logger LOG = LogManager.getLogger("Jewelers Construct");
     public static final RegistryHelper REGISTRY = new RegistryHelper().setTab(CreativeTabs.COMBAT).enableAutoRegistration();
-    
     
     @Mod.Instance("jewelersconstruct")
     public static JewelersConstruct INSTANCE;
@@ -58,6 +59,7 @@ public class JewelersConstruct {
     
     @EventHandler
     public void init (FMLInitializationEvent event) {
+        
         NetworkRegistry.INSTANCE.registerGuiHandler(JewelersConstruct.INSTANCE, new GuiHandler());
     }
     

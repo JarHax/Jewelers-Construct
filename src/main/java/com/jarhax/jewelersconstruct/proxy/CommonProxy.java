@@ -1,10 +1,9 @@
 package com.jarhax.jewelersconstruct.proxy;
 
-
 public class CommonProxy {
     
-    public void registerGui(){
-    
+    public void registerGui () {
+        
     }
     
 }

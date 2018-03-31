@@ -11,32 +11,26 @@ import com.jarhax.jewelersconstruct.api.modifier.Modifier;
 
 import baubles.api.BaubleType;
 import baubles.api.IBauble;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemJCon extends Item implements IBauble {
     
-    public ItemJCon () {
+    public ItemJCon() {
         
         this.setMaxStackSize(1);
     }
     
     @Override
-    public void setDamage(ItemStack stack, int damage) {
+    public void setDamage (ItemStack stack, int damage) {
         
         super.setDamage(stack, damage);
         
@@ -47,13 +41,13 @@ public class ItemJCon extends Item implements IBauble {
     }
     
     @Override
-    public int getMaxDamage(ItemStack stack) {
+    public int getMaxDamage (ItemStack stack) {
         
-        int baseDurability = 1;
+        final int baseDurability = 1;
         
         int durability = 0;
         
-        for (Entry<Modifier, Integer> modifierData : JewelryHelper.getModifiers(stack).entrySet()) {
+        for (final Entry<Modifier, Integer> modifierData : JewelryHelper.getModifiers(stack).entrySet()) {
             
             durability += modifierData.getKey().getModifiedDurability(stack, baseDurability);
         }
@@ -106,7 +100,7 @@ public class ItemJCon extends Item implements IBauble {
     @SideOnly(Side.CLIENT)
     public void addInformation (ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         
-        Set<Entry<Modifier, Integer>> modifiers = JewelryHelper.getModifiers(stack).entrySet();
+        final Set<Entry<Modifier, Integer>> modifiers = JewelryHelper.getModifiers(stack).entrySet();
         
         if (modifiers.isEmpty()) {
             

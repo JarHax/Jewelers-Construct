@@ -14,6 +14,7 @@ import net.minecraft.item.ItemStack;
 public class ModifierTest extends Modifier {
     
     public static final AttributeModifier BUFF_TEST = new AttributeModifier(UUID.fromString("88f2f87f-c94e-4d1b-8bd2-2e686f26d50b"), "jewelersconstruct_modifier_debug", 100, AttributeOperation.ADDITIVE.ordinal());
+    
     public ModifierTest() {
         
         this.setRegistryName("test");
@@ -27,6 +28,7 @@ public class ModifierTest extends Modifier {
         return map;
     }
     
+    @Override
     public int getModifiedDurability (ItemStack item, int base) {
         
         return 100;

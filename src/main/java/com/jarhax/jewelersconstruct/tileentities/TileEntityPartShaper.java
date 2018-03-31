@@ -8,94 +8,104 @@ import net.minecraftforge.items.ItemStackHandler;
 
 public class TileEntityPartShaper extends TileEntityBasicTickable {
     
-    
-    private ItemStackHandler inventory;
+    private final ItemStackHandler inventory;
     
     private int fuel = 0;
     private int fuelTotal = 0;
     
     private boolean processing = true;
     private int progress = 0;
-    private int progressMax = 100;
+    private final int progressMax = 100;
     
-    public TileEntityPartShaper () {
+    public TileEntityPartShaper() {
+        
         this.inventory = new ItemStackHandler(4);
     }
     
     @Override
     public void onEntityUpdate () {
-        if (fuel <= 0) {
-            fuelTotal = 0;
-            ItemStack fuelSlot = getInventory().getStackInSlot(1);
+        
+        if (this.fuel <= 0) {
+            this.fuelTotal = 0;
+            final ItemStack fuelSlot = this.getInventory().getStackInSlot(1);
             if (!fuelSlot.isEmpty()) {
                 if (TileEntityFurnace.getItemBurnTime(fuelSlot) > 0) {
-                    fuel = TileEntityFurnace.getItemBurnTime(fuelSlot);
-                    fuelTotal = fuel;
+                    this.fuel = TileEntityFurnace.getItemBurnTime(fuelSlot);
+                    this.fuelTotal = this.fuel;
                     fuelSlot.shrink(1);
                 }
             }
         }
-        if (fuel > 0) {
-            fuel--;
+        if (this.fuel > 0) {
+            this.fuel--;
         }
-        processing = true;
-        if(processing){
-            progress++;
-            if(progress>= progressMax){
-                progress = 0;
-                processing = false;
+        this.processing = true;
+        if (this.processing) {
+            this.progress++;
+            if (this.progress >= this.progressMax) {
+                this.progress = 0;
+                this.processing = false;
             }
         }
     }
     
     @Override
     public void writeNBT (NBTTagCompound dataTag) {
-        dataTag.setTag("inventory", inventory.serializeNBT());
-        dataTag.setInteger("fuel", fuel);
-        dataTag.setInteger("fuelTotal", fuelTotal);
-        dataTag.setInteger("progress", progress);
-        dataTag.setBoolean("processing", processing);
+        
+        dataTag.setTag("inventory", this.inventory.serializeNBT());
+        dataTag.setInteger("fuel", this.fuel);
+        dataTag.setInteger("fuelTotal", this.fuelTotal);
+        dataTag.setInteger("progress", this.progress);
+        dataTag.setBoolean("processing", this.processing);
         
     }
     
     @Override
     public void readNBT (NBTTagCompound dataTag) {
-        inventory.deserializeNBT(dataTag.getCompoundTag("inventory"));
-        fuelTotal = dataTag.getInteger("fuelTotal");
-        progress = dataTag.getInteger("progress");
-        processing = dataTag.getBoolean("processing");
+        
+        this.inventory.deserializeNBT(dataTag.getCompoundTag("inventory"));
+        this.fuelTotal = dataTag.getInteger("fuelTotal");
+        this.progress = dataTag.getInteger("progress");
+        this.processing = dataTag.getBoolean("processing");
     }
     
-    
     public ItemStackHandler getInventory () {
-        return inventory;
+        
+        return this.inventory;
     }
     
     public int getFuel () {
-        return fuel;
+        
+        return this.fuel;
     }
     
     public void setFuel (int fuel) {
+        
         this.fuel = fuel;
     }
     
     public int getFuelTotal () {
-        return fuelTotal;
+        
+        return this.fuelTotal;
     }
     
     public void setFuelTotal (int fuelTotal) {
+        
         this.fuelTotal = fuelTotal;
     }
     
     public boolean isProcessing () {
-        return processing;
+        
+        return this.processing;
     }
     
     public int getProgress () {
-        return progress;
+        
+        return this.progress;
     }
     
     public int getProgressMax () {
-        return progressMax;
+        
+        return this.progressMax;
     }
 }
