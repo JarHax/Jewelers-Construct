@@ -6,11 +6,8 @@ import org.apache.logging.log4j.Logger;
 import com.jarhax.jewelersconstruct.api.Material;
 import com.jarhax.jewelersconstruct.api.modifier.Modifier;
 import com.jarhax.jewelersconstruct.api.part.PartType;
-import com.jarhax.jewelersconstruct.blocks.BlockPartShaper;
 import com.jarhax.jewelersconstruct.client.gui.GuiHandler;
-import com.jarhax.jewelersconstruct.item.ItemJCon;
 import com.jarhax.jewelersconstruct.proxy.CommonProxy;
-import com.jarhax.jewelersconstruct.tileentities.TileEntityPartShaper;
 
 import net.darkhax.bookshelf.registry.RegistryHelper;
 import net.minecraft.creativetab.CreativeTabs;
@@ -22,7 +19,6 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import net.minecraftforge.registries.RegistryBuilder;
@@ -46,12 +42,10 @@ public class JewelersConstruct {
         createForgeRegistry("modifiers", Modifier.class);
         createForgeRegistry("materials", Material.class);
         createForgeRegistry("part_types", PartType.class);
-        LOG.info("Registries created!");
+        LOG.info("Registries created!");   
         
-        REGISTRY.registerItem(new ItemJCon(), "ring");
-        GameRegistry.registerTileEntity(TileEntityPartShaper.class, "part_shaper");
-        REGISTRY.registerBlock(new BlockPartShaper(), "part_shaper");
-        
+        Content.registerBlocks(REGISTRY);
+        Content.registerItems(REGISTRY);
     }
     
     @EventHandler
