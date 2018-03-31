@@ -8,6 +8,7 @@ import com.jarhax.jewelersconstruct.api.modifier.Modifier;
 import com.jarhax.jewelersconstruct.api.part.PartType;
 
 import net.darkhax.bookshelf.util.StackUtils;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -15,6 +16,8 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.Constants.NBT;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
 
 public class JewelryHelper {
@@ -26,6 +29,7 @@ public class JewelryHelper {
     private static final String TAG_MODIFIERS = "Modifiers";
     private static final String TAG_MODIFIER = "Modifier";
     private static final String TAG_LEVEL = "ModifierLevel";
+    private static final String TAG_MATERIAL = "Material";
     
     public static Modifier getModifierByName (String name) {
         
@@ -35,6 +39,11 @@ public class JewelryHelper {
     public static Material getMaterialByName (String name) {
         
         return MATERIALS.getValue(new ResourceLocation(name));
+    }
+    
+    public static PartType getPartTypeByName(String name) {
+        
+        return PART_TYPES.getValue(new ResourceLocation(name));
     }
     
     public static void tickJewelry (ItemStack stack, EntityLivingBase user) {
@@ -126,5 +135,23 @@ public class JewelryHelper {
         }
         
         return count;
+    }
+    
+    public static Material getPartMaterial(ItemStack stack) {
+        
+        final NBTTagCompound tag = stack.getTagCompound();
+        return tag != null && tag.hasKey(TAG_MATERIAL) ? getMaterialByName(tag.getString(TAG_MATERIAL)) : null;
+    }
+    
+    public static void setMaterial(ItemStack stack, Material material) {
+        
+        StackUtils.prepareStackTag(stack).setString(TAG_MATERIAL, material.getRegistryName().toString());
+    }
+    
+    @SideOnly(Side.CLIENT)
+    public static String getMaterialName(Material material) {
+        
+        final String translationKey = material != null ? material.getTranslationName() : "jewelersconstruct.material.undefined";
+        return I18n.format(translationKey);
     }
 }

@@ -5,6 +5,9 @@ import java.util.Set;
 
 import com.jarhax.jewelersconstruct.api.modifier.Modifier;
 
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 public abstract class Material extends IForgeRegistryEntry.Impl<Material> {
@@ -45,5 +48,12 @@ public abstract class Material extends IForgeRegistryEntry.Impl<Material> {
     public Set<Modifier> getModifiers () {
         
         return EMPTY;
+    }
+    
+    @SideOnly(Side.CLIENT)
+    public String getTranslationName () {
+        
+        final ResourceLocation identifier = this.getRegistryName();
+        return "jewelersconstruct.material." + identifier.getResourceDomain() + "." + identifier.getResourcePath();
     }
 }
