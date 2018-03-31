@@ -10,6 +10,6 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void registerGui () {
         super.registerGui();
-        NetworkRegistry.INSTANCE.registerGuiHandler(JewelersConstruct.INSTANCE, new GuiHandler());
+       
     }
 }
