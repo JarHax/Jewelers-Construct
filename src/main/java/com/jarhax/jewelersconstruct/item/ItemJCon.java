@@ -6,19 +6,23 @@ import java.util.Set;
 
 import javax.annotation.Nullable;
 
+import com.google.common.collect.Multimap;
 import com.jarhax.jewelersconstruct.api.JewelryHelper;
 import com.jarhax.jewelersconstruct.api.modifier.Modifier;
 
 import baubles.api.BaubleType;
 import baubles.api.IBauble;
+import net.darkhax.bookshelf.util.PlayerUtils;
 import net.darkhax.bookshelf.util.StackUtils;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -121,6 +125,32 @@ public class ItemJCon extends Item implements IBauble {
             for (final Entry<Modifier, Integer> modifierData : modifiers) {
                 
                 tooltip.add(I18n.format(modifierData.getKey().getTranslationName()) + " " + I18n.format("enchantment.level." + modifierData.getValue()));
+                this.getModifierTooltip(modifierData.getKey().getAttributeModifiers(stack, PlayerUtils.getClientPlayer(), modifierData.getValue()), tooltip);
+            }
+        }
+    }
+    
+    private void getModifierTooltip (Multimap<String, AttributeModifier> multimap, List<String> list) {
+        
+        if (!multimap.isEmpty()) {
+            
+            for (final Entry<String, AttributeModifier> entry : multimap.entries()) {
+                
+                final AttributeModifier modifier = entry.getValue();
+                final double baseAmount = modifier.getAmount();
+                
+                double displayAmount = modifier.getOperation() != 1 && modifier.getOperation() != 2 ? baseAmount : baseAmount * 100d;
+                
+                if (baseAmount > 0.0D) {
+                    
+                    list.add(TextFormatting.BLUE + " " + I18n.format("attribute.modifier.plus." + modifier.getOperation(), ItemStack.DECIMALFORMAT.format(displayAmount), I18n.format("attribute.name." + entry.getKey())));
+                }
+                
+                else if (baseAmount < 0.0D) {
+                    
+                    displayAmount = displayAmount * -1.0D;
+                    list.add(TextFormatting.RED + " " + I18n.format("attribute.modifier.take." + modifier.getOperation(), ItemStack.DECIMALFORMAT.format(displayAmount), I18n.format("attribute.name." + entry.getKey())));
+                }
             }
         }
     }
