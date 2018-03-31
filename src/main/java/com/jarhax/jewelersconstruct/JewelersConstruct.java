@@ -4,6 +4,7 @@ import com.jarhax.jewelersconstruct.api.Material;
 import com.jarhax.jewelersconstruct.api.modifier.Modifier;
 import com.jarhax.jewelersconstruct.api.modifier.ModifierTest;
 import com.jarhax.jewelersconstruct.blocks.BlockPartShaper;
+import com.jarhax.jewelersconstruct.client.gui.GuiHandler;
 import com.jarhax.jewelersconstruct.item.ItemJCon;
 import com.jarhax.jewelersconstruct.proxy.CommonProxy;
 import com.jarhax.jewelersconstruct.tileentities.TileEntityPartShaper;
@@ -19,6 +20,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
@@ -56,7 +58,7 @@ public class JewelersConstruct {
     
     @EventHandler
     public void init (FMLInitializationEvent event) {
-        PROXY.registerGui();
+        NetworkRegistry.INSTANCE.registerGuiHandler(JewelersConstruct.INSTANCE, new GuiHandler());
     }
     
     @EventHandler
