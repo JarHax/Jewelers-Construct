@@ -80,6 +80,18 @@ public class Modifier extends IForgeRegistryEntry.Impl<Modifier> {
     }
     
     /**
+     * Checks if this modifier should count toward the total amount of modifiers on a piece of
+     * jewelry.
+     * 
+     * @return Whether or not this modifier counts towards the total modifier limit of a piece
+     *         of jewelry.
+     */
+    public boolean countsTowardsLimit () {
+        
+        return true;
+    }
+    
+    /**
      * Called every tick when the player is wearing something with this modifier.
      * 
      * @param item The item with the modifier.
@@ -99,7 +111,7 @@ public class Modifier extends IForgeRegistryEntry.Impl<Modifier> {
     public String getTranslationName () {
         
         final ResourceLocation identifier = this.getRegistryName();
-        return "jewlersconstruct.modifier." + identifier.getResourceDomain() + "." + identifier.getResourcePath();
+        return "jewelersconstruct.modifier." + identifier.getResourceDomain() + "." + identifier.getResourcePath();
     }
     
     public int getLevelInRange (int level) {

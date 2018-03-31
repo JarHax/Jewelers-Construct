@@ -7,6 +7,9 @@ item.jewelersconstruct.ring.name=Ring
 tile.jewelersconstruct.part.shaper.name=Part Shaper
 
 # Modifiers
-jewlersconstruct.modifier.missing=There are no modifiers!
-jewlersconstruct.modifier.jewelersconstruct.test=Test
-jewlersconstruct.modifier.jewelersconstruct.attack=Attack
+jewelersconstruct.modifier.missing=There are no modifiers!
+jewelersconstruct.modifier.jewelersconstruct.test=Test
+jewelersconstruct.modifier.jewelersconstruct.attack=Attack
+
+# Tooltips
+tooltip.jewelersconstruct.modifiercout=Modifiers %s / ?

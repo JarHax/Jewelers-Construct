@@ -117,7 +117,7 @@ public class ItemJCon extends Item implements IBauble {
         
         if (modifiers.isEmpty()) {
             
-            tooltip.add(I18n.format("jewlersconstruct.modifier.missing"));
+            tooltip.add(I18n.format("jewelersconstruct.modifier.missing"));
         }
         
         else {
@@ -127,6 +127,11 @@ public class ItemJCon extends Item implements IBauble {
                 tooltip.add(I18n.format(modifierData.getKey().getTranslationName()) + " " + I18n.format("enchantment.level." + modifierData.getValue()));
                 this.getModifierTooltip(modifierData.getKey().getAttributeModifiers(stack, PlayerUtils.getClientPlayer(), modifierData.getValue()), tooltip);
             }
+        }
+        
+        if (flagIn == ITooltipFlag.TooltipFlags.ADVANCED) {
+            
+            tooltip.add(I18n.format("tooltip.jewelersconstruct.modifiercout", JewelryHelper.getModifierCount(stack)));
         }
     }
     

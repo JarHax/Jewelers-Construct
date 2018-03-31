@@ -110,4 +110,19 @@ public class JewelryHelper {
         
         StackUtils.prepareStackTag(stack).setTag(TAG_MODIFIERS, list);
     }
+    
+    public static int getModifierCount (ItemStack stack) {
+        
+        int count = 0;
+        
+        for (final Entry<Modifier, Integer> modifierData : getModifiers(stack).entrySet()) {
+            
+            if (modifierData.getKey().countsTowardsLimit()) {
+                
+                count += modifierData.getValue();
+            }
+        }
+        
+        return count;
+    }
 }
