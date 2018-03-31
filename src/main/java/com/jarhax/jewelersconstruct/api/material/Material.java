@@ -1,4 +1,4 @@
-package com.jarhax.jewelersconstruct.api;
+package com.jarhax.jewelersconstruct.api.material;
 
 import java.util.HashSet;
 import java.util.Set;

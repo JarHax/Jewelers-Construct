@@ -1,6 +1,7 @@
 package com.jarhax.jewelersconstruct;
 
-import com.jarhax.jewelersconstruct.api.Material;
+import com.jarhax.jewelersconstruct.api.material.Material;
+import com.jarhax.jewelersconstruct.api.material.MaterialBase;
 import com.jarhax.jewelersconstruct.api.modifier.Modifier;
 import com.jarhax.jewelersconstruct.api.modifier.ModifierAttack;
 import com.jarhax.jewelersconstruct.api.modifier.ModifierTest;
@@ -50,11 +51,22 @@ public class Content {
         registry.register(MODIFIER_ATTACK);
     }
     
+    public static final Material MATERIAL_WOOD = new MaterialBase(60, 1, 1, "wood");
+    public static final Material MATERIAL_BONE = new MaterialBase(80, 1, 1, "bone");
+    public static final Material MATERIAL_STONE = new MaterialBase(120, 1, 1, "stone");
+    public static final Material MATERIAL_IRON = new MaterialBase(256, 1, 1, "iron");
+    public static final Material MATERIAL_GOLD = new MaterialBase(60, 3, 2, "gold");
+    
     /* ============================== Materials =========================== */
     @SubscribeEvent
     public static void registerMaterials (RegistryEvent.Register<Material> event) {
         
         final IForgeRegistry<Material> registry = event.getRegistry();
+        registry.register(MATERIAL_WOOD);
+        registry.register(MATERIAL_BONE);
+        registry.register(MATERIAL_STONE);
+        registry.register(MATERIAL_IRON);
+        registry.register(MATERIAL_GOLD);
     }
     
     /* ============================== Part Types ========================== */
