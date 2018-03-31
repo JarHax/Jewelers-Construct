@@ -5,6 +5,7 @@ import com.jarhax.jewelersconstruct.api.modifier.Modifier;
 import com.jarhax.jewelersconstruct.api.modifier.ModifierTest;
 import com.jarhax.jewelersconstruct.blocks.BlockPartShaper;
 import com.jarhax.jewelersconstruct.item.ItemJCon;
+import com.jarhax.jewelersconstruct.proxy.CommonProxy;
 import net.darkhax.bookshelf.registry.RegistryHelper;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.ResourceLocation;
@@ -12,6 +13,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -29,6 +31,13 @@ public class JewelersConstruct {
     public static final Logger LOG = LogManager.getLogger("Jewelers Construct");
     public static final RegistryHelper REGISTRY = new RegistryHelper().setTab(CreativeTabs.COMBAT).enableAutoRegistration();
     
+    
+    @Mod.Instance("jewelersconstruct")
+    public static JewelersConstruct INSTANCE;
+    
+    @SidedProxy(clientSide = "com.jarhax.jewelersconstruct.proxy.ClientProxy", serverSide = "com.jarhax.jewelersconstruct.proxy.CommonProxy")
+    public static CommonProxy PROXY;
+    
     @EventHandler
     public void preInit (FMLPreInitializationEvent event) {
         
@@ -43,7 +52,7 @@ public class JewelersConstruct {
     
     @EventHandler
     public void init (FMLInitializationEvent event) {
-        
+        PROXY.registerGui();
     }
     
     @EventHandler
