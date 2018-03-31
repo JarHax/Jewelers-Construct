@@ -1,12 +1,24 @@
 package com.jarhax.jewelersconstruct.item;
 
+import java.util.List;
+import java.util.Map.Entry;
+
+import javax.annotation.Nullable;
+
 import com.jarhax.jewelersconstruct.api.JewelryHelper;
+import com.jarhax.jewelersconstruct.api.modifier.Modifier;
 
 import baubles.api.BaubleType;
 import baubles.api.IBauble;
+import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemJCon extends Item implements IBauble {
     
@@ -32,5 +44,37 @@ public class ItemJCon extends Item implements IBauble {
     public void onUnequipped (ItemStack stack, EntityLivingBase player) {
         
         JewelryHelper.handleUnEquip(stack, player);
+    }
+    
+    @Override
+    public void getSubItems (CreativeTabs tab, NonNullList<ItemStack> items) {
+        
+        if (this.isInCreativeTab(tab)) {
+            
+            for (final Modifier modifier : JewelryHelper.MODIFIERS) {
+                
+                for (int level = 1; level <= modifier.getMaxLevel(); level++) {
+                    
+                    final ItemStack stack = new ItemStack(this);
+                    JewelryHelper.setModifier(stack, modifier, level);
+                    items.add(stack);
+                }
+            }
+        }
+    }
+    
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void addInformation (ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+        
+        if (stack.getTagCompound() != null) {
+            
+            tooltip.add(stack.getTagCompound().toString());
+        }
+        
+        for (final Entry<Modifier, Integer> s : JewelryHelper.getModifiers(stack).entrySet()) {
+            
+            tooltip.add(s.getKey().getRegistryName().toString() + " - " + s.getValue());
+        }
     }
 }

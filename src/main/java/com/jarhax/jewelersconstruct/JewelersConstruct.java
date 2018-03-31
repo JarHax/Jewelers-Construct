@@ -5,14 +5,20 @@ import org.apache.logging.log4j.Logger;
 
 import com.jarhax.jewelersconstruct.api.Material;
 import com.jarhax.jewelersconstruct.api.modifier.Modifier;
+import com.jarhax.jewelersconstruct.api.modifier.ModifierTest;
+import com.jarhax.jewelersconstruct.item.ItemJCon;
 
+import net.darkhax.bookshelf.registry.RegistryHelper;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import net.minecraftforge.registries.RegistryBuilder;
@@ -22,6 +28,7 @@ import net.minecraftforge.registries.RegistryBuilder;
 public class JewelersConstruct {
     
     public static final Logger LOG = LogManager.getLogger("Jewelers Construct");
+    public static final RegistryHelper REGISTRY = new RegistryHelper().setTab(CreativeTabs.COMBAT).enableAutoRegistration();
     
     @EventHandler
     public void preInit (FMLPreInitializationEvent event) {
@@ -30,6 +37,8 @@ public class JewelersConstruct {
         createForgeRegistry("modifiers", Modifier.class);
         createForgeRegistry("materials", Material.class);
         LOG.info("Registries created!");
+        
+        REGISTRY.registerItem(new ItemJCon(), "ring");
     }
     
     @EventHandler
@@ -40,6 +49,12 @@ public class JewelersConstruct {
     @EventHandler
     public void postInit (FMLPostInitializationEvent event) {
         
+    }
+    
+    @SubscribeEvent
+    public static void onModifierRegister (RegistryEvent.Register<Modifier> event) {
+        
+        event.getRegistry().register(new ModifierTest());
     }
     
     private static <T extends IForgeRegistryEntry<T>> IForgeRegistry<T> createForgeRegistry (String name, Class<T> type) {
