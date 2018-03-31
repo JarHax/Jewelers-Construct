@@ -30,7 +30,7 @@ import net.minecraftforge.registries.RegistryBuilder;
 public class JewelersConstruct {
     
     public static final Logger LOG = LogManager.getLogger("Jewelers Construct");
-    public static final RegistryHelper REGISTRY = new RegistryHelper().setTab(CreativeTabs.COMBAT).enableAutoRegistration();
+    public static final RegistryHelper REGISTRY = new RegistryHelper().setTab(new CreativeTabJewelersConstruct()).enableAutoRegistration();
     
     @Mod.Instance("jewelersconstruct")
     public static JewelersConstruct INSTANCE;

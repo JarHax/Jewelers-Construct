@@ -13,3 +13,6 @@ jewelersconstruct.modifier.jewelersconstruct.attack=Attack
 
 # Tooltips
 tooltip.jewelersconstruct.modifiercout=Modifiers %s / ?
+
+# Misc
+itemGroup.jewelersconstruct=Jewelers Construct
