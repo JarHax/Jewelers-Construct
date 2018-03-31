@@ -105,6 +105,7 @@ public class JewelryHelper {
             final NBTTagCompound tag = new NBTTagCompound();
             tag.setString(TAG_MODIFIER, modifierData.getKey().getRegistryName().toString());
             tag.setInteger(TAG_LEVEL, modifierData.getValue());
+            list.appendTag(tag);
         }
         
         StackUtils.prepareStackTag(stack).setTag(TAG_MODIFIERS, list);
