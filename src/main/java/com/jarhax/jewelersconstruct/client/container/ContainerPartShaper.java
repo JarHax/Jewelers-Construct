@@ -5,6 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
+import net.minecraftforge.items.SlotItemHandler;
 
 public class ContainerPartShaper extends Container {
     
@@ -12,6 +13,13 @@ public class ContainerPartShaper extends Container {
     
     public ContainerPartShaper (InventoryPlayer invPlayer, TileEntityPartShaper tile) {
         this.tile = tile;
+        
+        //TODO change these to slot specific ones, that accept certain items only
+        addSlotToContainer(new SlotItemHandler(tile.getInventory(), 0, 56, 17));
+        addSlotToContainer(new SlotItemHandler(tile.getInventory(), 1, 56, 53));
+        addSlotToContainer(new SlotItemHandler(tile.getInventory(), 2, 20, 35));
+        addSlotToContainer(new SlotItemHandler(tile.getInventory(), 3, 116, 35));
+        
         
         for (int x = 0; x < 9; x++) {
             addSlotToContainer(new Slot(invPlayer, x, 8 + 18 * x, 142));

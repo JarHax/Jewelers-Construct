@@ -6,6 +6,7 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
 
 public class GuiPartShaper extends GuiContainer {
     
@@ -14,10 +15,11 @@ public class GuiPartShaper extends GuiContainer {
     private int guiHeight;
     private int left;
     private int top;
-    
+    private TileEntityPartShaper tile;
     
     public GuiPartShaper (InventoryPlayer invPlayer, TileEntityPartShaper tile) {
         super(new ContainerPartShaper(invPlayer, tile));
+        this.tile = tile;
     }
     
     @Override
@@ -29,11 +31,28 @@ public class GuiPartShaper extends GuiContainer {
         this.top = this.height / 2 - this.guiHeight / 2;
     }
     
-    public void drawScreen(int mouseX, int mouseY, float partialTicks)
-    {
+    public void drawScreen (int mouseX, int mouseY, float partialTicks) {
         this.drawDefaultBackground();
         super.drawScreen(mouseX, mouseY, partialTicks);
         this.renderHoveredToolTip(mouseX, mouseY);
+    }
+    
+    @Override
+    protected void drawGuiContainerForegroundLayer (int mouseX, int mouseY) {
+        super.drawGuiContainerForegroundLayer(mouseX, mouseY);
+        mc.getTextureManager().bindTexture(TEXTURE);
+        GL11.glPushMatrix();
+        
+        int height = (int) (((float) tile.getFuel()) / tile.getFuelTotal() * 13);
+        if (height > 0)
+            drawTexturedModalRect(56, 36 + height, guiWidth, 15 + height, 14, 14);
+        
+        
+        int width = (int) (((float) tile.getProgress()) / tile.getProgressMax() * 23);
+        if (width > 0)
+            drawTexturedModalRect(56+24, 34, guiWidth+1, 0, width, 16);
+        
+        GL11.glPopMatrix();
     }
     
     @Override
