@@ -11,18 +11,55 @@ import com.jarhax.jewelersconstruct.api.modifier.Modifier;
 
 import baubles.api.BaubleType;
 import baubles.api.IBauble;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemJCon extends Item implements IBauble {
+    
+    public ItemJCon () {
+        
+        this.setMaxStackSize(1);
+    }
+    
+    @Override
+    public void setDamage(ItemStack stack, int damage) {
+        
+        super.setDamage(stack, damage);
+        
+        if (stack.getItemDamage() > stack.getMaxDamage()) {
+            
+            super.setDamage(stack, stack.getMaxDamage());
+        }
+    }
+    
+    @Override
+    public int getMaxDamage(ItemStack stack) {
+        
+        int baseDurability = 1;
+        
+        int durability = 0;
+        
+        for (Entry<Modifier, Integer> modifierData : JewelryHelper.getModifiers(stack).entrySet()) {
+            
+            durability += modifierData.getKey().getModifiedDurability(stack, baseDurability);
+        }
+        
+        return durability;
+    }
     
     @Override
     public BaubleType getBaubleType (ItemStack itemstack) {
