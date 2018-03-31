@@ -8,6 +8,8 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 public class Modifier extends IForgeRegistryEntry.Impl<Modifier> {
@@ -113,6 +115,7 @@ public class Modifier extends IForgeRegistryEntry.Impl<Modifier> {
      * 
      * @return The translation key for the midifiers name.
      */
+    @SideOnly(Side.CLIENT)
     public String getTranslationName () {
         
         final ResourceLocation identifier = this.getRegistryName();

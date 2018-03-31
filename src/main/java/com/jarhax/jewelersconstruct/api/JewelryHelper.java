@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.jarhax.jewelersconstruct.api.modifier.Modifier;
+import com.jarhax.jewelersconstruct.api.part.PartType;
 
 import net.darkhax.bookshelf.util.StackUtils;
 import net.minecraft.entity.EntityLivingBase;
@@ -20,6 +21,7 @@ public class JewelryHelper {
     
     public static final IForgeRegistry<Modifier> MODIFIERS = GameRegistry.findRegistry(Modifier.class);
     public static final IForgeRegistry<Material> MATERIALS = GameRegistry.findRegistry(Material.class);
+    public static final IForgeRegistry<PartType> PART_TYPES = GameRegistry.findRegistry(PartType.class);
     
     private static final String TAG_MODIFIERS = "Modifiers";
     private static final String TAG_MODIFIER = "Modifier";

@@ -7,6 +7,7 @@ import com.jarhax.jewelersconstruct.api.Material;
 import com.jarhax.jewelersconstruct.api.modifier.Modifier;
 import com.jarhax.jewelersconstruct.api.modifier.ModifierAttack;
 import com.jarhax.jewelersconstruct.api.modifier.ModifierTest;
+import com.jarhax.jewelersconstruct.api.part.PartType;
 import com.jarhax.jewelersconstruct.blocks.BlockPartShaper;
 import com.jarhax.jewelersconstruct.client.gui.GuiHandler;
 import com.jarhax.jewelersconstruct.item.ItemJCon;
@@ -50,6 +51,7 @@ public class JewelersConstruct {
         LOG.info("Creating registries!");
         createForgeRegistry("modifiers", Modifier.class);
         createForgeRegistry("materials", Material.class);
+        createForgeRegistry("part_types", PartType.class);
         LOG.info("Registries created!");
         
         REGISTRY.registerItem(new ItemJCon(), "ring");
