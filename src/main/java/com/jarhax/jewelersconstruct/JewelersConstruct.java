@@ -1,13 +1,10 @@
 package com.jarhax.jewelersconstruct;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.jarhax.jewelersconstruct.api.Material;
 import com.jarhax.jewelersconstruct.api.modifier.Modifier;
 import com.jarhax.jewelersconstruct.api.modifier.ModifierTest;
+import com.jarhax.jewelersconstruct.blocks.BlockPartShaper;
 import com.jarhax.jewelersconstruct.item.ItemJCon;
-
 import net.darkhax.bookshelf.registry.RegistryHelper;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.ResourceLocation;
@@ -22,6 +19,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import net.minecraftforge.registries.RegistryBuilder;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Mod(modid = "jewelersconstruct", name = "Jewelers Construct", version = "@VERSION@")
 @EventBusSubscriber
@@ -39,6 +38,7 @@ public class JewelersConstruct {
         LOG.info("Registries created!");
         
         REGISTRY.registerItem(new ItemJCon(), "ring");
+        REGISTRY.registerBlock(new BlockPartShaper(), "part_shaper");
     }
     
     @EventHandler
