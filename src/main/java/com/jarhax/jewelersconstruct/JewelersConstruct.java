@@ -3,6 +3,8 @@ package com.jarhax.jewelersconstruct;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.google.common.collect.Multimap;
+import com.jarhax.jewelersconstruct.api.JewelryHelper;
 import com.jarhax.jewelersconstruct.api.material.Material;
 import com.jarhax.jewelersconstruct.api.modifier.Modifier;
 import com.jarhax.jewelersconstruct.api.part.PartType;
@@ -10,6 +12,7 @@ import com.jarhax.jewelersconstruct.client.gui.GuiHandler;
 import com.jarhax.jewelersconstruct.proxy.CommonProxy;
 
 import net.darkhax.bookshelf.registry.RegistryHelper;
+import net.darkhax.bookshelf.util.ModUtils;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Mod;
@@ -58,6 +61,15 @@ public class JewelersConstruct {
     @EventHandler
     public void postInit (FMLPostInitializationEvent event) {
         
+        logRegistry("modifier", JewelryHelper.MODIFIERS);
+        logRegistry("material", JewelryHelper.MATERIALS);
+        logRegistry("part type", JewelryHelper.PART_TYPES);
+    }
+    
+    private static void logRegistry(String name, IForgeRegistry<?> registry) {
+        
+        Multimap<String, ?> sorted = ModUtils.getSortedEntries(registry);
+        LOG.info("The {} registry loaded with {} entries from {} mod(s).", name, sorted.values().size(), sorted.keySet().size());
     }
     
     private static <T extends IForgeRegistryEntry<T>> IForgeRegistry<T> createForgeRegistry (String name, Class<T> type) {
