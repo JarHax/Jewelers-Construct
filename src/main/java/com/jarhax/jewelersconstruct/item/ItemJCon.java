@@ -11,6 +11,7 @@ import com.jarhax.jewelersconstruct.api.modifier.Modifier;
 
 import baubles.api.BaubleType;
 import baubles.api.IBauble;
+import net.darkhax.bookshelf.util.StackUtils;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
@@ -23,6 +24,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemJCon extends Item implements IBauble {
+    
+    private static final String TAG_LAST_PLAYER = "LastPlayer";
     
     public ItemJCon() {
         
@@ -64,6 +67,11 @@ public class ItemJCon extends Item implements IBauble {
     @Override
     public void onWornTick (ItemStack stack, EntityLivingBase player) {
         
+        if (!isLastUser(stack, player)) {
+            
+            this.onEquipped(stack, player);
+        }
+        
         JewelryHelper.tickJewelry(stack, player);
     }
     
@@ -71,6 +79,7 @@ public class ItemJCon extends Item implements IBauble {
     public void onEquipped (ItemStack stack, EntityLivingBase player) {
         
         JewelryHelper.handleEquip(stack, player);
+        setLastUser(stack, player);
     }
     
     @Override
@@ -114,5 +123,15 @@ public class ItemJCon extends Item implements IBauble {
                 tooltip.add(I18n.format(modifierData.getKey().getTranslationName()) + " " + I18n.format("enchantment.level." + modifierData.getValue()));
             }
         }
+    }
+    
+    private static void setLastUser (ItemStack stack, EntityLivingBase user) {
+        
+        StackUtils.prepareStackTag(stack).setUniqueId(TAG_LAST_PLAYER, user.getUniqueID());
+    }
+    
+    private static boolean isLastUser (ItemStack stack, EntityLivingBase user) {
+        
+        return stack.hasTagCompound() ? stack.getTagCompound().getUniqueId(TAG_LAST_PLAYER).equals(user.getUniqueID()) : false;
     }
 }
