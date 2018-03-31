@@ -9,11 +9,16 @@ import net.minecraft.util.ResourceLocation;
 
 public class GuiPartShaper extends GuiContainer {
     
-    private static final ResourceLocation CHEST_GUI_TEXTURE = new ResourceLocation("Jewelersconstruct", "textures/gui/gui+part_shaper.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation("jewelersconstruct", "textures/gui/gui_part_shaper.png");
     private int guiWidth;
     private int guiHeight;
     private int left;
     private int top;
+    
+    
+    public GuiPartShaper (InventoryPlayer invPlayer, TileEntityPartShaper tile) {
+        super(new ContainerPartShaper(invPlayer, tile));
+    }
     
     @Override
     public void initGui () {
@@ -24,14 +29,12 @@ public class GuiPartShaper extends GuiContainer {
         this.top = this.height / 2 - this.guiHeight / 2;
     }
     
-    public GuiPartShaper (InventoryPlayer invPlayer, TileEntityPartShaper tile) {
-        super(new ContainerPartShaper(invPlayer, tile));
-    }
+    
     
     @Override
     protected void drawGuiContainerBackgroundLayer (float partialTicks, int mouseX, int mouseY) {
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.getTextureManager().bindTexture(CHEST_GUI_TEXTURE);
+        this.mc.getTextureManager().bindTexture(TEXTURE);
         int i = (this.width - this.xSize) / 2;
         int j = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(i, j, 0, 0, this.xSize, 166);
