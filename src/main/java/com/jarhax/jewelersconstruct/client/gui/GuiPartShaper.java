@@ -1,5 +1,10 @@
 package com.jarhax.jewelersconstruct.client.gui;
 
+import com.jarhax.jewelersconstruct.api.JewelryHelper;
+import com.jarhax.jewelersconstruct.api.part.PartType;
+import java.io.IOException;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.resources.I18n;
 import org.lwjgl.opengl.GL11;
 
 import com.jarhax.jewelersconstruct.client.container.ContainerPartShaper;
@@ -13,8 +18,6 @@ import net.minecraft.util.ResourceLocation;
 public class GuiPartShaper extends GuiContainer {
     
     private static final ResourceLocation TEXTURE = new ResourceLocation("jewelersconstruct", "textures/gui/gui_part_shaper.png");
-    private int guiWidth;
-    private int guiHeight;
     private int left;
     private int top;
     private final TileEntityPartShaper tile;
@@ -27,12 +30,22 @@ public class GuiPartShaper extends GuiContainer {
     
     @Override
     public void initGui () {
-        
-        this.guiWidth = 176;
-        this.guiHeight = 166;
+        //old width = 176
+        this.xSize = 176+100;
+        this.ySize = 166;
         super.initGui();
-        this.left = this.width / 2 - this.guiWidth / 2;
-        this.top = this.height / 2 - this.guiHeight / 2;
+        this.left = this.width / 2 - this.xSize / 2;
+        this.top = this.height / 2 - this.ySize / 2;
+        int index = 0;
+        int indexX = 0;
+        int indexY = 0;
+        for (PartType type : JewelryHelper.PART_TYPES.getValuesCollection()) {
+            buttonList.add(new GuiButton(index++, (left+100) -25-(25*indexX++), top+ (25*indexY), 20,20, I18n.format(type.getTranslationName())));
+            if(indexX >2){
+                indexY++;
+                indexX = 0;
+            }
+        }
     }
     
     @Override
@@ -52,12 +65,12 @@ public class GuiPartShaper extends GuiContainer {
         
         final int height = (int) ((float) this.tile.getFuel() / this.tile.getFuelTotal() * 13);
         if (height > 0) {
-            this.drawTexturedModalRect(56, 36 +13- height, this.guiWidth, 15 +13- height, 14, 14);
+            this.drawTexturedModalRect(56, 36 +13- height, this.xSize, 15 +13- height, 14, 14);
         }
         
         final int width = (int) ((float) this.tile.getProgress() / this.tile.getProgressMax() * 23);
         if (width > 0) {
-            this.drawTexturedModalRect(56 + 24, 34, this.guiWidth + 1, 0, width, 16);
+            this.drawTexturedModalRect(56 + 24, 34, this.xSize + 1, 0, width, 16);
         }
         
         GL11.glPopMatrix();
@@ -68,6 +81,11 @@ public class GuiPartShaper extends GuiContainer {
         
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.getTextureManager().bindTexture(TEXTURE);
-        this.drawTexturedModalRect(this.left, this.top, 0, 0, this.xSize, 166);
+        this.drawTexturedModalRect(this.left+100, this.top, 0, 0, this.xSize-100, 166);
+    }
+    
+    @Override
+    public void handleMouseInput () throws IOException {
+        super.handleMouseInput();
     }
 }
