@@ -16,6 +16,7 @@ import com.jarhax.jewelersconstruct.tileentities.TileEntityPartShaper;
 import net.darkhax.bookshelf.registry.RegistryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -56,10 +57,10 @@ public class Content {
     }
     
     /* ============================== Part Types ========================== */    
-    public static final PartType PART_BAND = new PartTypeBase("band");
-    public static final PartType PART_BINDING = new PartTypeBase("binding");
-    public static final PartType PART_CHAIN = new PartTypeBase("chain");
-    public static final PartType PART_BUCKLE = new PartTypeBase("buckle");
+    public static final PartType PART_BAND = new PartTypeBase("band", new ResourceLocation("jewelersconstruct", "textures/items/part_band.png"));
+    public static final PartType PART_BINDING = new PartTypeBase("binding", new ResourceLocation("jewelersconstruct", "textures/items/part_binding.png"));
+    public static final PartType PART_CHAIN = new PartTypeBase("chain", new ResourceLocation("jewelersconstruct", "textures/items/part_chain.png"));
+    public static final PartType PART_BUCKLE = new PartTypeBase("buckle", new ResourceLocation("jewelersconstruct", "textures/items/part_buckle.png"));
     
     @SubscribeEvent
     public static void registerPartTypes (RegistryEvent.Register<PartType> event) {
