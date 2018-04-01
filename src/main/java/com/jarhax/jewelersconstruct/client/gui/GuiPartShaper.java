@@ -3,7 +3,10 @@ package com.jarhax.jewelersconstruct.client.gui;
 import com.jarhax.jewelersconstruct.api.JewelryHelper;
 import com.jarhax.jewelersconstruct.api.part.PartType;
 import java.io.IOException;
-import net.minecraft.client.gui.GuiButton;
+import java.util.List;
+
+import com.jarhax.jewelersconstruct.client.gui.buttons.GuiButtonPart;
+import net.minecraft.client.gui.*;
 import net.minecraft.client.resources.I18n;
 import org.lwjgl.opengl.GL11;
 
@@ -40,7 +43,7 @@ public class GuiPartShaper extends GuiContainer {
         int indexX = 0;
         int indexY = 0;
         for (PartType type : JewelryHelper.PART_TYPES.getValuesCollection()) {
-            buttonList.add(new GuiButton(index++, (left+100) -25-(25*indexX++), top+ (25*indexY), 20,20, I18n.format(type.getTranslationName())));
+            buttonList.add(new GuiButtonPart(this, index++, (left+100) -25-(25*indexX++), top+ (25*indexY), 20,20, type));
             if(indexX >2){
                 indexY++;
                 indexX = 0;
@@ -88,4 +91,5 @@ public class GuiPartShaper extends GuiContainer {
     public void handleMouseInput () throws IOException {
         super.handleMouseInput();
     }
+    
 }
