@@ -7,7 +7,6 @@ import com.google.common.collect.Multimap;
 import com.jarhax.jewelersconstruct.api.JewelryHelper;
 import com.jarhax.jewelersconstruct.api.material.Material;
 import com.jarhax.jewelersconstruct.api.modifier.Modifier;
-import com.jarhax.jewelersconstruct.api.part.PartRecipe;
 import com.jarhax.jewelersconstruct.api.part.PartType;
 import com.jarhax.jewelersconstruct.client.gui.GuiHandler;
 import com.jarhax.jewelersconstruct.proxy.CommonProxy;
