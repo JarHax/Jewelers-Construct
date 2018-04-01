@@ -8,6 +8,8 @@ import com.jarhax.jewelersconstruct.api.JewelryHelper;
 import com.jarhax.jewelersconstruct.api.material.Material;
 import com.jarhax.jewelersconstruct.api.part.PartType;
 
+import net.darkhax.bookshelf.item.IColorfulItem;
+import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
@@ -18,7 +20,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemPart extends Item {
+public class ItemPart extends Item implements IColorfulItem {
     
     private final PartType type;
     
@@ -59,5 +61,16 @@ public class ItemPart extends Item {
                 items.add(stack);
             }
         }
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public IItemColor getColorHandler () {
+        
+        return (stack, layer) -> {
+            
+            final Material material = JewelryHelper.getPartMaterial(stack);
+            return material != null ? material.getColor(stack, layer) : 00;
+        };
     }
 }

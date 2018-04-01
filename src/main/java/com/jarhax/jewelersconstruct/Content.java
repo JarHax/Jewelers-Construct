@@ -36,11 +36,11 @@ public class Content {
         registry.register(MODIFIER_ATTACK);
     }
     
-    public static final Material MATERIAL_WOOD = new MaterialBase(60, 1, 1, "wood");
-    public static final Material MATERIAL_BONE = new MaterialBase(80, 1, 1, "bone");
-    public static final Material MATERIAL_STONE = new MaterialBase(120, 1, 1, "stone");
-    public static final Material MATERIAL_IRON = new MaterialBase(256, 1, 1, "iron");
-    public static final Material MATERIAL_GOLD = new MaterialBase(60, 3, 2, "gold");
+    public static final Material MATERIAL_WOOD = new MaterialBase(60, 1, 1, "wood", 0x755821);
+    public static final Material MATERIAL_BONE = new MaterialBase(80, 1, 1, "bone", 0xedebca);
+    public static final Material MATERIAL_STONE = new MaterialBase(120, 1, 1, "stone", 0x494949);
+    public static final Material MATERIAL_IRON = new MaterialBase(256, 1, 1, "iron", 0x959595);
+    public static final Material MATERIAL_GOLD = new MaterialBase(60, 3, 2, "gold", 0xcabd3c);
     
     /* ============================== Materials =========================== */
     @SubscribeEvent

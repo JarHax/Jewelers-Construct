@@ -5,6 +5,7 @@ import java.util.Set;
 
 import com.jarhax.jewelersconstruct.api.modifier.Modifier;
 
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -23,14 +24,14 @@ public abstract class Material extends IForgeRegistryEntry.Impl<Material> {
      * 
      * @return The base durability.
      */
-    abstract int getDurability ();
+    public abstract int getDurability ();
     
     /**
      * Gets the amount of modifiers this part provides.
      * 
      * @return The amount of modifiers.
      */
-    abstract int getRetention ();
+    public abstract int getRetention ();
     
     /**
      * The purity of this material. This is used to determine what tier of modifiers can be
@@ -38,7 +39,13 @@ public abstract class Material extends IForgeRegistryEntry.Impl<Material> {
      * 
      * @return The purity of the material.
      */
-    abstract int getPurity ();
+    public abstract int getPurity ();
+    
+    /**
+     * Gets the color to use for parts of this material.
+     * @return The color of the material.
+     */
+    public abstract int getColor(ItemStack stack, int layer);
     
     /**
      * Gets a set of all the modifiers this material provides by default.
