@@ -69,12 +69,12 @@ public class GuiPartShaper extends GuiContainer {
         
         final int height = (int) ((float) this.tile.getFuel() / this.tile.getFuelTotal() * 13);
         if (height > 0) {
-            this.drawTexturedModalRect(56, 36 +13- height, this.xSize, 15 +13- height, 14, 14);
+            this.drawTexturedModalRect(156, 36 +13- height, this.xSize-100, 15 +13- height, 14, 14);
         }
         
         final int width = (int) ((float) this.tile.getProgress() / this.tile.getProgressMax() * 23);
         if (width > 0) {
-            this.drawTexturedModalRect(56 + 24, 34, this.xSize + 1, 0, width, 16);
+            this.drawTexturedModalRect(156 + 24, 34, this.xSize-100 + 1, 0, width, 16);
         }
         
         GL11.glPopMatrix();
