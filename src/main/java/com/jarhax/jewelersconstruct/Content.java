@@ -7,6 +7,7 @@ import com.jarhax.jewelersconstruct.api.modifier.ModifierAttack;
 import com.jarhax.jewelersconstruct.api.modifier.ModifierTest;
 import com.jarhax.jewelersconstruct.api.part.PartType;
 import com.jarhax.jewelersconstruct.api.part.PartTypeBase;
+import com.jarhax.jewelersconstruct.blocks.BlockPartForge;
 import com.jarhax.jewelersconstruct.blocks.BlockPartShaper;
 import com.jarhax.jewelersconstruct.item.ItemJCon;
 import com.jarhax.jewelersconstruct.item.ItemPart;
@@ -72,11 +73,15 @@ public class Content {
     
     /* ============================== Blocks ============================== */
     public static final Block BLOCK_PART_SHAPER = new BlockPartShaper();
+    public static final Block BLOCK_PART_FORGE = new BlockPartForge();
+    
     
     public static void registerBlocks (RegistryHelper registry) {
         
         GameRegistry.registerTileEntity(TileEntityPartShaper.class, "part_shaper");
         registry.registerBlock(BLOCK_PART_SHAPER, "part_shaper");
+        registry.registerBlock(BLOCK_PART_FORGE, "part_forge");
+    
     }
     
     /* ============================== Items =============================== */
