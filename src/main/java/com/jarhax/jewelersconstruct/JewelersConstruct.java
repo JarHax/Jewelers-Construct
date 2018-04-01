@@ -7,13 +7,13 @@ import com.google.common.collect.Multimap;
 import com.jarhax.jewelersconstruct.api.JewelryHelper;
 import com.jarhax.jewelersconstruct.api.material.Material;
 import com.jarhax.jewelersconstruct.api.modifier.Modifier;
+import com.jarhax.jewelersconstruct.api.part.PartRecipe;
 import com.jarhax.jewelersconstruct.api.part.PartType;
 import com.jarhax.jewelersconstruct.client.gui.GuiHandler;
 import com.jarhax.jewelersconstruct.proxy.CommonProxy;
 
 import net.darkhax.bookshelf.registry.RegistryHelper;
 import net.darkhax.bookshelf.util.ModUtils;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -56,6 +56,7 @@ public class JewelersConstruct {
         
         NetworkRegistry.INSTANCE.registerGuiHandler(JewelersConstruct.INSTANCE, new GuiHandler());
         PROXY.registerRenders();
+        Content.associateItemsToMaterial();
     }
     
     @EventHandler

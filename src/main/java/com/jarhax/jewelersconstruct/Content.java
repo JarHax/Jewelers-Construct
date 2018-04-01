@@ -1,5 +1,6 @@
 package com.jarhax.jewelersconstruct;
 
+import com.jarhax.jewelersconstruct.api.JewelryHelper;
 import com.jarhax.jewelersconstruct.api.material.Material;
 import com.jarhax.jewelersconstruct.api.material.MaterialBase;
 import com.jarhax.jewelersconstruct.api.modifier.Modifier;
@@ -14,6 +15,7 @@ import com.jarhax.jewelersconstruct.item.ItemPart;
 import com.jarhax.jewelersconstruct.tileentities.TileEntityPartShaper;
 
 import net.darkhax.bookshelf.registry.RegistryHelper;
+import net.darkhax.bookshelf.util.OreDictUtils;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
@@ -54,6 +56,17 @@ public class Content {
         registry.register(MATERIAL_STONE);
         registry.register(MATERIAL_IRON);
         registry.register(MATERIAL_GOLD);
+    }
+    
+    public static void associateItemsToMaterial() {
+        
+        JewelryHelper.associateMaterial(OreDictUtils.PLANK_WOOD, MATERIAL_WOOD);
+        JewelryHelper.associateMaterial(OreDictUtils.BONE, MATERIAL_BONE);
+        JewelryHelper.associateMaterial(OreDictUtils.STONE, MATERIAL_STONE);
+        JewelryHelper.associateMaterial(OreDictUtils.INGOT_IRON, MATERIAL_IRON);
+        JewelryHelper.associateMaterial("plateIron", MATERIAL_IRON);
+        JewelryHelper.associateMaterial(OreDictUtils.INGOT_GOLD, MATERIAL_GOLD);
+        JewelryHelper.associateMaterial("plateGold", MATERIAL_GOLD);
     }
     
     /* ============================== Part Types ========================== */    

@@ -8,6 +8,7 @@ import com.jarhax.jewelersconstruct.api.material.Material;
 import com.jarhax.jewelersconstruct.api.modifier.Modifier;
 import com.jarhax.jewelersconstruct.api.part.PartType;
 
+import net.darkhax.bookshelf.lib.ItemStackMap;
 import net.darkhax.bookshelf.util.StackUtils;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
@@ -19,13 +20,15 @@ import net.minecraftforge.common.util.Constants.NBT;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
 
 public class JewelryHelper {
     
     public static final IForgeRegistry<Modifier> MODIFIERS = GameRegistry.findRegistry(Modifier.class);
     public static final IForgeRegistry<Material> MATERIALS = GameRegistry.findRegistry(Material.class);
-    public static final IForgeRegistry<PartType> PART_TYPES = GameRegistry.findRegistry(PartType.class);
+    public static final IForgeRegistry<PartType> PART_TYPES = GameRegistry.findRegistry(PartType.class);       
+    public static final ItemStackMap<Material> INPUTS_TO_MATERIALS = new ItemStackMap<>(ItemStackMap.SIMILAR_WITH_SIZE);
     
     private static final String TAG_MODIFIERS = "Modifiers";
     private static final String TAG_MODIFIER = "Modifier";
@@ -154,5 +157,23 @@ public class JewelryHelper {
         
         final String translationKey = material != null ? material.getTranslationName() : "jewelersconstruct.material.undefined";
         return I18n.format(translationKey);
+    }
+    
+    public static void associateMaterial(String oredict, Material material) {
+        
+        for (ItemStack stack : OreDictionary.getOres(oredict)) {
+            
+            associateMaterial(stack, material);
+        }
+    }
+    
+    public static void associateMaterial(ItemStack stack, Material material) {
+        
+        INPUTS_TO_MATERIALS.put(stack, material);
+    }
+    
+    public static Material getMaterial(ItemStack stack) {
+        
+        return INPUTS_TO_MATERIALS.get(stack);
     }
 }
