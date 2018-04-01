@@ -11,6 +11,7 @@ import com.jarhax.jewelersconstruct.api.part.PartType;
 import com.jarhax.jewelersconstruct.client.gui.GuiHandler;
 import com.jarhax.jewelersconstruct.proxy.CommonProxy;
 
+import net.darkhax.bookshelf.network.NetworkHandler;
 import net.darkhax.bookshelf.registry.RegistryHelper;
 import net.darkhax.bookshelf.util.ModUtils;
 import net.minecraft.util.ResourceLocation;
@@ -25,14 +26,12 @@ import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import net.minecraftforge.registries.RegistryBuilder;
 
-@Mod(modid = "jewelersconstruct", name = "Jewelers Construct", version = "@VERSION@")
+@Mod(modid = JewelersConstruct.MOD_ID, name = "Jewelers Construct", version = "@VERSION@")
 public class JewelersConstruct {
     
+    public static final String MOD_ID = "jewelersconstruct";    
     public static final Logger LOG = LogManager.getLogger("Jewelers Construct");
     public static final RegistryHelper REGISTRY = new RegistryHelper().setTab(new CreativeTabJewelersConstruct()).enableAutoRegistration();
-    
-    @Mod.Instance("jewelersconstruct")
-    public static JewelersConstruct INSTANCE;
     
     @SidedProxy(clientSide = "com.jarhax.jewelersconstruct.proxy.ClientProxy", serverSide = "com.jarhax.jewelersconstruct.proxy.CommonProxy")
     public static CommonProxy PROXY;
@@ -53,7 +52,7 @@ public class JewelersConstruct {
     @EventHandler
     public void init (FMLInitializationEvent event) {
         
-        NetworkRegistry.INSTANCE.registerGuiHandler(JewelersConstruct.INSTANCE, new GuiHandler());
+        NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
         PROXY.registerRenders();
         Content.associateItemsToMaterial();
     }
@@ -74,6 +73,6 @@ public class JewelersConstruct {
     
     private static <T extends IForgeRegistryEntry<T>> IForgeRegistry<T> createForgeRegistry (String name, Class<T> type) {
         
-        return new RegistryBuilder<T>().setName(new ResourceLocation("jewelersconstruct", name)).setType(type).setMaxID(Integer.MAX_VALUE >> 5).create();
+        return new RegistryBuilder<T>().setName(new ResourceLocation(MOD_ID, name)).setType(type).setMaxID(Integer.MAX_VALUE >> 5).create();
     }
 }
