@@ -5,6 +5,7 @@ item.jewelersconstruct.ring.name=Ring
 
 # Blocks
 tile.jewelersconstruct.part.shaper.name=Part Shaper
+tile.jewelersconstruct.part.forge.name=Jewelers Forge
 
 # Modifiers
 jewelersconstruct.modifier.missing=There are no modifiers!
