@@ -34,6 +34,7 @@ public class GuiButtonPart extends GuiButton {
     @Override
     public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks) {
         if(this.visible) {
+            GlStateManager.disableLighting();
             mc.getTextureManager().bindTexture(TEXTURE);
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
             this.hovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;
@@ -47,7 +48,7 @@ public class GuiButtonPart extends GuiButton {
             drawTexturedModalRect(x + 2, y + 2, 0, 0, 16, 16);
             GL11.glColor4d(1,1f,1f,1);
             this.mouseDragged(mc, mouseX, mouseY);
-    
+            GlStateManager.enableLighting();
             if(this.hovered) {
                 parent.drawHoveringText(I18n.format(type.getTranslationName()), mouseX, mouseY);
             }
