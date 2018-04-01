@@ -1,5 +1,7 @@
 package com.jarhax.jewelersconstruct.tileentities;
 
+import com.jarhax.jewelersconstruct.api.JewelryHelper;
+import com.jarhax.jewelersconstruct.api.part.PartType;
 import net.darkhax.bookshelf.block.tileentity.TileEntityBasicTickable;
 import net.minecraft.item.*;
 import net.minecraft.nbt.NBTTagCompound;
@@ -16,15 +18,15 @@ public class TileEntityPartShaper extends TileEntityBasicTickable {
     private boolean processing = true;
     private int progress = 0;
     private final int progressMax = 100;
+    private PartType lastType = JewelryHelper.PART_TYPES.getValues().get(0);
     
     public TileEntityPartShaper() {
         
-        this.inventory = new ItemStackHandler(4);
+        this.inventory = new ItemStackHandler(3);
     }
     
     @Override
     public void onEntityUpdate () {
-        
         if (this.fuel <= 0) {
             this.fuelTotal = 0;
             final ItemStack fuelSlot = this.getInventory().getStackInSlot(1);
@@ -61,7 +63,7 @@ public class TileEntityPartShaper extends TileEntityBasicTickable {
         dataTag.setInteger("fuelTotal", this.fuelTotal);
         dataTag.setInteger("progress", this.progress);
         dataTag.setBoolean("processing", this.processing);
-        
+        dataTag.setString("lastPart", getLastType().getRegistryName().toString());
     }
     
     @Override
@@ -71,6 +73,7 @@ public class TileEntityPartShaper extends TileEntityBasicTickable {
         this.fuelTotal = dataTag.getInteger("fuelTotal");
         this.progress = dataTag.getInteger("progress");
         this.processing = dataTag.getBoolean("processing");
+        this.lastType = JewelryHelper.getPartTypeByName(dataTag.getString("lastPart"));
     }
     
     public ItemStackHandler getInventory () {
@@ -111,5 +114,13 @@ public class TileEntityPartShaper extends TileEntityBasicTickable {
     public int getProgressMax () {
         
         return this.progressMax;
+    }
+    
+    public PartType getLastType() {
+        return lastType;
+    }
+    
+    public void setLastPart(PartType lastType) {
+        this.lastType = lastType;
     }
 }

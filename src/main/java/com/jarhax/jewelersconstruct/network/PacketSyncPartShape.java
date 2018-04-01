@@ -26,9 +26,6 @@ public class PacketSyncPartShape extends TileEntityMessage<TileEntityPartShaper>
     public void getAction () {
 
         final PartType type = JewelryHelper.PART_TYPES.getValue(this.partType);
-        // Hello Jared OwO
-        // You want to change this code over here!
-        // o/
-        //this.tile.setSelectedPart(type);
+        this.tile.setLastPart(type);
     }
 }

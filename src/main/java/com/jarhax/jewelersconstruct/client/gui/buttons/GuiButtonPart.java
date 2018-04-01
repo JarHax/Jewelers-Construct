@@ -20,6 +20,8 @@ public class GuiButtonPart extends GuiButton {
     
     private Color colour;
     
+    private boolean selected = false;
+    
     public GuiButtonPart(GuiPartShaper parent, int buttonId, int x, int y, PartType type, int colour) {
         this(parent, buttonId, x, y, 20, 20, type, colour);
     }
@@ -42,7 +44,11 @@ public class GuiButtonPart extends GuiButton {
             GlStateManager.enableBlend();
             GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
             GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-            super.drawTexturedModalRect(this.x, this.y, 0, 166, this.width, this.height);
+            int offsetX = 0;
+            if(selected){
+                offsetX = this.width;
+            }
+            super.drawTexturedModalRect(this.x, this.y, offsetX, 166, this.width, this.height);
             mc.getTextureManager().bindTexture(type.getIconLocation());
             GL11.glColor4d(colour.getRed()/255f,colour.getGreen()/255f,colour.getBlue()/255f,1);
             drawTexturedModalRect(x + 2, y + 2, 0, 0, 16, 16);
@@ -67,5 +73,17 @@ public class GuiButtonPart extends GuiButton {
         bufferbuilder.pos((double) (x + width), (double) (y), (double) this.zLevel).tex((double) ((float) (textureX + width) * txSize), (double) ((float) (textureY) * txSize)).endVertex();
         bufferbuilder.pos((double) (x), (double) (y), (double) this.zLevel).tex((double) ((float) (textureX) * txSize), (double) ((float) (textureY) * txSize)).endVertex();
         tessellator.draw();
+    }
+    
+    public PartType getType() {
+        return type;
+    }
+    
+    public boolean isSelected() {
+        return selected;
+    }
+    
+    public void setSelected(boolean selected) {
+        this.selected = selected;
     }
 }

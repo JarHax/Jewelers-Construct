@@ -21,13 +21,7 @@ public class ContainerPartShaper extends Container {
         // TODO change these to slot specific ones, that accept certain items only
         this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), 0, 100+56, 17));
         this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), 1, 100+56, 53));
-        this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), 2, 100+20, 35){
-            @Override
-            public boolean canTakeStack(EntityPlayer playerIn) {
-                return false;
-            }
-        });
-        this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), 3, 100+116, 35));
+        this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), 2, 100+116, 35));
     
         for (int x = 0; x < 9; x++) {
             this.addSlotToContainer(new Slot(invPlayer, x, 108 + 18 * x, 142));
@@ -52,5 +46,10 @@ public class ContainerPartShaper extends Container {
         else {
             return player.getDistanceSq(this.tile.getPos().getX() + 0.5D, this.tile.getPos().getY() + 0.5D, this.tile.getPos().getZ() + 0.5D) <= 64.0D;
         }
+    }
+    
+    @Override
+    public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
+        return ItemStack.EMPTY;
     }
 }

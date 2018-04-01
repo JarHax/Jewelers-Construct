@@ -1,5 +1,6 @@
 package com.jarhax.jewelersconstruct.client.gui;
 
+import com.jarhax.jewelersconstruct.JewelersConstruct;
 import com.jarhax.jewelersconstruct.api.JewelryHelper;
 import com.jarhax.jewelersconstruct.api.material.Material;
 import com.jarhax.jewelersconstruct.api.part.PartType;
@@ -7,8 +8,10 @@ import java.io.IOException;
 import java.util.*;
 
 import com.jarhax.jewelersconstruct.client.gui.buttons.GuiButtonPart;
+import com.jarhax.jewelersconstruct.network.PacketSyncPartShape;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.util.math.BlockPos;
 import org.lwjgl.opengl.GL11;
 
 import com.jarhax.jewelersconstruct.client.container.ContainerPartShaper;
@@ -44,7 +47,11 @@ public class GuiPartShaper extends GuiContainer {
         int indexX = 0;
         int indexY = 0;
         for (PartType type : JewelryHelper.PART_TYPES.getValuesCollection()) {
-            buttonList.add(new GuiButtonPart(this, index++, (left+100) -25-(25*indexX++), top+ (25*indexY), 20,20, type, new Random().nextInt()*0xFFFFFF));
+            GuiButtonPart buttonPart = new GuiButtonPart(this, index++, (left + 100) - 25 - (25 * indexX++), top + (25 * indexY), 20, 20, type, new Random().nextInt() * 0xFFFFFF);
+            if(tile.getLastType().equals(type)){
+                buttonPart.setSelected(true);
+            }
+            buttonList.add(buttonPart);
             if(indexX >2){
                 indexY++;
                 indexX = 0;
@@ -89,8 +96,18 @@ public class GuiPartShaper extends GuiContainer {
     }
     
     @Override
-    public void handleMouseInput () throws IOException {
-        super.handleMouseInput();
+    protected void actionPerformed(GuiButton button) throws IOException {
+        super.actionPerformed(button);
+        if(button instanceof GuiButtonPart) {
+            tile.setLastPart(((GuiButtonPart) button).getType());
+            JewelersConstruct.NETWORK.sendToServer(new PacketSyncPartShape(tile.getPos(), ((GuiButtonPart) button).getType()));
+            for(GuiButton butt: buttonList) {
+                if(butt instanceof GuiButtonPart){
+                    ((GuiButtonPart) butt).setSelected(false);
+                }
+            }
+            ((GuiButtonPart) button).setSelected(true);
+            
+        }
     }
-    
 }
