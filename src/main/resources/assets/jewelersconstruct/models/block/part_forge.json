@@ -1,6 +1,7 @@
 {
-	"textures": {
-    "particle": "jewelersconstruct:blocks/part_forge",
+  "parent":"block/block",
+  "textures": {
+    "particle": "minecraft:blocks/planks_oak",
     "texture": "jewelersconstruct:models/part_forge"
 	},
 	"elements": [ 	 
