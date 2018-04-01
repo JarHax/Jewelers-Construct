@@ -39,6 +39,8 @@ public class JewelersConstruct {
     @Mod.Instance(MOD_ID)
     public static JewelersConstruct INSTANCE;
     
+    public static final NetworkHandler NETWORK = new NetworkHandler(MOD_ID);
+    
     @EventHandler
     public void preInit (FMLPreInitializationEvent event) {
         
