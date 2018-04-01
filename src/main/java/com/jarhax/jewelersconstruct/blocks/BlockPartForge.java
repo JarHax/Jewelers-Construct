@@ -32,11 +32,11 @@ public class BlockPartForge extends Block {
         return true;
     }
     
-//    @Override
-//    public AxisAlignedBB getBoundingBox (IBlockState state, IBlockAccess source, BlockPos pos) {
-//
-//        return new AxisAlignedBB(0, 0, 0, 1, 1 - 0.0625, 1);
-//    }
+    @Override
+    public AxisAlignedBB getBoundingBox (IBlockState state, IBlockAccess source, BlockPos pos) {
+
+        return new AxisAlignedBB(0, 0, 0, 1, 1 - 0.0625, 1);
+    }
     
 //    @Override
 //    public boolean hasTileEntity (IBlockState state) {
