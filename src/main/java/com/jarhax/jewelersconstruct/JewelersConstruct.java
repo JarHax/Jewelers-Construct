@@ -36,6 +36,9 @@ public class JewelersConstruct {
     @SidedProxy(clientSide = "com.jarhax.jewelersconstruct.proxy.ClientProxy", serverSide = "com.jarhax.jewelersconstruct.proxy.CommonProxy")
     public static CommonProxy PROXY;
     
+    @Mod.Instance(MOD_ID)
+    public static JewelersConstruct INSTANCE;
+    
     @EventHandler
     public void preInit (FMLPreInitializationEvent event) {
         
