@@ -10,20 +10,25 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
+import java.awt.*;
+
 public class GuiButtonPart extends GuiButton {
     
     private final PartType type;
     private final GuiPartShaper parent;
     private static final ResourceLocation TEXTURE = new ResourceLocation("jewelersconstruct", "textures/gui/gui_part_shaper.png");
     
-    public GuiButtonPart(GuiPartShaper parent, int buttonId, int x, int y, PartType type) {
-        this(parent, buttonId, x, y, 20, 20, type);
+    private Color colour;
+    
+    public GuiButtonPart(GuiPartShaper parent, int buttonId, int x, int y, PartType type, int colour) {
+        this(parent, buttonId, x, y, 20, 20, type, colour);
     }
     
-    public GuiButtonPart(GuiPartShaper parent, int buttonId, int x, int y, int widthIn, int heightIn, PartType type) {
+    public GuiButtonPart(GuiPartShaper parent, int buttonId, int x, int y, int widthIn, int heightIn, PartType type, int colour) {
         super(buttonId, x, y, widthIn, heightIn, "");
         this.type = type;
         this.parent = parent;
+        this.colour = new Color(colour);
     }
     
     @Override
@@ -38,7 +43,9 @@ public class GuiButtonPart extends GuiButton {
             GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
             super.drawTexturedModalRect(this.x, this.y, 0, 166, this.width, this.height);
             mc.getTextureManager().bindTexture(type.getIconLocation());
+            GL11.glColor4d(colour.getRed()/255f,colour.getGreen()/255f,colour.getBlue()/255f,1);
             drawTexturedModalRect(x + 2, y + 2, 0, 0, 16, 16);
+            GL11.glColor4d(1,1f,1f,1);
             this.mouseDragged(mc, mouseX, mouseY);
     
             if(this.hovered) {

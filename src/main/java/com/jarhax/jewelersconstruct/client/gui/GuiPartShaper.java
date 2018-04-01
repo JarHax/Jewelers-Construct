@@ -1,9 +1,10 @@
 package com.jarhax.jewelersconstruct.client.gui;
 
 import com.jarhax.jewelersconstruct.api.JewelryHelper;
+import com.jarhax.jewelersconstruct.api.material.Material;
 import com.jarhax.jewelersconstruct.api.part.PartType;
 import java.io.IOException;
-import java.util.List;
+import java.util.*;
 
 import com.jarhax.jewelersconstruct.client.gui.buttons.GuiButtonPart;
 import net.minecraft.client.gui.*;
@@ -43,7 +44,7 @@ public class GuiPartShaper extends GuiContainer {
         int indexX = 0;
         int indexY = 0;
         for (PartType type : JewelryHelper.PART_TYPES.getValuesCollection()) {
-            buttonList.add(new GuiButtonPart(this, index++, (left+100) -25-(25*indexX++), top+ (25*indexY), 20,20, type));
+            buttonList.add(new GuiButtonPart(this, index++, (left+100) -25-(25*indexX++), top+ (25*indexY), 20,20, type, new Random().nextInt()*0xFFFFFF));
             if(indexX >2){
                 indexY++;
                 indexX = 0;
