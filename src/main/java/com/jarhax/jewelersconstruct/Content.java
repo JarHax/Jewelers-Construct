@@ -37,13 +37,13 @@ public class Content {
         registry.register(MODIFIER_ATTACK);
     }
     
+    /* ============================== Materials =========================== */  
     public static final Material MATERIAL_WOOD = new MaterialBase(60, 1, 1, "wood", 0x755821);
     public static final Material MATERIAL_BONE = new MaterialBase(80, 1, 1, "bone", 0xedebca);
     public static final Material MATERIAL_STONE = new MaterialBase(120, 1, 1, "stone", 0x494949);
     public static final Material MATERIAL_IRON = new MaterialBase(256, 1, 1, "iron", 0x959595);
     public static final Material MATERIAL_GOLD = new MaterialBase(60, 3, 2, "gold", 0xcabd3c);
     
-    /* ============================== Materials =========================== */
     @SubscribeEvent
     public static void registerMaterials (RegistryEvent.Register<Material> event) {
         
@@ -55,12 +55,12 @@ public class Content {
         registry.register(MATERIAL_GOLD);
     }
     
+    /* ============================== Part Types ========================== */    
     public static final PartType PART_BAND = new PartTypeBase("band");
     public static final PartType PART_BINDING = new PartTypeBase("binding");
     public static final PartType PART_CHAIN = new PartTypeBase("chain");
     public static final PartType PART_BUCKLE = new PartTypeBase("buckle");
     
-    /* ============================== Part Types ========================== */
     @SubscribeEvent
     public static void registerPartTypes (RegistryEvent.Register<PartType> event) {
         
@@ -74,8 +74,7 @@ public class Content {
     /* ============================== Blocks ============================== */
     public static final Block BLOCK_PART_SHAPER = new BlockPartShaper();
     public static final Block BLOCK_PART_FORGE = new BlockPartForge();
-    
-    
+        
     public static void registerBlocks (RegistryHelper registry) {
         
         GameRegistry.registerTileEntity(TileEntityPartShaper.class, "part_shaper");
