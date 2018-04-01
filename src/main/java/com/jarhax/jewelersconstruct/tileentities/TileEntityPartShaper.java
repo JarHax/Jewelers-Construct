@@ -1,7 +1,7 @@
 package com.jarhax.jewelersconstruct.tileentities;
 
 import net.darkhax.bookshelf.block.tileentity.TileEntityBasicTickable;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraftforge.items.ItemStackHandler;
@@ -32,7 +32,12 @@ public class TileEntityPartShaper extends TileEntityBasicTickable {
                 if (TileEntityFurnace.getItemBurnTime(fuelSlot) > 0) {
                     this.fuel = TileEntityFurnace.getItemBurnTime(fuelSlot);
                     this.fuelTotal = this.fuel;
+                    Item item = fuelSlot.getItem();
                     fuelSlot.shrink(1);
+                    if(fuelSlot.isEmpty()){
+                        
+                        this.getInventory().setStackInSlot(1, item.getContainerItem(fuelSlot));
+                    }
                 }
             }
         }
