@@ -9,6 +9,7 @@ import com.jarhax.jewelersconstruct.api.material.Material;
 import com.jarhax.jewelersconstruct.api.modifier.Modifier;
 import com.jarhax.jewelersconstruct.api.part.PartType;
 import com.jarhax.jewelersconstruct.client.gui.GuiHandler;
+import com.jarhax.jewelersconstruct.network.PacketSyncPartShape;
 import com.jarhax.jewelersconstruct.proxy.CommonProxy;
 
 import net.darkhax.bookshelf.network.NetworkHandler;
@@ -22,6 +23,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import net.minecraftforge.registries.RegistryBuilder;
@@ -43,6 +45,8 @@ public class JewelersConstruct {
     
     @EventHandler
     public void preInit (FMLPreInitializationEvent event) {
+        
+        NETWORK.register(PacketSyncPartShape.class, Side.SERVER);
         
         LOG.info("Creating registries!");
         createForgeRegistry("modifiers", Modifier.class);
