@@ -6,7 +6,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.SlotItemHandler;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class ContainerPartShaper extends Container {
     
@@ -19,9 +21,14 @@ public class ContainerPartShaper extends Container {
         // TODO change these to slot specific ones, that accept certain items only
         this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), 0, 100+56, 17));
         this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), 1, 100+56, 53));
-        this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), 2, 100+20, 35));
+        this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), 2, 100+20, 35){
+            @Override
+            public boolean canTakeStack(EntityPlayer playerIn) {
+                return false;
+            }
+        });
         this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), 3, 100+116, 35));
-        
+    
         for (int x = 0; x < 9; x++) {
             this.addSlotToContainer(new Slot(invPlayer, x, 108 + 18 * x, 142));
         }
