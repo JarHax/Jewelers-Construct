@@ -7,12 +7,14 @@ import net.minecraft.client.gui.*;
 import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 public class GuiButtonPart extends GuiButton {
     
     private final PartType type;
     private final GuiPartShaper parent;
+    private static final ResourceLocation TEXTURE = new ResourceLocation("jewelersconstruct", "textures/gui/gui_part_shaper.png");
     
     public GuiButtonPart(GuiPartShaper parent, int buttonId, int x, int y, PartType type) {
         this(parent, buttonId, x, y, 20, 20, type);
@@ -27,15 +29,14 @@ public class GuiButtonPart extends GuiButton {
     @Override
     public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks) {
         if(this.visible) {
-            mc.getTextureManager().bindTexture(BUTTON_TEXTURES);
+            mc.getTextureManager().bindTexture(TEXTURE);
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
             this.hovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;
             int i = this.getHoverState(this.hovered);
             GlStateManager.enableBlend();
             GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
             GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-            super.drawTexturedModalRect(this.x, this.y, 0, 46 + i * 20, this.width / 2, this.height);
-            super.drawTexturedModalRect(this.x + this.width / 2, this.y, 200 - this.width / 2, 46 + i * 20, this.width / 2, this.height);
+            super.drawTexturedModalRect(this.x, this.y, 0, 166, this.width, this.height);
             mc.getTextureManager().bindTexture(type.getIconLocation());
             drawTexturedModalRect(x + 2, y + 2, 0, 0, 16, 16);
             this.mouseDragged(mc, mouseX, mouseY);
