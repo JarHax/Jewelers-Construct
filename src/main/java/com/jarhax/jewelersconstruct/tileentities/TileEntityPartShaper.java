@@ -66,7 +66,8 @@ public class TileEntityPartShaper extends TileEntityBasicTickable {
         dataTag.setInteger("fuelTotal", this.fuelTotal);
         dataTag.setInteger("progress", this.progress);
         dataTag.setBoolean("processing", this.processing);
-        dataTag.setString("lastPart", getLastType().getRegistryName().toString());
+        if(getLastType() != null)
+            dataTag.setString("lastPart", getLastType().getRegistryName().toString());
     }
     
     @Override
