@@ -19,8 +19,8 @@ public class ContainerPartShaper extends Container {
         this.tile = tile;
         
         // TODO change these to slot specific ones, that accept certain items only
-        this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), 0, 100+56, 17));
-        this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), 1, 100+56, 53));
+        this.addSlotToContainer(new SlotPartShaperInput(tile, 0, 100+56, 17));
+        this.addSlotToContainer(new SlotPartShaperFuel(tile, 1, 100+56, 53));
         this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), 2, 100+116, 35));
     
         for (int x = 0; x < 9; x++) {
