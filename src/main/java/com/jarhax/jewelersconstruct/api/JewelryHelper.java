@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 import com.jarhax.jewelersconstruct.api.material.Material;
 import com.jarhax.jewelersconstruct.api.modifier.Modifier;
 import com.jarhax.jewelersconstruct.api.part.PartType;
+import com.jarhax.jewelersconstruct.api.trinket.TrinketType;
 import com.jarhax.jewelersconstruct.item.ItemJCon;
 
 import baubles.api.BaublesApi;
@@ -34,7 +35,9 @@ public class JewelryHelper {
     public static final IForgeRegistry<Modifier> MODIFIERS = GameRegistry.findRegistry(Modifier.class);
     public static final IForgeRegistry<Material> MATERIALS = GameRegistry.findRegistry(Material.class);
     public static final IForgeRegistry<PartType> PART_TYPES = GameRegistry.findRegistry(PartType.class);
+    public static final IForgeRegistry<TrinketType> TRINKET_TYPES = GameRegistry.findRegistry(TrinketType.class);
     public static final ItemStackMap<Material> INPUTS_TO_MATERIALS = new ItemStackMap<>(ItemStackMap.SIMILAR);
+    
     
     private static final String TAG_MODIFIERS = "Modifiers";
     private static final String TAG_MODIFIER = "Modifier";
@@ -55,6 +58,10 @@ public class JewelryHelper {
         
         return PART_TYPES.getValue(new ResourceLocation(name));
     }
+    public static TrinketType getTrinketTypeByName (String name){
+        return TRINKET_TYPES.getValue(new ResourceLocation(name));
+    }
+    
     
     public static void tickJewelry (ItemStack stack, EntityLivingBase user) {
         
