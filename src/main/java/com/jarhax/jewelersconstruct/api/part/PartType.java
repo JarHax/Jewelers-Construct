@@ -1,5 +1,7 @@
 package com.jarhax.jewelersconstruct.api.part;
 
+import com.jarhax.jewelersconstruct.item.ItemPart;
+
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
@@ -9,14 +11,14 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 public class PartType extends IForgeRegistryEntry.Impl<PartType> {
     
     private final ResourceLocation iconLocation;
-    private Item partItem;
+    private ItemPart partItem;
     
-    public Item getPartItem () {
+    public ItemPart getPartItem () {
         
         return partItem;
     }
 
-    public void setPartItem (Item partItem) {
+    public void setPartItem (ItemPart partItem) {
         
         this.partItem = partItem;
     }
