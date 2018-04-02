@@ -25,7 +25,7 @@ public class RendertilePartShaper extends TileEntitySpecialRenderer<TileEntityPa
         GlStateManager.pushMatrix();
         GlStateManager.translate(x, y, z);
         
-        if(te.getFuel()>0) {
+        if(te.getFuel()>0 && te.isProcessing()) {
             GlStateManager.disableLighting();
             GlStateManager.translate(scale(5), 0.5, scale(5));
             GlStateManager.scale(1f / 4 + scale(2), 1.4f / 4, 1f / 4 + scale(2));
