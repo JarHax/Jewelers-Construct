@@ -9,11 +9,10 @@ tile.jewelersconstruct.part.forge.name=Jewelers Forge
 
 # Modifiers
 jewelersconstruct.modifier.missing=There are no modifiers!
-jewelersconstruct.modifier.jewelersconstruct.test=Test
-jewelersconstruct.modifier.jewelersconstruct.attack=Strength
-jewelersconstruct.modifier.jewelersconstruct.health=Life
-jewelersconstruct.modifier.jewelersconstruct.armor=Protect
-jewelersconstruct.modifier.jewelersconstruct.knockback=Sturdy
+jewelersconstruct.modifier.jewelersconstruct.vigor=Vigor
+jewelersconstruct.modifier.jewelersconstruct.vitality=Vitality
+jewelersconstruct.modifier.jewelersconstruct.fortitude=Fortitude
+jewelersconstruct.modifier.jewelersconstruct.sturdy=Sturdy
 
 # Materials
 jewelersconstruct.material.jewelersconstruct.wood=Wooden

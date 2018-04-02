@@ -4,11 +4,7 @@ import com.jarhax.jewelersconstruct.api.JewelryHelper;
 import com.jarhax.jewelersconstruct.api.material.Material;
 import com.jarhax.jewelersconstruct.api.material.MaterialBase;
 import com.jarhax.jewelersconstruct.api.modifier.Modifier;
-import com.jarhax.jewelersconstruct.api.modifier.ModifierArmor;
-import com.jarhax.jewelersconstruct.api.modifier.ModifierAttack;
-import com.jarhax.jewelersconstruct.api.modifier.ModifierHealth;
-import com.jarhax.jewelersconstruct.api.modifier.ModifierKnockback;
-import com.jarhax.jewelersconstruct.api.modifier.ModifierTest;
+import com.jarhax.jewelersconstruct.api.modifier.ModifierAttribute;
 import com.jarhax.jewelersconstruct.api.part.PartType;
 import com.jarhax.jewelersconstruct.api.part.PartTypeBase;
 import com.jarhax.jewelersconstruct.blocks.BlockPartForge;
@@ -17,9 +13,11 @@ import com.jarhax.jewelersconstruct.item.ItemJCon;
 import com.jarhax.jewelersconstruct.item.ItemPart;
 import com.jarhax.jewelersconstruct.tileentities.TileEntityPartShaper;
 
+import net.darkhax.bookshelf.data.AttributeOperation;
 import net.darkhax.bookshelf.registry.RegistryHelper;
 import net.darkhax.bookshelf.util.OreDictUtils;
 import net.minecraft.block.Block;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
@@ -32,21 +30,19 @@ import net.minecraftforge.registries.IForgeRegistry;
 public class Content {
     
     /* ============================== Modifiers =========================== */
-    public static final Modifier MODIFIER_TEST = new ModifierTest();
-    public static final Modifier MODIFIER_ATTACK = new ModifierAttack();
-    public static final Modifier MODIFIER_HEALTH = new ModifierHealth();
-    public static final Modifier MODIFIER_ARMOR = new ModifierArmor();
-    public static final Modifier MODIFIER_KNOCKBACK = new ModifierKnockback();
+    public static final Modifier MODIFIER_VIGOR = new ModifierAttribute("vigor", SharedMonsterAttributes.ATTACK_DAMAGE, 1.5d, AttributeOperation.ADDITIVE, 5, "a9106b47-1153-4620-831e-38cb01a63fec");
+    public static final Modifier MODIFIER_VITALITY = new ModifierAttribute("vitality", SharedMonsterAttributes.MAX_HEALTH, 2d, AttributeOperation.ADDITIVE, 5, "83ba3ce9-c4c5-472f-b9da-f79422e7d711");
+    public static final Modifier MODIFIER_FORTITUDE = new ModifierAttribute("fortitude", SharedMonsterAttributes.ARMOR, 2d, AttributeOperation.ADDITIVE, 3, "00dc5641-1c03-4aa6-940c-d4195ca49d44c");
+    public static final Modifier MODIFIER_STURDY = new ModifierAttribute("sturdy", SharedMonsterAttributes.KNOCKBACK_RESISTANCE, 0.05d, AttributeOperation.MULTIPLY_SEPERATE, 3, "d770af89-3ec9-40f0-b36c-cbc67242adec");
     
     @SubscribeEvent
     public static void registerModifiers (RegistryEvent.Register<Modifier> event) {
         
         final IForgeRegistry<Modifier> registry = event.getRegistry();
-        registry.register(MODIFIER_TEST);
-        registry.register(MODIFIER_ATTACK);
-        registry.register(MODIFIER_HEALTH);
-        registry.register(MODIFIER_ARMOR);
-        registry.register(MODIFIER_KNOCKBACK);
+        registry.register(MODIFIER_VIGOR);
+        registry.register(MODIFIER_VITALITY);
+        registry.register(MODIFIER_FORTITUDE);
+        registry.register(MODIFIER_STURDY);
     }
     
     /* ============================== Materials =========================== */

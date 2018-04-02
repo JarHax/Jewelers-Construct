@@ -5,6 +5,9 @@ import java.util.Set;
 
 import net.darkhax.bookshelf.util.StackUtils;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.ModContainer;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class TempUtils {
@@ -40,5 +43,20 @@ public class TempUtils {
         }
         
         return names;
+    }
+    
+    public static ResourceLocation getIdForActiveMod (String name) {
+        
+        if (!name.contains(":")) {
+            
+            final ModContainer container = Loader.instance().activeModContainer();
+            
+            if (container != null) {
+                
+                return new ResourceLocation(container.getModId(), name);
+            }
+        }
+        
+        return new ResourceLocation(name);
     }
 }
