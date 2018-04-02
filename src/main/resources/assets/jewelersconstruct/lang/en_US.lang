@@ -20,10 +20,19 @@ jewelersconstruct.modifier.jewelersconstruct.traveler=Traveler
 
 # Materials
 jewelersconstruct.material.jewelersconstruct.wood=Wooden
+jewelersconstruct.material.jewelersconstruct.flint=Flint
 jewelersconstruct.material.jewelersconstruct.bone=Bone
 jewelersconstruct.material.jewelersconstruct.stone=Stone
 jewelersconstruct.material.jewelersconstruct.iron=Iron
 jewelersconstruct.material.jewelersconstruct.gold=Gold
+
+# Common Mod Materials
+jewelersconstruct.material.jewelersconstruct.copper=Copper
+jewelersconstruct.material.jewelersconstruct.bronze=Bronze
+jewelersconstruct.material.jewelersconstruct.lead=Lead
+jewelersconstruct.material.jewelersconstruct.silver=Silver
+jewelersconstruct.material.jewelersconstruct.electrum=Electrum
+jewelersconstruct.material.jewelersconstruct.steel=Steel
 
 # Parts
 jewelersconstruct.part.jewelersconstruct.band=Band

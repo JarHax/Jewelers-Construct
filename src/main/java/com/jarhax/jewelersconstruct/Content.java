@@ -56,20 +56,38 @@ public class Content {
     
     /* ============================== Materials =========================== */
     public static final Material MATERIAL_WOOD = new MaterialBase(60, 1, 1, "wood", 0x755821);
-    public static final Material MATERIAL_BONE = new MaterialBase(80, 1, 1, "bone", 0xedebca);
+    public static final Material MATERIAL_FLINT = new MaterialBase(70, 1, 2, "flint", 0x696969);
+    public static final Material MATERIAL_BONE = new MaterialBase(80, 1, 1, "bone", 0xede6bf);
     public static final Material MATERIAL_STONE = new MaterialBase(120, 1, 1, "stone", 0x959595);
     public static final Material MATERIAL_IRON = new MaterialBase(256, 1, 1, "iron", 0xffffff);
     public static final Material MATERIAL_GOLD = new MaterialBase(60, 3, 2, "gold", 0xcabd3c);
+    
+    // Common mod materials
+    public static final Material MATERIAL_COPPER = new MaterialBase(260, 1, 1, "copper", 0xed9f07);
+    public static final Material MATERIAL_BRONZE = new MaterialBase(350, 1, 1, "bronze", 0xe3bd68);
+    public static final Material MATERIAL_LEAD = new MaterialBase(355, 1, 1, "lead", 0x4d4968);
+    public static final Material MATERIAL_SILVER = new MaterialBase(300, 2, 3, "silver", 0xd1ecf6);
+    public static final Material MATERIAL_ELECTRUM = new MaterialBase(285, 3, 3, "electrum", 0xe8db49);
+    public static final Material MATERIAL_STEEL = new MaterialBase(500, 1, 1, "steel", 0xa7a7a7);
     
     @SubscribeEvent
     public static void registerMaterials (RegistryEvent.Register<Material> event) {
         
         final IForgeRegistry<Material> registry = event.getRegistry();
         registry.register(MATERIAL_WOOD);
+        registry.register(MATERIAL_FLINT);
         registry.register(MATERIAL_BONE);
         registry.register(MATERIAL_STONE);
         registry.register(MATERIAL_IRON);
         registry.register(MATERIAL_GOLD);
+        
+        // Common mod materials
+        registry.register(MATERIAL_COPPER);
+        registry.register(MATERIAL_BRONZE);
+        registry.register(MATERIAL_LEAD);
+        registry.register(MATERIAL_SILVER);
+        registry.register(MATERIAL_ELECTRUM);
+        registry.register(MATERIAL_STEEL);
     }
     
     public static void associateItemsToMaterial () {
@@ -81,6 +99,20 @@ public class Content {
         JewelryHelper.associateMaterial("plateIron", MATERIAL_IRON);
         JewelryHelper.associateMaterial(OreDictUtils.INGOT_GOLD, MATERIAL_GOLD);
         JewelryHelper.associateMaterial("plateGold", MATERIAL_GOLD);
+        
+        // Common mod materials
+        JewelryHelper.associateMaterial("ingotCopper", MATERIAL_COPPER);
+        JewelryHelper.associateMaterial("plateCopper", MATERIAL_COPPER);
+        JewelryHelper.associateMaterial("inogtBronze", MATERIAL_BRONZE);
+        JewelryHelper.associateMaterial("plateBronze", MATERIAL_BRONZE);
+        JewelryHelper.associateMaterial("ingotLead", MATERIAL_LEAD);
+        JewelryHelper.associateMaterial("plateLead", MATERIAL_LEAD);
+        JewelryHelper.associateMaterial("ingotSilver", MATERIAL_SILVER);
+        JewelryHelper.associateMaterial("plateSilver", MATERIAL_SILVER);
+        JewelryHelper.associateMaterial("ingotElectrum", MATERIAL_ELECTRUM);
+        JewelryHelper.associateMaterial("plateElectrum", MATERIAL_ELECTRUM);
+        JewelryHelper.associateMaterial("ingotSteel", MATERIAL_STEEL);
+        JewelryHelper.associateMaterial("plateSteel", MATERIAL_STEEL);
     }
     
     /* ============================== Part Types ========================== */
