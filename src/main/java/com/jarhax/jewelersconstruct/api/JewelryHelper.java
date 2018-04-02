@@ -28,7 +28,7 @@ public class JewelryHelper {
     public static final IForgeRegistry<Modifier> MODIFIERS = GameRegistry.findRegistry(Modifier.class);
     public static final IForgeRegistry<Material> MATERIALS = GameRegistry.findRegistry(Material.class);
     public static final IForgeRegistry<PartType> PART_TYPES = GameRegistry.findRegistry(PartType.class);       
-    public static final ItemStackMap<Material> INPUTS_TO_MATERIALS = new ItemStackMap<>(ItemStackMap.SIMILAR_WITH_SIZE);
+    public static final ItemStackMap<Material> INPUTS_TO_MATERIALS = new ItemStackMap<>(ItemStackMap.SIMILAR);
     
     private static final String TAG_MODIFIERS = "Modifiers";
     private static final String TAG_MODIFIER = "Modifier";
