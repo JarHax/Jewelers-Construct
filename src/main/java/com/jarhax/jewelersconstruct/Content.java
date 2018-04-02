@@ -38,6 +38,7 @@ public class Content {
     public static final Modifier MODIFIER_LUCK = new ModifierAttribute("luck", SharedMonsterAttributes.LUCK, 1d, AttributeOperation.ADDITIVE, 3, "142f0767-4c33-4afc-9d74-8990230b9ec7");
     public static final Modifier MODIFIER_GRASPING = new ModifierAttribute("grasping", EntityPlayer.REACH_DISTANCE, 1.25d, AttributeOperation.ADDITIVE, 3, "15b13705-586d-4b25-9fbf-7dc76613977b");
     public static final Modifier MODIFIER_SWIFT = new ModifierAttribute("swift", SharedMonsterAttributes.ATTACK_SPEED, 0.33d, AttributeOperation.ADDITIVE, 3, "0238fcd1-c252-4389-9022-06215adff31f");
+    public static final Modifier MODIFIER_TRAVELER = new ModifierAttribute("traveler", SharedMonsterAttributes.MOVEMENT_SPEED, 0.1d, AttributeOperation.MULTIPLY, 5, "7a87405c-f8e8-4ba7-a235-fd6c0e90ebd2");
     
     @SubscribeEvent
     public static void registerModifiers (RegistryEvent.Register<Modifier> event) {
@@ -50,6 +51,7 @@ public class Content {
         registry.register(MODIFIER_LUCK);
         registry.register(MODIFIER_GRASPING);
         registry.register(MODIFIER_SWIFT);
+        registry.register(MODIFIER_TRAVELER);
     }
     
     /* ============================== Materials =========================== */
