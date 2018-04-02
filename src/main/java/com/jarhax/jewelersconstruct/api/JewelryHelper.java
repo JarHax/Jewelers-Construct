@@ -16,6 +16,7 @@ import net.darkhax.bookshelf.util.StackUtils;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -202,6 +203,11 @@ public class JewelryHelper {
         
         final String translationKey = material != null ? material.getTranslationName() : "jewelersconstruct.material.undefined";
         return I18n.format(translationKey);
+    }
+    
+    public static void associateMaterial (Item item, Material material) {
+        
+        associateMaterial(new ItemStack(item), material);
     }
     
     public static void associateMaterial (String oredict, Material material) {

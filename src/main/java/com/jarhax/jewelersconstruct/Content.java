@@ -19,6 +19,7 @@ import net.darkhax.bookshelf.util.OreDictUtils;
 import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
@@ -94,6 +95,7 @@ public class Content {
         
         JewelryHelper.associateMaterial(OreDictUtils.PLANK_WOOD, MATERIAL_WOOD);
         JewelryHelper.associateMaterial(OreDictUtils.BONE, MATERIAL_BONE);
+        JewelryHelper.associateMaterial(Items.FLINT, MATERIAL_FLINT);
         JewelryHelper.associateMaterial(OreDictUtils.STONE, MATERIAL_STONE);
         JewelryHelper.associateMaterial(OreDictUtils.INGOT_IRON, MATERIAL_IRON);
         JewelryHelper.associateMaterial("plateIron", MATERIAL_IRON);
