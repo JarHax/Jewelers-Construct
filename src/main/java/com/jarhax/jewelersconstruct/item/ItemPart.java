@@ -29,6 +29,7 @@ public class ItemPart extends Item implements IColorfulItem {
         this.type = type;        
         this.setMaxStackSize(1);
         this.hasSubtypes = true;
+        type.setPartItem(this);
     }
 
     public PartType getPartType() {
