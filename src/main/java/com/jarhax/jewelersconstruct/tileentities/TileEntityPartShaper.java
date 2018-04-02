@@ -1,6 +1,7 @@
 package com.jarhax.jewelersconstruct.tileentities;
 
 import com.jarhax.jewelersconstruct.api.JewelryHelper;
+import com.jarhax.jewelersconstruct.api.material.Material;
 import com.jarhax.jewelersconstruct.api.part.PartType;
 import net.darkhax.bookshelf.block.tileentity.TileEntityBasicTickable;
 import net.minecraft.item.*;
@@ -43,18 +44,22 @@ public class TileEntityPartShaper extends TileEntityBasicTickable {
                 }
             }
         }
-        if(this.fuel > 0) {
-            this.fuel--;
-        }
         if(this.processing) {
-            this.progress++;
-            if(this.progress >= this.progressMax) {
-                this.progress = 0;
-                this.processing = false;
+            if(this.fuel > 0) {
+                this.fuel--;
+                
+                this.progress++;
+                if(this.progress >= this.progressMax) {
+                    this.progress = 0;
+                    this.processing = false;
+                    Material material = JewelryHelper.getMaterial(inventory.getStackInSlot(0));
+                    inventory.getStackInSlot(0).shrink(1);
+                    ItemStack itemStack = new ItemStack(lastType.getPartItem());
+                    
+                    JewelryHelper.setMaterial(itemStack, material);
+                    inventory.setStackInSlot(2, itemStack);
+                }
             }
-        }
-        if(!inventory.getStackInSlot(0).isEmpty() && processing) {
-        
         }
     }
     
