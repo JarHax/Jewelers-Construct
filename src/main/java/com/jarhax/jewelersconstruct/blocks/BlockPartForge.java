@@ -2,10 +2,12 @@ package com.jarhax.jewelersconstruct.blocks;
 
 import com.jarhax.jewelersconstruct.JewelersConstruct;
 
+import com.jarhax.jewelersconstruct.tileentities.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -25,7 +27,7 @@ public class BlockPartForge extends Block {
     public boolean onBlockActivated (World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         
         if (!worldIn.isRemote) {
-            playerIn.openGui(JewelersConstruct.INSTANCE, 0, worldIn, pos.getX(), pos.getY(), pos.getZ());
+            playerIn.openGui(JewelersConstruct.INSTANCE, 1, worldIn, pos.getX(), pos.getY(), pos.getZ());
         }
         return true;
     }
@@ -36,18 +38,17 @@ public class BlockPartForge extends Block {
         return new AxisAlignedBB(0, 0, 0, 1, 1 - 0.0625, 1);
     }
     
-    // @Override
-    // public boolean hasTileEntity (IBlockState state) {
-    //
-    // return true;
-    // }
-    //
-    // @Nullable
-    // @Override
-    // public TileEntity createTileEntity (World world, IBlockState state) {
-    //
-    // return new TileEntityPartShaper();
-    // }
+     @Override
+     public boolean hasTileEntity (IBlockState state) {
+
+     return true;
+     }
+
+     @Override
+     public TileEntity createTileEntity (World world, IBlockState state) {
+
+     return new TileEntityTrinketForge();
+     }
     
     @Override
     public boolean isTopSolid (IBlockState state) {

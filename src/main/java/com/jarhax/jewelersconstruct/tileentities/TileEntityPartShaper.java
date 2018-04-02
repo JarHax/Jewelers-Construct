@@ -20,7 +20,7 @@ public class TileEntityPartShaper extends TileEntityBasicTickable {
     
     private boolean processing = false;
     private int progress = 0;
-    private final int progressMax = 100;
+    private final int progressMax = 200;
     private PartType lastType = JewelryHelper.PART_TYPES.getValues().get(0);
     
     public TileEntityPartShaper() {
@@ -31,23 +31,24 @@ public class TileEntityPartShaper extends TileEntityBasicTickable {
     @Override
     public void onEntityUpdate () {
         
-        if (this.fuel <= 0) {
-            this.fuelTotal = 0;
-            final ItemStack fuelSlot = this.getInventory().getStackInSlot(1);
-            if (!fuelSlot.isEmpty()) {
-                if (TileEntityFurnace.getItemBurnTime(fuelSlot) > 0) {
-                    this.fuel = TileEntityFurnace.getItemBurnTime(fuelSlot);
-                    this.fuelTotal = this.fuel;
-                    final Item item = fuelSlot.getItem();
-                    fuelSlot.shrink(1);
-                    if (fuelSlot.isEmpty()) {
-                        
-                        this.getInventory().setStackInSlot(1, item.getContainerItem(fuelSlot));
+        
+        if (this.processing) {
+            if (this.fuel <= 0) {
+                this.fuelTotal = 0;
+                final ItemStack fuelSlot = this.getInventory().getStackInSlot(1);
+                if (!fuelSlot.isEmpty()) {
+                    if (TileEntityFurnace.getItemBurnTime(fuelSlot) > 0) {
+                        this.fuel = TileEntityFurnace.getItemBurnTime(fuelSlot);
+                        this.fuelTotal = this.fuel;
+                        final Item item = fuelSlot.getItem();
+                        fuelSlot.shrink(1);
+                        if (fuelSlot.isEmpty()) {
+                    
+                            this.getInventory().setStackInSlot(1, item.getContainerItem(fuelSlot));
+                        }
                     }
                 }
             }
-        }
-        if (this.processing) {
             if (this.fuel > 0) {
                 this.fuel--;
                 
