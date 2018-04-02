@@ -4,7 +4,10 @@ import com.jarhax.jewelersconstruct.api.JewelryHelper;
 import com.jarhax.jewelersconstruct.api.material.Material;
 import com.jarhax.jewelersconstruct.api.material.MaterialBase;
 import com.jarhax.jewelersconstruct.api.modifier.Modifier;
+import com.jarhax.jewelersconstruct.api.modifier.ModifierArmor;
 import com.jarhax.jewelersconstruct.api.modifier.ModifierAttack;
+import com.jarhax.jewelersconstruct.api.modifier.ModifierHealth;
+import com.jarhax.jewelersconstruct.api.modifier.ModifierKnockback;
 import com.jarhax.jewelersconstruct.api.modifier.ModifierTest;
 import com.jarhax.jewelersconstruct.api.part.PartType;
 import com.jarhax.jewelersconstruct.api.part.PartTypeBase;
@@ -31,6 +34,9 @@ public class Content {
     /* ============================== Modifiers =========================== */
     public static final Modifier MODIFIER_TEST = new ModifierTest();
     public static final Modifier MODIFIER_ATTACK = new ModifierAttack();
+    public static final Modifier MODIFIER_HEALTH = new ModifierHealth();
+    public static final Modifier MODIFIER_ARMOR = new ModifierArmor();
+    public static final Modifier MODIFIER_KNOCKBACK = new ModifierKnockback();
     
     @SubscribeEvent
     public static void registerModifiers (RegistryEvent.Register<Modifier> event) {
@@ -38,6 +44,9 @@ public class Content {
         final IForgeRegistry<Modifier> registry = event.getRegistry();
         registry.register(MODIFIER_TEST);
         registry.register(MODIFIER_ATTACK);
+        registry.register(MODIFIER_HEALTH);
+        registry.register(MODIFIER_ARMOR);
+        registry.register(MODIFIER_KNOCKBACK);
     }
     
     /* ============================== Materials =========================== */  
