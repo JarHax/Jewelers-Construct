@@ -1,5 +1,6 @@
 package com.jarhax.jewelersconstruct;
 
+import baubles.api.BaubleType;
 import com.jarhax.jewelersconstruct.api.JewelryHelper;
 import com.jarhax.jewelersconstruct.api.material.Material;
 import com.jarhax.jewelersconstruct.api.material.MaterialBase;
@@ -9,11 +10,12 @@ import com.jarhax.jewelersconstruct.api.modifier.ModifierAttribute;
 import com.jarhax.jewelersconstruct.api.part.PartType;
 import com.jarhax.jewelersconstruct.api.part.PartTypeBase;
 import com.jarhax.jewelersconstruct.api.part.PartTypeGem;
+import com.jarhax.jewelersconstruct.api.trinket.*;
 import com.jarhax.jewelersconstruct.blocks.BlockPartForge;
 import com.jarhax.jewelersconstruct.blocks.BlockPartShaper;
 import com.jarhax.jewelersconstruct.item.ItemJCon;
 import com.jarhax.jewelersconstruct.item.ItemPart;
-import com.jarhax.jewelersconstruct.tileentities.TileEntityPartShaper;
+import com.jarhax.jewelersconstruct.tileentities.*;
 
 import net.darkhax.bookshelf.data.AttributeOperation;
 import net.darkhax.bookshelf.registry.RegistryHelper;
@@ -146,6 +148,21 @@ public class Content {
         registry.register(PART_GEM);
     }
     
+    /* ============================== Trinket Types ========================== */
+    public static final TrinketType TYPE_RING = new TrinketTypeBase("ring", new ResourceLocation("jewelersconstruct", "textures/items/ring.png"));
+    public static final TrinketType TYPE_BELT = new TrinketTypeBase("belt", new ResourceLocation("jewelersconstruct", "textures/items/belt.png"));
+    
+    
+    @SubscribeEvent
+    public static void registerTrinketTypes (RegistryEvent.Register<TrinketType> event) {
+        
+        final IForgeRegistry<TrinketType> registry = event.getRegistry();
+        registry.register(TYPE_RING);
+        TYPE_RING.setPartTypes(new PartType[]{PART_BAND, PART_BINDING, PART_GEM});
+        registry.register(TYPE_BELT);
+        TYPE_BELT.setPartTypes(new PartType[]{PART_BAND,PART_BAND, PART_BUCKLE, PART_GEM});
+    }
+    
     /* ============================== Blocks ============================== */
     public static final Block BLOCK_PART_SHAPER = new BlockPartShaper();
     public static final Block BLOCK_PART_FORGE = new BlockPartForge();
@@ -153,13 +170,17 @@ public class Content {
     public static void registerBlocks (RegistryHelper registry) {
         
         GameRegistry.registerTileEntity(TileEntityPartShaper.class, "part_shaper");
+        GameRegistry.registerTileEntity(TileEntityTrinketForge.class, "trinket_forge");
+    
         registry.registerBlock(BLOCK_PART_SHAPER, "part_shaper");
         registry.registerBlock(BLOCK_PART_FORGE, "part_forge");
         
     }
     
     /* ============================== Items =============================== */
-    public static final Item ITEM_RING = new ItemJCon(); // TODO replace with specific items
+    public static final Item ITEM_RING = new ItemJCon(TYPE_RING, BaubleType.RING); // TODO replace with specific items
+    public static final Item ITEM_BELT = new ItemJCon(TYPE_BELT, BaubleType.BELT); // TODO replace with specific items
+    
     public static final ItemPart ITEM_PART_BAND = new ItemPart(PART_BAND);
     public static final ItemPart ITEM_PART_BINDING = new ItemPart(PART_BINDING);
     public static final ItemPart ITEM_PART_CHAIN = new ItemPart(PART_CHAIN);
@@ -169,6 +190,7 @@ public class Content {
     public static void registerItems (RegistryHelper registry) {
         
         registry.registerItem(ITEM_RING, "ring");
+        registry.registerItem(ITEM_BELT, "belt");
         registry.registerItem(ITEM_PART_BAND, "part_band");
         registry.registerItem(ITEM_PART_BINDING, "part_binding");
         registry.registerItem(ITEM_PART_CHAIN, "part_chain");
