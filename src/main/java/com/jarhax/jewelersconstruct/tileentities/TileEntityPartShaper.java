@@ -15,7 +15,7 @@ public class TileEntityPartShaper extends TileEntityBasicTickable {
     private int fuel = 0;
     private int fuelTotal = 0;
     
-    private boolean processing = true;
+    private boolean processing = false;
     private int progress = 0;
     private final int progressMax = 100;
     private PartType lastType = JewelryHelper.PART_TYPES.getValues().get(0);
@@ -26,37 +26,40 @@ public class TileEntityPartShaper extends TileEntityBasicTickable {
     }
     
     @Override
-    public void onEntityUpdate () {
-        if (this.fuel <= 0) {
+    public void onEntityUpdate() {
+        if(this.fuel <= 0) {
             this.fuelTotal = 0;
             final ItemStack fuelSlot = this.getInventory().getStackInSlot(1);
-            if (!fuelSlot.isEmpty()) {
-                if (TileEntityFurnace.getItemBurnTime(fuelSlot) > 0) {
+            if(!fuelSlot.isEmpty()) {
+                if(TileEntityFurnace.getItemBurnTime(fuelSlot) > 0) {
                     this.fuel = TileEntityFurnace.getItemBurnTime(fuelSlot);
                     this.fuelTotal = this.fuel;
                     Item item = fuelSlot.getItem();
                     fuelSlot.shrink(1);
-                    if(fuelSlot.isEmpty()){
+                    if(fuelSlot.isEmpty()) {
                         
                         this.getInventory().setStackInSlot(1, item.getContainerItem(fuelSlot));
                     }
                 }
             }
         }
-        if (this.fuel > 0) {
+        if(this.fuel > 0) {
             this.fuel--;
         }
-        if (this.processing) {
+        if(this.processing) {
             this.progress++;
-            if (this.progress >= this.progressMax) {
+            if(this.progress >= this.progressMax) {
                 this.progress = 0;
                 this.processing = false;
             }
         }
+        if(!inventory.getStackInSlot(0).isEmpty() && processing) {
+        
+        }
     }
     
     @Override
-    public void writeNBT (NBTTagCompound dataTag) {
+    public void writeNBT(NBTTagCompound dataTag) {
         
         dataTag.setTag("inventory", this.inventory.serializeNBT());
         dataTag.setInteger("fuel", this.fuel);
@@ -67,7 +70,7 @@ public class TileEntityPartShaper extends TileEntityBasicTickable {
     }
     
     @Override
-    public void readNBT (NBTTagCompound dataTag) {
+    public void readNBT(NBTTagCompound dataTag) {
         
         this.inventory.deserializeNBT(dataTag.getCompoundTag("inventory"));
         this.fuelTotal = dataTag.getInteger("fuelTotal");
@@ -76,42 +79,42 @@ public class TileEntityPartShaper extends TileEntityBasicTickable {
         this.lastType = JewelryHelper.getPartTypeByName(dataTag.getString("lastPart"));
     }
     
-    public ItemStackHandler getInventory () {
+    public ItemStackHandler getInventory() {
         
         return this.inventory;
     }
     
-    public int getFuel () {
+    public int getFuel() {
         
         return this.fuel;
     }
     
-    public void setFuel (int fuel) {
+    public void setFuel(int fuel) {
         
         this.fuel = fuel;
     }
     
-    public int getFuelTotal () {
+    public int getFuelTotal() {
         
         return this.fuelTotal;
     }
     
-    public void setFuelTotal (int fuelTotal) {
+    public void setFuelTotal(int fuelTotal) {
         
         this.fuelTotal = fuelTotal;
     }
     
-    public boolean isProcessing () {
+    public boolean isProcessing() {
         
         return this.processing;
     }
     
-    public int getProgress () {
+    public int getProgress() {
         
         return this.progress;
     }
     
-    public int getProgressMax () {
+    public int getProgressMax() {
         
         return this.progressMax;
     }
@@ -121,6 +124,18 @@ public class TileEntityPartShaper extends TileEntityBasicTickable {
     }
     
     public void setLastPart(PartType lastType) {
+        this.lastType = lastType;
+    }
+    
+    public void setProcessing(boolean processing) {
+        this.processing = processing;
+    }
+    
+    public void setProgress(int progress) {
+        this.progress = progress;
+    }
+    
+    public void setLastType(PartType lastType) {
         this.lastType = lastType;
     }
 }

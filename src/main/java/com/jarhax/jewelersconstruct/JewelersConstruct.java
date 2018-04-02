@@ -1,5 +1,6 @@
 package com.jarhax.jewelersconstruct;
 
+import com.jarhax.jewelersconstruct.network.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -9,7 +10,6 @@ import com.jarhax.jewelersconstruct.api.material.Material;
 import com.jarhax.jewelersconstruct.api.modifier.Modifier;
 import com.jarhax.jewelersconstruct.api.part.PartType;
 import com.jarhax.jewelersconstruct.client.gui.GuiHandler;
-import com.jarhax.jewelersconstruct.network.PacketSyncPartShape;
 import com.jarhax.jewelersconstruct.proxy.CommonProxy;
 
 import net.darkhax.bookshelf.network.NetworkHandler;
@@ -47,7 +47,9 @@ public class JewelersConstruct {
     public void preInit (FMLPreInitializationEvent event) {
         
         NETWORK.register(PacketSyncPartShape.class, Side.SERVER);
-        
+        NETWORK.register(PacketStartPartShape.class, Side.SERVER);
+    
+    
         LOG.info("Creating registries!");
         createForgeRegistry("modifiers", Modifier.class);
         createForgeRegistry("materials", Material.class);
