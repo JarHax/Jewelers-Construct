@@ -83,15 +83,15 @@ public class JewelryHelper {
         updatePlayerModifiers(user);
     }
     
-    public static void updatePlayerModifiers(EntityPlayer player) {
+    public static void updatePlayerModifiers (EntityPlayer player) {
         
-        for (Entry<Modifier, Tuple<ItemStack, Integer>> topModifiers : getHighestModifiers(player).entrySet()) {
+        for (final Entry<Modifier, Tuple<ItemStack, Integer>> topModifiers : getHighestModifiers(player).entrySet()) {
             
             player.getAttributeMap().applyAttributeModifiers(topModifiers.getKey().getAttributeModifiers(topModifiers.getValue().getFirst(), player, topModifiers.getValue().getSecond()));
         }
     }
     
-    public static Map<Modifier, Tuple<ItemStack, Integer>> getHighestModifiers(EntityPlayer player) {
+    public static Map<Modifier, Tuple<ItemStack, Integer>> getHighestModifiers (EntityPlayer player) {
         
         final IBaublesItemHandler baubles = BaublesApi.getBaublesHandler(player);
         final Map<Modifier, Integer> previousBest = new HashMap<>();
@@ -103,7 +103,7 @@ public class JewelryHelper {
             
             if (!stack.isEmpty() && stack.getItem() instanceof ItemJCon) {
                 
-                for (Entry<Modifier, Integer> modifierData : JewelryHelper.getModifiers(stack).entrySet()) {
+                for (final Entry<Modifier, Integer> modifierData : JewelryHelper.getModifiers(stack).entrySet()) {
                     
                     final Modifier modifier = modifierData.getKey();
                     
