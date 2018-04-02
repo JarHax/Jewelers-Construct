@@ -12,6 +12,7 @@ import com.jarhax.jewelersconstruct.api.modifier.Modifier;
 
 import baubles.api.BaubleType;
 import baubles.api.IBauble;
+import com.jarhax.jewelersconstruct.api.trinket.TrinketType;
 import net.darkhax.bookshelf.util.PlayerUtils;
 import net.darkhax.bookshelf.util.StackUtils;
 import net.minecraft.client.resources.I18n;
@@ -32,9 +33,14 @@ public class ItemJCon extends Item implements IBauble {
     
     private static final String TAG_LAST_PLAYER = "LastPlayer";
     
-    public ItemJCon() {
+    private final TrinketType type;
+    private BaubleType baubleType;
+    public ItemJCon(TrinketType type,BaubleType baubleType) {
         
         this.setMaxStackSize(1);
+        this.type = type;
+        this.type.setTrinketItem(this);
+        this.baubleType = baubleType;
     }
     
     @Override
@@ -66,7 +72,7 @@ public class ItemJCon extends Item implements IBauble {
     @Override
     public BaubleType getBaubleType (ItemStack itemstack) {
         
-        return BaubleType.RING;
+        return baubleType;
     }
     
     @Override

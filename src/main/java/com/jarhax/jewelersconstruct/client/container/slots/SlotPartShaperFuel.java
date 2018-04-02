@@ -1,4 +1,4 @@
-package com.jarhax.jewelersconstruct.client.container;
+package com.jarhax.jewelersconstruct.client.container.slots;
 
 import javax.annotation.Nonnull;
 
