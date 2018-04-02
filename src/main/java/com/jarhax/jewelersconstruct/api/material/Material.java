@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.jarhax.jewelersconstruct.api.modifier.Modifier;
+import com.jarhax.jewelersconstruct.api.part.PartType;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -47,6 +48,14 @@ public abstract class Material extends IForgeRegistryEntry.Impl<Material> {
      * @return The color of the material.
      */
     public abstract int getColor (ItemStack stack, int layer);
+    
+    /**
+     * Checks if this material can be made into a part type.
+     * 
+     * @param type The type of part.
+     * @return Whether or not it can be made.
+     */
+    public abstract boolean isValidForPart (PartType type);
     
     /**
      * Gets a set of all the modifiers this material provides by default.

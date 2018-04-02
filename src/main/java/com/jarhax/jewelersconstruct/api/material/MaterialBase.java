@@ -1,5 +1,7 @@
 package com.jarhax.jewelersconstruct.api.material;
 
+import com.jarhax.jewelersconstruct.api.part.PartType;
+
 import net.minecraft.item.ItemStack;
 
 public class MaterialBase extends Material {
@@ -40,5 +42,11 @@ public class MaterialBase extends Material {
     public int getColor (ItemStack stack, int layer) {
         
         return this.color;
+    }
+    
+    @Override
+    public boolean isValidForPart (PartType type) {
+        
+        return true;
     }
 }

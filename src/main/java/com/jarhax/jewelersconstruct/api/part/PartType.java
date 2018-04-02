@@ -1,5 +1,6 @@
 package com.jarhax.jewelersconstruct.api.part;
 
+import com.jarhax.jewelersconstruct.api.material.Material;
 import com.jarhax.jewelersconstruct.item.ItemPart;
 
 import net.minecraft.util.ResourceLocation;
@@ -38,5 +39,10 @@ public class PartType extends IForgeRegistryEntry.Impl<PartType> {
     public ResourceLocation getIconLocation () {
         
         return this.iconLocation;
+    }
+    
+    public boolean isValidForMaterial (Material material) {
+        
+        return true;
     }
 }

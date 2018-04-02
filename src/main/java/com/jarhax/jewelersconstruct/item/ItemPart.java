@@ -57,9 +57,12 @@ public class ItemPart extends Item implements IColorfulItem {
             
             for (final Material material : JewelryHelper.MATERIALS) {
                 
-                final ItemStack stack = new ItemStack(this);
-                JewelryHelper.setMaterial(stack, material);
-                items.add(stack);
+                if (material.isValidForPart(this.getPartType()) && this.getPartType().isValidForMaterial(material)) {
+                    
+                    final ItemStack stack = new ItemStack(this);
+                    JewelryHelper.setMaterial(stack, material);
+                    items.add(stack);
+                }
             }
         }
     }
