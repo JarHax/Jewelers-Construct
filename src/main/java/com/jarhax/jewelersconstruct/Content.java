@@ -13,6 +13,7 @@ import com.jarhax.jewelersconstruct.api.part.PartTypeGem;
 import com.jarhax.jewelersconstruct.api.trinket.*;
 import com.jarhax.jewelersconstruct.blocks.BlockPartForge;
 import com.jarhax.jewelersconstruct.blocks.BlockPartShaper;
+import com.jarhax.jewelersconstruct.item.ItemCreativeModifier;
 import com.jarhax.jewelersconstruct.item.ItemJCon;
 import com.jarhax.jewelersconstruct.item.ItemPart;
 import com.jarhax.jewelersconstruct.tileentities.*;
@@ -178,6 +179,7 @@ public class Content {
     }
     
     /* ============================== Items =============================== */
+    public static final Item ITEM_CREATIVE_MODIFIER = new ItemCreativeModifier();
     public static final Item ITEM_RING = new ItemJCon(TYPE_RING, BaubleType.RING); // TODO replace with specific items
     public static final Item ITEM_BELT = new ItemJCon(TYPE_BELT, BaubleType.BELT); // TODO replace with specific items
     
@@ -196,5 +198,6 @@ public class Content {
         registry.registerItem(ITEM_PART_CHAIN, "part_chain");
         registry.registerItem(ITEM_PART_BUCKLE, "part_buckle");
         registry.registerItem(ITEM_PART_GEM, "part_gem");
+        registry.registerItem(ITEM_CREATIVE_MODIFIER, "creative_modifier");
     }
 }
