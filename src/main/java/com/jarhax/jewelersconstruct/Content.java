@@ -3,10 +3,12 @@ package com.jarhax.jewelersconstruct;
 import com.jarhax.jewelersconstruct.api.JewelryHelper;
 import com.jarhax.jewelersconstruct.api.material.Material;
 import com.jarhax.jewelersconstruct.api.material.MaterialBase;
+import com.jarhax.jewelersconstruct.api.material.MaterialGem;
 import com.jarhax.jewelersconstruct.api.modifier.Modifier;
 import com.jarhax.jewelersconstruct.api.modifier.ModifierAttribute;
 import com.jarhax.jewelersconstruct.api.part.PartType;
 import com.jarhax.jewelersconstruct.api.part.PartTypeBase;
+import com.jarhax.jewelersconstruct.api.part.PartTypeGem;
 import com.jarhax.jewelersconstruct.blocks.BlockPartForge;
 import com.jarhax.jewelersconstruct.blocks.BlockPartShaper;
 import com.jarhax.jewelersconstruct.item.ItemJCon;
@@ -63,6 +65,11 @@ public class Content {
     public static final Material MATERIAL_IRON = new MaterialBase(256, 1, 1, "iron", 0xffffff);
     public static final Material MATERIAL_GOLD = new MaterialBase(60, 3, 2, "gold", 0xcabd3c);
     
+    // Gems
+    public static final Material MATERIAL_PRISMARINE = new MaterialGem(30, 0, 0, "Prismarine", 0x97c0b4);
+    public static final Material MATERIAL_EMERALD = new MaterialGem(45, 0, 0, "Emerald", 0x35c765);
+    public static final Material MATERIAL_DIAMOND = new MaterialGem(80, 0, 0, "Diamond", 0x74d9c7);
+    
     // Common mod materials
     public static final Material MATERIAL_COPPER = new MaterialBase(260, 1, 1, "copper", 0xed9f07);
     public static final Material MATERIAL_BRONZE = new MaterialBase(350, 1, 1, "bronze", 0xe3bd68);
@@ -81,6 +88,10 @@ public class Content {
         registry.register(MATERIAL_STONE);
         registry.register(MATERIAL_IRON);
         registry.register(MATERIAL_GOLD);
+        
+        registry.register(MATERIAL_PRISMARINE);
+        registry.register(MATERIAL_EMERALD);
+        registry.register(MATERIAL_DIAMOND);
         
         // Common mod materials
         registry.register(MATERIAL_COPPER);
@@ -122,6 +133,7 @@ public class Content {
     public static final PartType PART_BINDING = new PartTypeBase("binding", new ResourceLocation("jewelersconstruct", "textures/items/part_binding.png"));
     public static final PartType PART_CHAIN = new PartTypeBase("chain", new ResourceLocation("jewelersconstruct", "textures/items/part_chain.png"));
     public static final PartType PART_BUCKLE = new PartTypeBase("buckle", new ResourceLocation("jewelersconstruct", "textures/items/part_buckle.png"));
+    public static final PartType PART_GEM = new PartTypeGem("gem", new ResourceLocation("jewelersconstruct", "textures/items/part_gem.png"));
     
     @SubscribeEvent
     public static void registerPartTypes (RegistryEvent.Register<PartType> event) {
@@ -131,6 +143,7 @@ public class Content {
         registry.register(PART_BINDING);
         registry.register(PART_CHAIN);
         registry.register(PART_BUCKLE);
+        registry.register(PART_GEM);
     }
     
     /* ============================== Blocks ============================== */
@@ -151,6 +164,7 @@ public class Content {
     public static final ItemPart ITEM_PART_BINDING = new ItemPart(PART_BINDING);
     public static final ItemPart ITEM_PART_CHAIN = new ItemPart(PART_CHAIN);
     public static final ItemPart ITEM_PART_BUCKLE = new ItemPart(PART_BUCKLE);
+    public static final ItemPart ITEM_PART_GEM = new ItemPart(PART_GEM);
     
     public static void registerItems (RegistryHelper registry) {
         
@@ -159,5 +173,6 @@ public class Content {
         registry.registerItem(ITEM_PART_BINDING, "part_binding");
         registry.registerItem(ITEM_PART_CHAIN, "part_chain");
         registry.registerItem(ITEM_PART_BUCKLE, "part_buckle");
+        registry.registerItem(ITEM_PART_GEM, "part_gem");
     }
 }

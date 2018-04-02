@@ -26,6 +26,11 @@ jewelersconstruct.material.jewelersconstruct.stone=Stone
 jewelersconstruct.material.jewelersconstruct.iron=Iron
 jewelersconstruct.material.jewelersconstruct.gold=Gold
 
+# Gem Materials
+jewelersconstruct.material.jewelersconstruct.gemdiamond=Diamond
+jewelersconstruct.material.jewelersconstruct.gemprismarine=Prismarine
+jewelersconstruct.material.jewelersconstruct.gememerald=Emerald
+
 # Common Mod Materials
 jewelersconstruct.material.jewelersconstruct.copper=Copper
 jewelersconstruct.material.jewelersconstruct.bronze=Bronze
@@ -39,6 +44,7 @@ jewelersconstruct.part.jewelersconstruct.band=Band
 jewelersconstruct.part.jewelersconstruct.binding=Binding
 jewelersconstruct.part.jewelersconstruct.chain=Chain
 jewelersconstruct.part.jewelersconstruct.buckle=Buckle
+jewelersconstruct.part.jewelersconstruct.gem=Gem
 
 # Tooltips
 tooltip.jewelersconstruct.modifiercout=Modifiers %s / ?
