@@ -8,7 +8,7 @@ import com.jarhax.jewelersconstruct.api.material.Material;
 import com.jarhax.jewelersconstruct.api.modifier.Modifier;
 import com.jarhax.jewelersconstruct.api.part.PartType;
 import com.jarhax.jewelersconstruct.api.trinket.TrinketType;
-import com.jarhax.jewelersconstruct.item.ItemJCon;
+import com.jarhax.jewelersconstruct.item.ItemJewelry;
 
 import baubles.api.BaublesApi;
 import baubles.api.cap.IBaublesItemHandler;
@@ -109,7 +109,7 @@ public class JewelryHelper {
             
             final ItemStack stack = baubles.getStackInSlot(slot);
             
-            if (!stack.isEmpty() && stack.getItem() instanceof ItemJCon) {
+            if (!stack.isEmpty() && stack.getItem() instanceof ItemJewelry) {
                 
                 for (final Entry<Modifier, Integer> modifierData : JewelryHelper.getModifiers(stack).entrySet()) {
                     

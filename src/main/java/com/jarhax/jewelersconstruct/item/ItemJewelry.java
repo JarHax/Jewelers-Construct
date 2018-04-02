@@ -6,37 +6,34 @@ import java.util.Set;
 
 import javax.annotation.Nullable;
 
-import com.google.common.collect.Multimap;
 import com.jarhax.jewelersconstruct.TempUtils;
 import com.jarhax.jewelersconstruct.api.JewelryHelper;
 import com.jarhax.jewelersconstruct.api.modifier.Modifier;
+import com.jarhax.jewelersconstruct.api.trinket.TrinketType;
 
 import baubles.api.BaubleType;
 import baubles.api.IBauble;
-import com.jarhax.jewelersconstruct.api.trinket.TrinketType;
 import net.darkhax.bookshelf.util.PlayerUtils;
 import net.darkhax.bookshelf.util.StackUtils;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemJCon extends Item implements IBauble {
+public class ItemJewelry extends Item implements IBauble {
     
     private static final String TAG_LAST_PLAYER = "LastPlayer";
     
     private final TrinketType type;
     private BaubleType baubleType;
-    public ItemJCon(TrinketType type,BaubleType baubleType) {
+    public ItemJewelry(TrinketType type,BaubleType baubleType) {
         
         this.setMaxStackSize(1);
         this.type = type;
@@ -111,15 +108,6 @@ public class ItemJCon extends Item implements IBauble {
         
         if (this.isInCreativeTab(tab)) {
             
-            for (final Modifier modifier : JewelryHelper.MODIFIERS) {
-                
-                for (int level = 1; level <= modifier.getMaxLevel(); level++) {
-                    
-                    final ItemStack stack = new ItemStack(this);
-                    JewelryHelper.setModifier(stack, modifier, level);
-                    items.add(stack);
-                }
-            }
         }
     }
     

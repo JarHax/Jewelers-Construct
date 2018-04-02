@@ -14,7 +14,7 @@ import com.jarhax.jewelersconstruct.api.trinket.*;
 import com.jarhax.jewelersconstruct.blocks.BlockPartForge;
 import com.jarhax.jewelersconstruct.blocks.BlockPartShaper;
 import com.jarhax.jewelersconstruct.item.ItemCreativeModifier;
-import com.jarhax.jewelersconstruct.item.ItemJCon;
+import com.jarhax.jewelersconstruct.item.ItemJewelry;
 import com.jarhax.jewelersconstruct.item.ItemPart;
 import com.jarhax.jewelersconstruct.tileentities.*;
 
@@ -180,8 +180,8 @@ public class Content {
     
     /* ============================== Items =============================== */
     public static final Item ITEM_CREATIVE_MODIFIER = new ItemCreativeModifier();
-    public static final Item ITEM_RING = new ItemJCon(TYPE_RING, BaubleType.RING); // TODO replace with specific items
-    public static final Item ITEM_BELT = new ItemJCon(TYPE_BELT, BaubleType.BELT); // TODO replace with specific items
+    public static final Item ITEM_RING = new ItemJewelry(TYPE_RING, BaubleType.RING); // TODO replace with specific items
+    public static final Item ITEM_BELT = new ItemJewelry(TYPE_BELT, BaubleType.BELT); // TODO replace with specific items
     
     public static final ItemPart ITEM_PART_BAND = new ItemPart(PART_BAND);
     public static final ItemPart ITEM_PART_BINDING = new ItemPart(PART_BINDING);

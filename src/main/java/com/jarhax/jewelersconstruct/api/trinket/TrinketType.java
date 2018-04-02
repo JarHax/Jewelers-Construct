@@ -1,7 +1,7 @@
 package com.jarhax.jewelersconstruct.api.trinket;
 
 import com.jarhax.jewelersconstruct.api.part.PartType;
-import com.jarhax.jewelersconstruct.item.ItemJCon;
+import com.jarhax.jewelersconstruct.item.ItemJewelry;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.*;
 import net.minecraftforge.registries.IForgeRegistryEntry;
@@ -9,7 +9,7 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 public class TrinketType extends IForgeRegistryEntry.Impl<TrinketType> {
     
     private final ResourceLocation iconLocation;
-    private ItemJCon trinketItem;
+    private ItemJewelry trinketItem;
     private PartType[] partTypes;
     
     public TrinketType(ResourceLocation iconLocation) {
@@ -29,11 +29,11 @@ public class TrinketType extends IForgeRegistryEntry.Impl<TrinketType> {
         return this.iconLocation;
     }
     
-    public ItemJCon getTrinketItem() {
+    public ItemJewelry getTrinketItem() {
         return trinketItem;
     }
     
-    public void setTrinketItem(ItemJCon trinketItem) {
+    public void setTrinketItem(ItemJewelry trinketItem) {
         this.trinketItem = trinketItem;
     }
     
