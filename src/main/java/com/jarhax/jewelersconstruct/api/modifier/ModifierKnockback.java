@@ -26,7 +26,7 @@ public class ModifierKnockback extends Modifier {
         final Multimap<String, AttributeModifier> map = HashMultimap.create();
         
         map.put(SharedMonsterAttributes.KNOCKBACK_RESISTANCE.getName(), MODIFIER);
-
+        
         return map;
     }
 }

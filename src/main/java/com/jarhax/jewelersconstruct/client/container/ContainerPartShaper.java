@@ -1,5 +1,7 @@
 package com.jarhax.jewelersconstruct.client.container;
 
+import javax.annotation.Nonnull;
+
 import com.jarhax.jewelersconstruct.tileentities.TileEntityPartShaper;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -8,9 +10,6 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.SlotItemHandler;
-import net.minecraftforge.oredict.OreDictionary;
-
-import javax.annotation.Nonnull;
 
 public class ContainerPartShaper extends Container {
     
@@ -21,15 +20,16 @@ public class ContainerPartShaper extends Container {
         this.tile = tile;
         
         // TODO change these to slot specific ones, that accept certain items only
-        this.addSlotToContainer(new SlotPartShaperInput(tile, 0, 100+56, 17));
-        this.addSlotToContainer(new SlotPartShaperFuel(tile, 1, 100+56, 53));
-        this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), 2, 100+116, 35){
+        this.addSlotToContainer(new SlotPartShaperInput(tile, 0, 100 + 56, 17));
+        this.addSlotToContainer(new SlotPartShaperFuel(tile, 1, 100 + 56, 53));
+        this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), 2, 100 + 116, 35) {
             @Override
-            public boolean isItemValid(@Nonnull ItemStack stack) {
+            public boolean isItemValid (@Nonnull ItemStack stack) {
+                
                 return false;
             }
         });
-    
+        
         for (int x = 0; x < 9; x++) {
             this.addSlotToContainer(new Slot(invPlayer, x, 108 + 18 * x, 142));
         }
@@ -56,7 +56,8 @@ public class ContainerPartShaper extends Container {
     }
     
     @Override
-    public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
+    public ItemStack transferStackInSlot (EntityPlayer playerIn, int index) {
+        
         return ItemStack.EMPTY;
     }
 }

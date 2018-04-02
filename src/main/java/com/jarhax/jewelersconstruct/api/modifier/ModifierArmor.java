@@ -26,7 +26,7 @@ public class ModifierArmor extends Modifier {
         final Multimap<String, AttributeModifier> map = HashMultimap.create();
         
         map.put(SharedMonsterAttributes.ARMOR.getName(), MODIFIER);
-
+        
         return map;
     }
 }

@@ -26,7 +26,7 @@ public class ModifierHealth extends Modifier {
         final Multimap<String, AttributeModifier> map = HashMultimap.create();
         
         map.put(SharedMonsterAttributes.MAX_HEALTH.getName(), MODIFIER);
-
+        
         return map;
     }
 }

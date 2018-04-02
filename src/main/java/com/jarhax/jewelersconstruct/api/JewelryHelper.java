@@ -27,7 +27,7 @@ public class JewelryHelper {
     
     public static final IForgeRegistry<Modifier> MODIFIERS = GameRegistry.findRegistry(Modifier.class);
     public static final IForgeRegistry<Material> MATERIALS = GameRegistry.findRegistry(Material.class);
-    public static final IForgeRegistry<PartType> PART_TYPES = GameRegistry.findRegistry(PartType.class);       
+    public static final IForgeRegistry<PartType> PART_TYPES = GameRegistry.findRegistry(PartType.class);
     public static final ItemStackMap<Material> INPUTS_TO_MATERIALS = new ItemStackMap<>(ItemStackMap.SIMILAR);
     
     private static final String TAG_MODIFIERS = "Modifiers";
@@ -45,7 +45,7 @@ public class JewelryHelper {
         return MATERIALS.getValue(new ResourceLocation(name));
     }
     
-    public static PartType getPartTypeByName(String name) {
+    public static PartType getPartTypeByName (String name) {
         
         return PART_TYPES.getValue(new ResourceLocation(name));
     }
@@ -141,38 +141,38 @@ public class JewelryHelper {
         return count;
     }
     
-    public static Material getPartMaterial(ItemStack stack) {
+    public static Material getPartMaterial (ItemStack stack) {
         
         final NBTTagCompound tag = stack.getTagCompound();
         return tag != null && tag.hasKey(TAG_MATERIAL) ? getMaterialByName(tag.getString(TAG_MATERIAL)) : null;
     }
     
-    public static void setMaterial(ItemStack stack, Material material) {
+    public static void setMaterial (ItemStack stack, Material material) {
         
         StackUtils.prepareStackTag(stack).setString(TAG_MATERIAL, material.getRegistryName().toString());
     }
     
     @SideOnly(Side.CLIENT)
-    public static String getMaterialName(Material material) {
+    public static String getMaterialName (Material material) {
         
         final String translationKey = material != null ? material.getTranslationName() : "jewelersconstruct.material.undefined";
         return I18n.format(translationKey);
     }
     
-    public static void associateMaterial(String oredict, Material material) {
+    public static void associateMaterial (String oredict, Material material) {
         
-        for (ItemStack stack : OreDictionary.getOres(oredict)) {
+        for (final ItemStack stack : OreDictionary.getOres(oredict)) {
             
             associateMaterial(stack, material);
         }
     }
     
-    public static void associateMaterial(ItemStack stack, Material material) {
+    public static void associateMaterial (ItemStack stack, Material material) {
         
         INPUTS_TO_MATERIALS.put(stack, material);
     }
     
-    public static Material getMaterial(ItemStack stack) {
+    public static Material getMaterial (ItemStack stack) {
         
         return INPUTS_TO_MATERIALS.get(stack);
     }

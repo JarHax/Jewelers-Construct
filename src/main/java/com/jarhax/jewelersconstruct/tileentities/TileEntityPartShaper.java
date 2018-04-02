@@ -3,8 +3,10 @@ package com.jarhax.jewelersconstruct.tileentities;
 import com.jarhax.jewelersconstruct.api.JewelryHelper;
 import com.jarhax.jewelersconstruct.api.material.Material;
 import com.jarhax.jewelersconstruct.api.part.PartType;
+
 import net.darkhax.bookshelf.block.tileentity.TileEntityBasicTickable;
-import net.minecraft.item.*;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraftforge.items.ItemStackHandler;
@@ -27,56 +29,58 @@ public class TileEntityPartShaper extends TileEntityBasicTickable {
     }
     
     @Override
-    public void onEntityUpdate() {
-        if(this.fuel <= 0) {
+    public void onEntityUpdate () {
+        
+        if (this.fuel <= 0) {
             this.fuelTotal = 0;
             final ItemStack fuelSlot = this.getInventory().getStackInSlot(1);
-            if(!fuelSlot.isEmpty()) {
-                if(TileEntityFurnace.getItemBurnTime(fuelSlot) > 0) {
+            if (!fuelSlot.isEmpty()) {
+                if (TileEntityFurnace.getItemBurnTime(fuelSlot) > 0) {
                     this.fuel = TileEntityFurnace.getItemBurnTime(fuelSlot);
                     this.fuelTotal = this.fuel;
-                    Item item = fuelSlot.getItem();
+                    final Item item = fuelSlot.getItem();
                     fuelSlot.shrink(1);
-                    if(fuelSlot.isEmpty()) {
+                    if (fuelSlot.isEmpty()) {
                         
                         this.getInventory().setStackInSlot(1, item.getContainerItem(fuelSlot));
                     }
                 }
             }
         }
-        if(this.processing) {
-            if(this.fuel > 0) {
+        if (this.processing) {
+            if (this.fuel > 0) {
                 this.fuel--;
                 
                 this.progress++;
-                if(this.progress >= this.progressMax) {
+                if (this.progress >= this.progressMax) {
                     this.progress = 0;
                     this.processing = false;
-                    Material material = JewelryHelper.getMaterial(inventory.getStackInSlot(0));
-                    inventory.getStackInSlot(0).shrink(1);
-                    ItemStack itemStack = new ItemStack(lastType.getPartItem());
+                    final Material material = JewelryHelper.getMaterial(this.inventory.getStackInSlot(0));
+                    this.inventory.getStackInSlot(0).shrink(1);
+                    final ItemStack itemStack = new ItemStack(this.lastType.getPartItem());
                     
                     JewelryHelper.setMaterial(itemStack, material);
-                    inventory.setStackInSlot(2, itemStack);
+                    this.inventory.setStackInSlot(2, itemStack);
                 }
             }
         }
     }
     
     @Override
-    public void writeNBT(NBTTagCompound dataTag) {
+    public void writeNBT (NBTTagCompound dataTag) {
         
         dataTag.setTag("inventory", this.inventory.serializeNBT());
         dataTag.setInteger("fuel", this.fuel);
         dataTag.setInteger("fuelTotal", this.fuelTotal);
         dataTag.setInteger("progress", this.progress);
         dataTag.setBoolean("processing", this.processing);
-        if(getLastType() != null)
-            dataTag.setString("lastPart", getLastType().getRegistryName().toString());
+        if (this.getLastType() != null) {
+            dataTag.setString("lastPart", this.getLastType().getRegistryName().toString());
+        }
     }
     
     @Override
-    public void readNBT(NBTTagCompound dataTag) {
+    public void readNBT (NBTTagCompound dataTag) {
         
         this.inventory.deserializeNBT(dataTag.getCompoundTag("inventory"));
         this.fuelTotal = dataTag.getInteger("fuelTotal");
@@ -85,63 +89,68 @@ public class TileEntityPartShaper extends TileEntityBasicTickable {
         this.lastType = JewelryHelper.getPartTypeByName(dataTag.getString("lastPart"));
     }
     
-    public ItemStackHandler getInventory() {
+    public ItemStackHandler getInventory () {
         
         return this.inventory;
     }
     
-    public int getFuel() {
+    public int getFuel () {
         
         return this.fuel;
     }
     
-    public void setFuel(int fuel) {
+    public void setFuel (int fuel) {
         
         this.fuel = fuel;
     }
     
-    public int getFuelTotal() {
+    public int getFuelTotal () {
         
         return this.fuelTotal;
     }
     
-    public void setFuelTotal(int fuelTotal) {
+    public void setFuelTotal (int fuelTotal) {
         
         this.fuelTotal = fuelTotal;
     }
     
-    public boolean isProcessing() {
+    public boolean isProcessing () {
         
         return this.processing;
     }
     
-    public int getProgress() {
+    public int getProgress () {
         
         return this.progress;
     }
     
-    public int getProgressMax() {
+    public int getProgressMax () {
         
         return this.progressMax;
     }
     
-    public PartType getLastType() {
-        return lastType;
+    public PartType getLastType () {
+        
+        return this.lastType;
     }
     
-    public void setLastPart(PartType lastType) {
+    public void setLastPart (PartType lastType) {
+        
         this.lastType = lastType;
     }
     
-    public void setProcessing(boolean processing) {
+    public void setProcessing (boolean processing) {
+        
         this.processing = processing;
     }
     
-    public void setProgress(int progress) {
+    public void setProgress (int progress) {
+        
         this.progress = progress;
     }
     
-    public void setLastType(PartType lastType) {
+    public void setLastType (PartType lastType) {
+        
         this.lastType = lastType;
     }
 }

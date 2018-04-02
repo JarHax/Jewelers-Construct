@@ -1,6 +1,5 @@
 package com.jarhax.jewelersconstruct;
 
-import com.jarhax.jewelersconstruct.network.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -10,6 +9,8 @@ import com.jarhax.jewelersconstruct.api.material.Material;
 import com.jarhax.jewelersconstruct.api.modifier.Modifier;
 import com.jarhax.jewelersconstruct.api.part.PartType;
 import com.jarhax.jewelersconstruct.client.gui.GuiHandler;
+import com.jarhax.jewelersconstruct.network.PacketStartPartShape;
+import com.jarhax.jewelersconstruct.network.PacketSyncPartShape;
 import com.jarhax.jewelersconstruct.proxy.CommonProxy;
 
 import net.darkhax.bookshelf.network.NetworkHandler;
@@ -31,7 +32,7 @@ import net.minecraftforge.registries.RegistryBuilder;
 @Mod(modid = JewelersConstruct.MOD_ID, name = "Jewelers Construct", version = "@VERSION@")
 public class JewelersConstruct {
     
-    public static final String MOD_ID = "jewelersconstruct";    
+    public static final String MOD_ID = "jewelersconstruct";
     public static final Logger LOG = LogManager.getLogger("Jewelers Construct");
     public static final RegistryHelper REGISTRY = new RegistryHelper().setTab(new CreativeTabJewelersConstruct()).enableAutoRegistration();
     
@@ -48,13 +49,12 @@ public class JewelersConstruct {
         
         NETWORK.register(PacketSyncPartShape.class, Side.SERVER);
         NETWORK.register(PacketStartPartShape.class, Side.SERVER);
-    
-    
+        
         LOG.info("Creating registries!");
         createForgeRegistry("modifiers", Modifier.class);
         createForgeRegistry("materials", Material.class);
         createForgeRegistry("part_types", PartType.class);
-        LOG.info("Registries created!");   
+        LOG.info("Registries created!");
         
         Content.registerBlocks(REGISTRY);
         Content.registerItems(REGISTRY);
@@ -76,9 +76,9 @@ public class JewelersConstruct {
         logRegistry("part type", JewelryHelper.PART_TYPES);
     }
     
-    private static void logRegistry(String name, IForgeRegistry<?> registry) {
+    private static void logRegistry (String name, IForgeRegistry<?> registry) {
         
-        Multimap<String, ?> sorted = ModUtils.getSortedEntries(registry);
+        final Multimap<String, ?> sorted = ModUtils.getSortedEntries(registry);
         LOG.info("The {} registry loaded with {} entries from {} mod(s).", name, sorted.values().size(), sorted.keySet().size());
     }
     

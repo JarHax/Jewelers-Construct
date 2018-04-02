@@ -9,7 +9,7 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class TempUtils {
     
-    public static boolean equalForCrafting(ItemStack stack, Object recipeStack) {
+    public static boolean equalForCrafting (ItemStack stack, Object recipeStack) {
         
         if (recipeStack instanceof ItemStack) {
             
@@ -25,16 +25,16 @@ public class TempUtils {
     }
     
     public static boolean areStacksSimilarWithSize (ItemStack firstStack, ItemStack secondStack) {
-
+        
         return StackUtils.areStacksSimilar(firstStack, secondStack) && firstStack.getCount() >= secondStack.getCount();
     }
     
-    public static Set<String> getOreNames(ItemStack stack) {
+    public static Set<String> getOreNames (ItemStack stack) {
         
-        final Set<String> names = new HashSet<String>();
+        final Set<String> names = new HashSet<>();
         
         // Why is the OreDictionary class so horrible :sob:
-        for (int id : OreDictionary.getOreIDs(stack)) {
+        for (final int id : OreDictionary.getOreIDs(stack)) {
             
             names.add(OreDictionary.getOreName(id));
         }

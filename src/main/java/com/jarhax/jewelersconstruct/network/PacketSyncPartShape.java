@@ -9,22 +9,22 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 
 public class PacketSyncPartShape extends TileEntityMessage<TileEntityPartShaper> {
-
+    
     public ResourceLocation partType;
-
-    public PacketSyncPartShape () {
-
+    
+    public PacketSyncPartShape() {
+        
     }
-
-    public PacketSyncPartShape (BlockPos pos, PartType type) {
-
+    
+    public PacketSyncPartShape(BlockPos pos, PartType type) {
+        
         super(pos);
         this.partType = type.getRegistryName();
     }
-
+    
     @Override
     public void getAction () {
-
+        
         final PartType type = JewelryHelper.PART_TYPES.getValue(this.partType);
         this.tile.setLastPart(type);
     }

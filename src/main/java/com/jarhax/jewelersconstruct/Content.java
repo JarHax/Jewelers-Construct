@@ -49,7 +49,7 @@ public class Content {
         registry.register(MODIFIER_KNOCKBACK);
     }
     
-    /* ============================== Materials =========================== */  
+    /* ============================== Materials =========================== */
     public static final Material MATERIAL_WOOD = new MaterialBase(60, 1, 1, "wood", 0x755821);
     public static final Material MATERIAL_BONE = new MaterialBase(80, 1, 1, "bone", 0xedebca);
     public static final Material MATERIAL_STONE = new MaterialBase(120, 1, 1, "stone", 0x959595);
@@ -67,7 +67,7 @@ public class Content {
         registry.register(MATERIAL_GOLD);
     }
     
-    public static void associateItemsToMaterial() {
+    public static void associateItemsToMaterial () {
         
         JewelryHelper.associateMaterial(OreDictUtils.PLANK_WOOD, MATERIAL_WOOD);
         JewelryHelper.associateMaterial(OreDictUtils.BONE, MATERIAL_BONE);
@@ -78,7 +78,7 @@ public class Content {
         JewelryHelper.associateMaterial("plateGold", MATERIAL_GOLD);
     }
     
-    /* ============================== Part Types ========================== */    
+    /* ============================== Part Types ========================== */
     public static final PartType PART_BAND = new PartTypeBase("band", new ResourceLocation("jewelersconstruct", "textures/items/part_band.png"));
     public static final PartType PART_BINDING = new PartTypeBase("binding", new ResourceLocation("jewelersconstruct", "textures/items/part_binding.png"));
     public static final PartType PART_CHAIN = new PartTypeBase("chain", new ResourceLocation("jewelersconstruct", "textures/items/part_chain.png"));
@@ -97,13 +97,13 @@ public class Content {
     /* ============================== Blocks ============================== */
     public static final Block BLOCK_PART_SHAPER = new BlockPartShaper();
     public static final Block BLOCK_PART_FORGE = new BlockPartForge();
-        
+    
     public static void registerBlocks (RegistryHelper registry) {
         
         GameRegistry.registerTileEntity(TileEntityPartShaper.class, "part_shaper");
         registry.registerBlock(BLOCK_PART_SHAPER, "part_shaper");
         registry.registerBlock(BLOCK_PART_FORGE, "part_forge");
-    
+        
     }
     
     /* ============================== Items =============================== */

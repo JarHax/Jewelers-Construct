@@ -43,9 +43,10 @@ public abstract class Material extends IForgeRegistryEntry.Impl<Material> {
     
     /**
      * Gets the color to use for parts of this material.
+     * 
      * @return The color of the material.
      */
-    public abstract int getColor(ItemStack stack, int layer);
+    public abstract int getColor (ItemStack stack, int layer);
     
     /**
      * Gets a set of all the modifiers this material provides by default.

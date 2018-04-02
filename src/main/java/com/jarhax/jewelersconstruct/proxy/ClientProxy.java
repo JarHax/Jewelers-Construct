@@ -2,8 +2,8 @@ package com.jarhax.jewelersconstruct.proxy;
 
 import com.jarhax.jewelersconstruct.client.render.RendertilePartShaper;
 import com.jarhax.jewelersconstruct.tileentities.TileEntityPartShaper;
+
 import net.minecraftforge.fml.client.registry.ClientRegistry;
-import org.omg.PortableInterceptor.ClientRequestInfo;
 
 public class ClientProxy extends CommonProxy {
     

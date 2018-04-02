@@ -26,19 +26,19 @@ public class ItemPart extends Item implements IColorfulItem {
     
     public ItemPart(PartType type) {
         
-        this.type = type;        
+        this.type = type;
         this.setMaxStackSize(1);
         this.hasSubtypes = true;
         type.setPartItem(this);
     }
-
-    public PartType getPartType() {
+    
+    public PartType getPartType () {
         
         return this.type;
     }
     
     @Override
-    public String getItemStackDisplayName(ItemStack stack) {
+    public String getItemStackDisplayName (ItemStack stack) {
         
         return JewelryHelper.getMaterialName(JewelryHelper.getPartMaterial(stack)) + " " + I18n.format(this.getPartType().getTranslationName());
     }
@@ -51,11 +51,11 @@ public class ItemPart extends Item implements IColorfulItem {
     }
     
     @Override
-    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+    public void getSubItems (CreativeTabs tab, NonNullList<ItemStack> items) {
         
         if (this.isInCreativeTab(tab)) {
             
-            for (Material material : JewelryHelper.MATERIALS) {
+            for (final Material material : JewelryHelper.MATERIALS) {
                 
                 final ItemStack stack = new ItemStack(this);
                 JewelryHelper.setMaterial(stack, material);
@@ -63,7 +63,7 @@ public class ItemPart extends Item implements IColorfulItem {
             }
         }
     }
-
+    
     @Override
     @SideOnly(Side.CLIENT)
     public IItemColor getColorHandler () {
