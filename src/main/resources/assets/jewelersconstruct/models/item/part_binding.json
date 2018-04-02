@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "jewelersconstruct:items/part_buckle"
+    "layer0": "jewelersconstruct:items/part_binding"
   }
 }
