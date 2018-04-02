@@ -65,7 +65,7 @@ public class ItemJCon extends Item implements IBauble {
     @Override
     public BaubleType getBaubleType (ItemStack itemstack) {
         
-        return BaubleType.CHARM;
+        return BaubleType.RING;
     }
     
     @Override

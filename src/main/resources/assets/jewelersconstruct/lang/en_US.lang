@@ -13,6 +13,9 @@ jewelersconstruct.modifier.jewelersconstruct.vigor=Vigor
 jewelersconstruct.modifier.jewelersconstruct.vitality=Vitality
 jewelersconstruct.modifier.jewelersconstruct.fortitude=Fortitude
 jewelersconstruct.modifier.jewelersconstruct.sturdy=Sturdy
+jewelersconstruct.modifier.jewelersconstruct.luck=Luck
+jewelersconstruct.modifier.jewelersconstruct.grasping=Grasping
+jewelersconstruct.modifier.jewelersconstruct.swift=Swift
 
 # Materials
 jewelersconstruct.material.jewelersconstruct.wood=Wooden

@@ -18,6 +18,7 @@ import net.darkhax.bookshelf.registry.RegistryHelper;
 import net.darkhax.bookshelf.util.OreDictUtils;
 import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
@@ -34,6 +35,9 @@ public class Content {
     public static final Modifier MODIFIER_VITALITY = new ModifierAttribute("vitality", SharedMonsterAttributes.MAX_HEALTH, 2d, AttributeOperation.ADDITIVE, 5, "83ba3ce9-c4c5-472f-b9da-f79422e7d711");
     public static final Modifier MODIFIER_FORTITUDE = new ModifierAttribute("fortitude", SharedMonsterAttributes.ARMOR, 2d, AttributeOperation.ADDITIVE, 3, "00dc5641-1c03-4aa6-940c-d4195ca49d44c");
     public static final Modifier MODIFIER_STURDY = new ModifierAttribute("sturdy", SharedMonsterAttributes.KNOCKBACK_RESISTANCE, 0.05d, AttributeOperation.MULTIPLY_SEPERATE, 3, "d770af89-3ec9-40f0-b36c-cbc67242adec");
+    public static final Modifier MODIFIER_LUCK = new ModifierAttribute("luck", SharedMonsterAttributes.LUCK, 1d, AttributeOperation.ADDITIVE, 3, "142f0767-4c33-4afc-9d74-8990230b9ec7");
+    public static final Modifier MODIFIER_GRASPING = new ModifierAttribute("grasping", EntityPlayer.REACH_DISTANCE, 1.25d, AttributeOperation.ADDITIVE, 3, "15b13705-586d-4b25-9fbf-7dc76613977b");
+    public static final Modifier MODIFIER_SWIFT = new ModifierAttribute("swift", SharedMonsterAttributes.ATTACK_SPEED, 0.33d, AttributeOperation.ADDITIVE, 3, "0238fcd1-c252-4389-9022-06215adff31f");
     
     @SubscribeEvent
     public static void registerModifiers (RegistryEvent.Register<Modifier> event) {
@@ -43,6 +47,9 @@ public class Content {
         registry.register(MODIFIER_VITALITY);
         registry.register(MODIFIER_FORTITUDE);
         registry.register(MODIFIER_STURDY);
+        registry.register(MODIFIER_LUCK);
+        registry.register(MODIFIER_GRASPING);
+        registry.register(MODIFIER_SWIFT);
     }
     
     /* ============================== Materials =========================== */
