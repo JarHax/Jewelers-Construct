@@ -3,8 +3,8 @@ package com.jarhax.jewelersconstruct.item;
 import java.awt.Color;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.annotation.Nullable;
 
@@ -26,8 +26,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemCreativeModifier extends Item implements IColorfulItem {
-
-    public ItemCreativeModifier () {
+    
+    public ItemCreativeModifier() {
         
         this.setMaxStackSize(1);
         this.hasSubtypes = true;
@@ -77,11 +77,11 @@ public class ItemCreativeModifier extends Item implements IColorfulItem {
         
         return (stack, layer) -> {
             
-            Map<Modifier, Integer> modifiers = JewelryHelper.getModifiers(stack);
+            final Map<Modifier, Integer> modifiers = JewelryHelper.getModifiers(stack);
             
             int color = 0;
             
-            for (Entry<Modifier, Integer> entry : modifiers.entrySet()) {
+            for (final Entry<Modifier, Integer> entry : modifiers.entrySet()) {
                 
                 Color awtColor = new Color(entry.getKey().getRegistryName().getResourcePath().hashCode());
                 

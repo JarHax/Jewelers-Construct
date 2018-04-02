@@ -1,11 +1,12 @@
 package com.jarhax.jewelersconstruct.client.container.slots;
 
+import javax.annotation.Nonnull;
+
 import com.jarhax.jewelersconstruct.tileentities.TileEntityTrinketForge;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.SlotItemHandler;
-
-import javax.annotation.Nonnull;
 
 public class SlotTrinketForgeOutput extends SlotItemHandler {
     
@@ -18,17 +19,18 @@ public class SlotTrinketForgeOutput extends SlotItemHandler {
     }
     
     @Override
-    public boolean isItemValid(@Nonnull ItemStack stack) {
+    public boolean isItemValid (@Nonnull ItemStack stack) {
+        
         return false;
     }
     
-    
     @Override
-    public ItemStack onTake(EntityPlayer thePlayer, ItemStack stack) {
-        for(int i = 0; i < tile.getInventory().getSlots(); i++) {
+    public ItemStack onTake (EntityPlayer thePlayer, ItemStack stack) {
+        
+        for (int i = 0; i < this.tile.getInventory().getSlots(); i++) {
             
-            ItemStack slot = tile.getInventory().getStackInSlot(i);
-            if(!slot.isEmpty()) {
+            final ItemStack slot = this.tile.getInventory().getStackInSlot(i);
+            if (!slot.isEmpty()) {
                 slot.shrink(1);
             }
         }

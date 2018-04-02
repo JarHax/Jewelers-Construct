@@ -38,7 +38,6 @@ public class JewelryHelper {
     public static final IForgeRegistry<TrinketType> TRINKET_TYPES = GameRegistry.findRegistry(TrinketType.class);
     public static final ItemStackMap<Material> INPUTS_TO_MATERIALS = new ItemStackMap<>(ItemStackMap.SIMILAR);
     
-    
     private static final String TAG_MODIFIERS = "Modifiers";
     private static final String TAG_MODIFIER = "Modifier";
     private static final String TAG_LEVEL = "ModifierLevel";
@@ -58,10 +57,11 @@ public class JewelryHelper {
         
         return PART_TYPES.getValue(new ResourceLocation(name));
     }
-    public static TrinketType getTrinketTypeByName (String name){
+    
+    public static TrinketType getTrinketTypeByName (String name) {
+        
         return TRINKET_TYPES.getValue(new ResourceLocation(name));
     }
-    
     
     public static void tickJewelry (ItemStack stack, EntityLivingBase user) {
         

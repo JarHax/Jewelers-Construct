@@ -1,8 +1,12 @@
 package com.jarhax.jewelersconstruct.client.container;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Nonnull;
 
-import com.jarhax.jewelersconstruct.client.container.slots.*;
+import com.jarhax.jewelersconstruct.client.container.slots.SlotPartShaperFuel;
+import com.jarhax.jewelersconstruct.client.container.slots.SlotPartShaperInput;
 import com.jarhax.jewelersconstruct.tileentities.TileEntityPartShaper;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,8 +15,6 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.SlotItemHandler;
-
-import java.util.*;
 
 public class ContainerPartShaper extends Container {
     
@@ -58,94 +60,96 @@ public class ContainerPartShaper extends Container {
     }
     
     @Override
-    public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
+    public ItemStack transferStackInSlot (EntityPlayer playerIn, int index) {
         
         ItemStack itemStack;
-        Slot clickSlot = this.inventorySlots.get(index);
+        final Slot clickSlot = this.inventorySlots.get(index);
         
-        if((clickSlot != null) && (clickSlot.getHasStack())) {
+        if (clickSlot != null && clickSlot.getHasStack()) {
             itemStack = clickSlot.getStack();
             
-            if(itemStack.isEmpty()) {
+            if (itemStack.isEmpty()) {
                 return ItemStack.EMPTY;
             }
-            List<Slot> selectedSlots = new ArrayList<>();
+            final List<Slot> selectedSlots = new ArrayList<>();
             
-            if(clickSlot.inventory instanceof InventoryPlayer) {
-                for(int x = 0; x < this.inventorySlots.size(); x++) {
-                    Slot advSlot =  this.inventorySlots.get(x);
-                    if(advSlot.isItemValid(itemStack)) {
+            if (clickSlot.inventory instanceof InventoryPlayer) {
+                for (int x = 0; x < this.inventorySlots.size(); x++) {
+                    final Slot advSlot = this.inventorySlots.get(x);
+                    if (advSlot.isItemValid(itemStack)) {
                         selectedSlots.add(advSlot);
                     }
                 }
-            } else {
-                for(int x = 0; x < this.inventorySlots.size(); x++) {
-                    Slot advSlot =  this.inventorySlots.get(x);
+            }
+            else {
+                for (int x = 0; x < this.inventorySlots.size(); x++) {
+                    final Slot advSlot = this.inventorySlots.get(x);
                     
-                    if((advSlot.inventory instanceof InventoryPlayer)) {
-                        if(advSlot.isItemValid(itemStack)) {
+                    if (advSlot.inventory instanceof InventoryPlayer) {
+                        if (advSlot.isItemValid(itemStack)) {
                             selectedSlots.add(advSlot);
                         }
                     }
                 }
             }
             
-            if(!itemStack.isEmpty()) {
-                for(Slot slot : selectedSlots) {
-                    if((slot.isItemValid(itemStack)) && (!itemStack.isEmpty())) {
-                        if(slot.getHasStack()) {
-                            ItemStack stack = slot.getStack();
+            if (!itemStack.isEmpty()) {
+                for (final Slot slot : selectedSlots) {
+                    if (slot.isItemValid(itemStack) && !itemStack.isEmpty()) {
+                        if (slot.getHasStack()) {
+                            final ItemStack stack = slot.getStack();
                             
-                            if((!itemStack.isEmpty()) && (itemStack.isItemEqual(stack))) {
+                            if (!itemStack.isEmpty() && itemStack.isItemEqual(stack)) {
                                 int maxSize = stack.getMaxStackSize();
                                 
-                                if(maxSize > slot.getSlotStackLimit()) {
+                                if (maxSize > slot.getSlotStackLimit()) {
                                     maxSize = slot.getSlotStackLimit();
                                 }
                                 
                                 int placeAble = maxSize - stack.getCount();
                                 
-                                if(itemStack.getCount() < placeAble) {
+                                if (itemStack.getCount() < placeAble) {
                                     placeAble = itemStack.getCount();
                                 }
                                 
                                 stack.grow(placeAble);
                                 itemStack.shrink(placeAble);
                                 
-                                if(itemStack.getCount() <= 0) {
+                                if (itemStack.getCount() <= 0) {
                                     clickSlot.putStack(ItemStack.EMPTY);
                                     slot.onSlotChanged();
-                                    updateSlot(clickSlot);
-                                    updateSlot(slot);
+                                    this.updateSlot(clickSlot);
+                                    this.updateSlot(slot);
                                     return ItemStack.EMPTY;
                                 }
                                 
-                                updateSlot(slot);
+                                this.updateSlot(slot);
                             }
-                        } else {
+                        }
+                        else {
                             int maxSize = itemStack.getMaxStackSize();
                             
-                            if(maxSize > slot.getSlotStackLimit()) {
+                            if (maxSize > slot.getSlotStackLimit()) {
                                 maxSize = slot.getSlotStackLimit();
                             }
                             
-                            ItemStack tmp = itemStack.copy();
+                            final ItemStack tmp = itemStack.copy();
                             
-                            if(tmp.getCount() > maxSize) {
+                            if (tmp.getCount() > maxSize) {
                                 tmp.setCount(maxSize);
                             }
                             itemStack.shrink(tmp.getCount());
                             slot.putStack(tmp);
                             
-                            if(itemStack.getCount() <= 0) {
+                            if (itemStack.getCount() <= 0) {
                                 clickSlot.putStack(ItemStack.EMPTY);
                                 slot.onSlotChanged();
-                                updateSlot(clickSlot);
-                                updateSlot(slot);
+                                this.updateSlot(clickSlot);
+                                this.updateSlot(slot);
                                 return ItemStack.EMPTY;
                             }
                             
-                            updateSlot(slot);
+                            this.updateSlot(slot);
                         }
                     }
                 }
@@ -153,11 +157,12 @@ public class ContainerPartShaper extends Container {
             
             clickSlot.putStack(!itemStack.isEmpty() ? itemStack.copy() : ItemStack.EMPTY);
         }
-        updateSlot(clickSlot);
+        this.updateSlot(clickSlot);
         return ItemStack.EMPTY;
     }
     
-    private void updateSlot(final Slot slot) {
+    private void updateSlot (final Slot slot) {
+        
         this.detectAndSendChanges();
     }
 }

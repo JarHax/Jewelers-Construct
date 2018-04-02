@@ -2,8 +2,10 @@ package com.jarhax.jewelersconstruct.client.gui;
 
 import javax.annotation.Nullable;
 
-import com.jarhax.jewelersconstruct.client.container.*;
-import com.jarhax.jewelersconstruct.tileentities.*;
+import com.jarhax.jewelersconstruct.client.container.ContainerPartShaper;
+import com.jarhax.jewelersconstruct.client.container.ContainerTrinketForge;
+import com.jarhax.jewelersconstruct.tileentities.TileEntityPartShaper;
+import com.jarhax.jewelersconstruct.tileentities.TileEntityTrinketForge;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
@@ -20,7 +22,7 @@ public class GuiHandler implements IGuiHandler {
             case 0:
                 return new ContainerPartShaper(player.inventory, (TileEntityPartShaper) world.getTileEntity(new BlockPos(x, y, z)));
             case 1:
-                return new ContainerTrinketForge(player.inventory, (TileEntityTrinketForge) world.getTileEntity(new BlockPos(x,y,z)));
+                return new ContainerTrinketForge(player.inventory, (TileEntityTrinketForge) world.getTileEntity(new BlockPos(x, y, z)));
         }
         return null;
     }
@@ -33,7 +35,7 @@ public class GuiHandler implements IGuiHandler {
             case 0:
                 return new GuiPartShaper(player.inventory, (TileEntityPartShaper) world.getTileEntity(new BlockPos(x, y, z)));
             case 1:
-                return new GuiTrinketForge(player.inventory, (TileEntityTrinketForge) world.getTileEntity(new BlockPos(x,y,z)));
+                return new GuiTrinketForge(player.inventory, (TileEntityTrinketForge) world.getTileEntity(new BlockPos(x, y, z)));
         }
         return null;
     }

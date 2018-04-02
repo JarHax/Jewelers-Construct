@@ -1,9 +1,9 @@
 package com.jarhax.jewelersconstruct.network;
 
 import com.jarhax.jewelersconstruct.api.JewelryHelper;
-import com.jarhax.jewelersconstruct.api.part.PartType;
 import com.jarhax.jewelersconstruct.api.trinket.TrinketType;
-import com.jarhax.jewelersconstruct.tileentities.*;
+import com.jarhax.jewelersconstruct.tileentities.TileEntityTrinketForge;
+
 import net.darkhax.bookshelf.network.TileEntityMessage;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -14,7 +14,7 @@ public class PacketSyncTrinketForge extends TileEntityMessage<TileEntityTrinketF
     public ResourceLocation type;
     
     public PacketSyncTrinketForge() {
-    
+        
     }
     
     public PacketSyncTrinketForge(BlockPos pos, TrinketType type) {

@@ -1,6 +1,5 @@
 package com.jarhax.jewelersconstruct;
 
-import baubles.api.BaubleType;
 import com.jarhax.jewelersconstruct.api.JewelryHelper;
 import com.jarhax.jewelersconstruct.api.material.Material;
 import com.jarhax.jewelersconstruct.api.material.MaterialBase;
@@ -10,14 +9,17 @@ import com.jarhax.jewelersconstruct.api.modifier.ModifierAttribute;
 import com.jarhax.jewelersconstruct.api.part.PartType;
 import com.jarhax.jewelersconstruct.api.part.PartTypeBase;
 import com.jarhax.jewelersconstruct.api.part.PartTypeGem;
-import com.jarhax.jewelersconstruct.api.trinket.*;
+import com.jarhax.jewelersconstruct.api.trinket.TrinketType;
+import com.jarhax.jewelersconstruct.api.trinket.TrinketTypeBase;
 import com.jarhax.jewelersconstruct.blocks.BlockPartForge;
 import com.jarhax.jewelersconstruct.blocks.BlockPartShaper;
 import com.jarhax.jewelersconstruct.item.ItemCreativeModifier;
 import com.jarhax.jewelersconstruct.item.ItemJewelry;
 import com.jarhax.jewelersconstruct.item.ItemPart;
-import com.jarhax.jewelersconstruct.tileentities.*;
+import com.jarhax.jewelersconstruct.tileentities.TileEntityPartShaper;
+import com.jarhax.jewelersconstruct.tileentities.TileEntityTrinketForge;
 
+import baubles.api.BaubleType;
 import net.darkhax.bookshelf.data.AttributeOperation;
 import net.darkhax.bookshelf.registry.RegistryHelper;
 import net.darkhax.bookshelf.util.OreDictUtils;
@@ -153,15 +155,14 @@ public class Content {
     public static final TrinketType TYPE_RING = new TrinketTypeBase("ring", new ResourceLocation("jewelersconstruct", "textures/items/ring.png"));
     public static final TrinketType TYPE_BELT = new TrinketTypeBase("belt", new ResourceLocation("jewelersconstruct", "textures/items/belt.png"));
     
-    
     @SubscribeEvent
     public static void registerTrinketTypes (RegistryEvent.Register<TrinketType> event) {
         
         final IForgeRegistry<TrinketType> registry = event.getRegistry();
         registry.register(TYPE_RING);
-        TYPE_RING.setPartTypes(new PartType[]{PART_BAND, PART_BINDING, PART_GEM});
+        TYPE_RING.setPartTypes(new PartType[] { PART_BAND, PART_BINDING, PART_GEM });
         registry.register(TYPE_BELT);
-        TYPE_BELT.setPartTypes(new PartType[]{PART_BAND,PART_BAND, PART_BUCKLE, PART_GEM});
+        TYPE_BELT.setPartTypes(new PartType[] { PART_BAND, PART_BAND, PART_BUCKLE, PART_GEM });
     }
     
     /* ============================== Blocks ============================== */
@@ -172,7 +173,7 @@ public class Content {
         
         GameRegistry.registerTileEntity(TileEntityPartShaper.class, "part_shaper");
         GameRegistry.registerTileEntity(TileEntityTrinketForge.class, "trinket_forge");
-    
+        
         registry.registerBlock(BLOCK_PART_SHAPER, "part_shaper");
         registry.registerBlock(BLOCK_PART_FORGE, "part_forge");
         
@@ -180,8 +181,16 @@ public class Content {
     
     /* ============================== Items =============================== */
     public static final Item ITEM_CREATIVE_MODIFIER = new ItemCreativeModifier();
-    public static final Item ITEM_RING = new ItemJewelry(TYPE_RING, BaubleType.RING); // TODO replace with specific items
-    public static final Item ITEM_BELT = new ItemJewelry(TYPE_BELT, BaubleType.BELT); // TODO replace with specific items
+    public static final Item ITEM_RING = new ItemJewelry(TYPE_RING, BaubleType.RING); // TODO
+                                                                                      // replace
+                                                                                      // with
+                                                                                      // specific
+                                                                                      // items
+    public static final Item ITEM_BELT = new ItemJewelry(TYPE_BELT, BaubleType.BELT); // TODO
+                                                                                      // replace
+                                                                                      // with
+                                                                                      // specific
+                                                                                      // items
     
     public static final ItemPart ITEM_PART_BAND = new ItemPart(PART_BAND);
     public static final ItemPart ITEM_PART_BINDING = new ItemPart(PART_BINDING);

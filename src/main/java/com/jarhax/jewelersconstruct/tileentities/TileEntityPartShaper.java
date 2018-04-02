@@ -31,7 +31,6 @@ public class TileEntityPartShaper extends TileEntityBasicTickable {
     @Override
     public void onEntityUpdate () {
         
-        
         if (this.processing) {
             if (this.fuel <= 0) {
                 this.fuelTotal = 0;
@@ -43,7 +42,7 @@ public class TileEntityPartShaper extends TileEntityBasicTickable {
                         final Item item = fuelSlot.getItem();
                         fuelSlot.shrink(1);
                         if (fuelSlot.isEmpty()) {
-                    
+                            
                             this.getInventory().setStackInSlot(1, item.getContainerItem(fuelSlot));
                         }
                     }

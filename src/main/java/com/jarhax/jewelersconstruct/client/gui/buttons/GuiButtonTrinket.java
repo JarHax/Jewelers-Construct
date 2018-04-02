@@ -1,17 +1,20 @@
 package com.jarhax.jewelersconstruct.client.gui.buttons;
 
-import com.jarhax.jewelersconstruct.api.part.PartType;
+import java.awt.Color;
+
+import org.lwjgl.opengl.GL11;
+
 import com.jarhax.jewelersconstruct.api.trinket.TrinketType;
-import com.jarhax.jewelersconstruct.client.gui.*;
+import com.jarhax.jewelersconstruct.client.gui.GuiTrinketForge;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.BufferBuilder;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
-import org.lwjgl.opengl.GL11;
-
-import java.awt.*;
 
 public class GuiButtonTrinket extends GuiButton {
     
@@ -80,8 +83,9 @@ public class GuiButtonTrinket extends GuiButton {
         tessellator.draw();
     }
     
-    public TrinketType getType() {
-        return type;
+    public TrinketType getType () {
+        
+        return this.type;
     }
     
     public boolean isSelected () {

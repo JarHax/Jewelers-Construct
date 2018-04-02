@@ -32,8 +32,9 @@ public class ItemJewelry extends Item implements IBauble {
     private static final String TAG_LAST_PLAYER = "LastPlayer";
     
     private final TrinketType type;
-    private BaubleType baubleType;
-    public ItemJewelry(TrinketType type,BaubleType baubleType) {
+    private final BaubleType baubleType;
+    
+    public ItemJewelry(TrinketType type, BaubleType baubleType) {
         
         this.setMaxStackSize(1);
         this.type = type;
@@ -70,7 +71,7 @@ public class ItemJewelry extends Item implements IBauble {
     @Override
     public BaubleType getBaubleType (ItemStack itemstack) {
         
-        return baubleType;
+        return this.baubleType;
     }
     
     @Override
