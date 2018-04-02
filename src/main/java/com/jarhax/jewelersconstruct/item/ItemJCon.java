@@ -19,6 +19,7 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
@@ -82,14 +83,20 @@ public class ItemJCon extends Item implements IBauble {
     @Override
     public void onEquipped (ItemStack stack, EntityLivingBase player) {
         
-        JewelryHelper.handleEquip(stack, player);
-        setLastUser(stack, player);
+        if (player instanceof EntityPlayer) {
+            
+            JewelryHelper.handleEquip(stack, (EntityPlayer) player);
+            setLastUser(stack, player);
+        }
     }
     
     @Override
     public void onUnequipped (ItemStack stack, EntityLivingBase player) {
         
-        JewelryHelper.handleUnEquip(stack, player);
+        if (player instanceof EntityPlayer) {
+            
+            JewelryHelper.handleUnEquip(stack, (EntityPlayer) player);
+        }
     }
     
     @Override

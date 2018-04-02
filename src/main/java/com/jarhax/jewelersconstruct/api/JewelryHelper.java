@@ -7,15 +7,20 @@ import java.util.Map.Entry;
 import com.jarhax.jewelersconstruct.api.material.Material;
 import com.jarhax.jewelersconstruct.api.modifier.Modifier;
 import com.jarhax.jewelersconstruct.api.part.PartType;
+import com.jarhax.jewelersconstruct.item.ItemJCon;
 
+import baubles.api.BaublesApi;
+import baubles.api.cap.IBaublesItemHandler;
 import net.darkhax.bookshelf.lib.ItemStackMap;
 import net.darkhax.bookshelf.util.StackUtils;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.Tuple;
 import net.minecraftforge.common.util.Constants.NBT;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
@@ -58,20 +63,60 @@ public class JewelryHelper {
         }
     }
     
-    public static void handleEquip (ItemStack stack, EntityLivingBase user) {
+    public static void handleEquip (ItemStack stack, EntityPlayer user) {
         
         for (final Entry<Modifier, Integer> modifierData : getModifiers(stack).entrySet()) {
             
             user.getAttributeMap().applyAttributeModifiers(modifierData.getKey().getAttributeModifiers(stack, user, modifierData.getValue()));
         }
+        
+        updatePlayerModifiers(user);
     }
     
-    public static void handleUnEquip (ItemStack stack, EntityLivingBase user) {
+    public static void handleUnEquip (ItemStack stack, EntityPlayer user) {
         
         for (final Entry<Modifier, Integer> modifierData : getModifiers(stack).entrySet()) {
             
             user.getAttributeMap().removeAttributeModifiers(modifierData.getKey().getAttributeModifiers(stack, user, modifierData.getValue()));
         }
+        
+        updatePlayerModifiers(user);
+    }
+    
+    public static void updatePlayerModifiers(EntityPlayer player) {
+        
+        for (Entry<Modifier, Tuple<ItemStack, Integer>> topModifiers : getHighestModifiers(player).entrySet()) {
+            
+            player.getAttributeMap().applyAttributeModifiers(topModifiers.getKey().getAttributeModifiers(topModifiers.getValue().getFirst(), player, topModifiers.getValue().getSecond()));
+        }
+    }
+    
+    public static Map<Modifier, Tuple<ItemStack, Integer>> getHighestModifiers(EntityPlayer player) {
+        
+        final IBaublesItemHandler baubles = BaublesApi.getBaublesHandler(player);
+        final Map<Modifier, Integer> previousBest = new HashMap<>();
+        final Map<Modifier, Tuple<ItemStack, Integer>> results = new HashMap<>();
+        
+        for (int slot = 0; slot < baubles.getSlots(); slot++) {
+            
+            final ItemStack stack = baubles.getStackInSlot(slot);
+            
+            if (!stack.isEmpty() && stack.getItem() instanceof ItemJCon) {
+                
+                for (Entry<Modifier, Integer> modifierData : JewelryHelper.getModifiers(stack).entrySet()) {
+                    
+                    final Modifier modifier = modifierData.getKey();
+                    
+                    // We are better than the last one, or there was no last one.
+                    if (!previousBest.containsKey(modifier) || previousBest.get(modifier) < modifierData.getValue()) {
+                        
+                        results.put(modifier, new Tuple<>(stack, modifierData.getValue()));
+                    }
+                }
+            }
+        }
+        
+        return results;
     }
     
     public static void removeModifier (ItemStack stack, Modifier modifier) {
