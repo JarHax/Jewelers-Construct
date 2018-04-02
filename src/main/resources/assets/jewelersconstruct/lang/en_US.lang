@@ -51,3 +51,6 @@ tooltip.jewelersconstruct.modifiercout=Modifiers %s / ?
 
 # Misc
 itemGroup.jewelersconstruct=Jewelers Construct
+
+# Trinkets
+jewelersconstruct.trinket.jewelersconstruct.ring=Ring
