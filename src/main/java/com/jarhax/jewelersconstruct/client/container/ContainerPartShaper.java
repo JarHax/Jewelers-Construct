@@ -10,6 +10,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.oredict.OreDictionary;
 
+import javax.annotation.Nonnull;
+
 public class ContainerPartShaper extends Container {
     
     private final TileEntityPartShaper tile;
@@ -21,7 +23,12 @@ public class ContainerPartShaper extends Container {
         // TODO change these to slot specific ones, that accept certain items only
         this.addSlotToContainer(new SlotPartShaperInput(tile, 0, 100+56, 17));
         this.addSlotToContainer(new SlotPartShaperFuel(tile, 1, 100+56, 53));
-        this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), 2, 100+116, 35));
+        this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), 2, 100+116, 35){
+            @Override
+            public boolean isItemValid(@Nonnull ItemStack stack) {
+                return false;
+            }
+        });
     
         for (int x = 0; x < 9; x++) {
             this.addSlotToContainer(new Slot(invPlayer, x, 108 + 18 * x, 142));
