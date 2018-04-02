@@ -2,6 +2,7 @@
 
 # Items
 item.jewelersconstruct.ring.name=Ring
+item.jewelersconstruct.belt.name=Belt
 
 # Blocks
 tile.jewelersconstruct.part.shaper.name=Part Shaper
