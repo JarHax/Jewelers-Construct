@@ -5,6 +5,8 @@ This mod allows players to create baubles out of the various resources in their 
 ## ModJam and Future updates
 The textures, models, content, and general balancing in this mod is largely a proof of concept that was made in 4 days for ModJam 5. We are planning to continue development of this mod but further polish is needed before we will be officially releasing it on Curse. A branch for the polished version has been created and can be found [here](https://github.com/JarHax/ModJam-5/tree/polish). 
 
+## Downloads
+[1.8.0](http://i.blamejared.com/ModJam5-1.12.2-1.8.0.jar)
 ## Getting Started (Quick Start)
 
 **Building a bauble**
