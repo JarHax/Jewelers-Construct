@@ -1,5 +1,7 @@
 package com.jarhax.jewelersconstruct;
 
+import com.jarhax.jewelersconstruct.addons.tcon.Addon;
+import com.jarhax.jewelersconstruct.addons.tcon.AddonManager;
 import com.jarhax.jewelersconstruct.api.JewelryHelper;
 import com.jarhax.jewelersconstruct.api.material.Material;
 import com.jarhax.jewelersconstruct.api.material.MaterialBase;
@@ -30,6 +32,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -37,6 +40,15 @@ import net.minecraftforge.registries.IForgeRegistry;
 
 @EventBusSubscriber
 public class Content {
+    
+    @SubscribeEvent
+    public static void tooltip(ItemTooltipEvent event) {
+        
+        for (String s : TempUtils.getOreNames(event.getItemStack())) {
+            
+            event.getToolTip().add(s);
+        }
+    }
     
     /* ============================== Modifiers =========================== */
     public static final Modifier MODIFIER_VIGOR = new ModifierAttribute("vigor", SharedMonsterAttributes.ATTACK_DAMAGE, 1.5d, AttributeOperation.ADDITIVE, 5, "a9106b47-1153-4620-831e-38cb01a63fec");
@@ -105,6 +117,8 @@ public class Content {
         registry.register(MATERIAL_SILVER);
         registry.register(MATERIAL_ELECTRUM);
         registry.register(MATERIAL_STEEL);
+        
+        AddonManager.getAddons().forEach(addon -> addon.registerMaterials(registry));
     }
     
     public static void associateItemsToMaterial () {
@@ -131,6 +145,8 @@ public class Content {
         JewelryHelper.associateMaterial("plateElectrum", MATERIAL_ELECTRUM);
         JewelryHelper.associateMaterial("ingotSteel", MATERIAL_STEEL);
         JewelryHelper.associateMaterial("plateSteel", MATERIAL_STEEL);
+        
+        AddonManager.getAddons().forEach(addon -> addon.associateMaterials());
     }
     
     /* ============================== Part Types ========================== */

@@ -4,6 +4,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.google.common.collect.Multimap;
+import com.jarhax.jewelersconstruct.addons.tcon.AddonManager;
+import com.jarhax.jewelersconstruct.addons.tcon.AddonTcon;
 import com.jarhax.jewelersconstruct.api.JewelryHelper;
 import com.jarhax.jewelersconstruct.api.material.Material;
 import com.jarhax.jewelersconstruct.api.modifier.Modifier;
@@ -19,9 +21,12 @@ import net.darkhax.bookshelf.network.NetworkHandler;
 import net.darkhax.bookshelf.registry.RegistryHelper;
 import net.darkhax.bookshelf.util.ModUtils;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLConstructionEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -47,6 +52,12 @@ public class JewelersConstruct {
     public static final NetworkHandler NETWORK = new NetworkHandler(MOD_ID);
     
     @EventHandler
+    public void onConstruction (FMLConstructionEvent event) {
+        
+        AddonManager.init(event.getASMHarvestedData());
+    }
+    
+    @EventHandler
     public void preInit (FMLPreInitializationEvent event) {
         
         NETWORK.register(PacketSyncPartShape.class, Side.SERVER);
@@ -69,7 +80,6 @@ public class JewelersConstruct {
         
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
         PROXY.registerRenders();
-        Content.associateItemsToMaterial();
     }
     
     @EventHandler
@@ -79,7 +89,7 @@ public class JewelersConstruct {
         logRegistry("material", JewelryHelper.MATERIALS);
         logRegistry("part type", JewelryHelper.PART_TYPES);
         logRegistry("trinket type", JewelryHelper.TRINKET_TYPES);
-        
+        Content.associateItemsToMaterial();
     }
     
     private static void logRegistry (String name, IForgeRegistry<?> registry) {

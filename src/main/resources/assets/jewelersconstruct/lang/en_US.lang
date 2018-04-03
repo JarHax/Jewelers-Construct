@@ -21,6 +21,7 @@ jewelersconstruct.modifier.jewelersconstruct.swift=Swift
 jewelersconstruct.modifier.jewelersconstruct.traveler=Traveler
 
 # Materials
+jewelersconstruct.material.jewelersconstruct.missing=This has no materials!
 jewelersconstruct.material.jewelersconstruct.wood=Wooden
 jewelersconstruct.material.jewelersconstruct.flint=Flint
 jewelersconstruct.material.jewelersconstruct.bone=Bone
@@ -40,6 +41,13 @@ jewelersconstruct.material.jewelersconstruct.lead=Lead
 jewelersconstruct.material.jewelersconstruct.silver=Silver
 jewelersconstruct.material.jewelersconstruct.electrum=Electrum
 jewelersconstruct.material.jewelersconstruct.steel=Steel
+
+# Tcon Materials
+jewelersconstruct.material.jewelersconstruct.ardite=Ardite
+jewelersconstruct.material.jewelersconstruct.cobalt=Cobalt
+jewelersconstruct.material.jewelersconstruct.manyullyn=Manyullyn
+jewelersconstruct.material.jewelersconstruct.pigiron=Pigiron
+jewelersconstruct.material.jewelersconstruct.knightslime=Knightslime
 
 # Parts
 jewelersconstruct.part.jewelersconstruct.band=Band

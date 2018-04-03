@@ -238,6 +238,7 @@ public class JewelryHelper {
         
         for (final ItemStack stack : OreDictionary.getOres(oredict)) {
             
+            System.out.println("Associating " + stack.toString() + oredict);
             associateMaterial(stack, material);
         }
     }
