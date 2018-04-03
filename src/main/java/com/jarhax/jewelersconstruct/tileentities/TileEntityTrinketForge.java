@@ -11,6 +11,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.items.ItemStackHandler;
 
 import java.util.*;
+import java.util.function.BiFunction;
 
 public class TileEntityTrinketForge extends TileEntityBasicTickable {
     
@@ -81,6 +82,10 @@ public class TileEntityTrinketForge extends TileEntityBasicTickable {
                             for(final Map.Entry<Modifier, Integer> entry : map.entrySet()) {
                                 modifierMap.merge(entry.getKey(), entry.getValue(), (integer, integer2) -> integer + integer2);
                             }
+                        }
+                        Modifier modifier = JewelryHelper.INPUTS_TO_MODIFIERS.get(slot);
+                        if(modifier != null) {
+                            modifierMap.merge(modifier, 1, (integer, integer2) -> integer + integer2);
                         }
                     }
                 }

@@ -27,7 +27,7 @@ public class SlotTrinketforgeInput extends SlotItemHandler {
     @Override
     public boolean isItemValid(@Nonnull ItemStack stack) {
         if(!tile.getInventory().getStackInSlot(5).isEmpty()) {
-            return !JewelryHelper.getModifiers(stack).isEmpty() && !(stack.getItem() instanceof ItemJewelry);
+            return (JewelryHelper.INPUTS_TO_MODIFIERS.containsKey(stack)||!JewelryHelper.getModifiers(stack).isEmpty()) && !(stack.getItem() instanceof ItemJewelry) ;
         }
         return this.tile.getLastType().getPartTypes().length > this.slotNumber && this.tile.getLastType().getPartTypes()[this.slotNumber].getPartItem() == stack.getItem();
     }
