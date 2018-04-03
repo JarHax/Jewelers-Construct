@@ -12,7 +12,6 @@ public class MaterialGem extends MaterialBase {
     
     @Override
     public boolean isValidForPart (PartType type) {
-        
         return type instanceof PartTypeGem;
     }
 }

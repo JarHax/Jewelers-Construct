@@ -1,41 +1,32 @@
 package com.jarhax.jewelersconstruct;
 
+import baubles.api.BaubleType;
 import com.jarhax.jewelersconstruct.addons.tcon.AddonManager;
 import com.jarhax.jewelersconstruct.api.JewelryHelper;
-import com.jarhax.jewelersconstruct.api.material.Material;
-import com.jarhax.jewelersconstruct.api.material.MaterialBase;
-import com.jarhax.jewelersconstruct.api.material.MaterialGem;
-import com.jarhax.jewelersconstruct.api.modifier.Modifier;
-import com.jarhax.jewelersconstruct.api.modifier.ModifierAttribute;
-import com.jarhax.jewelersconstruct.api.part.PartType;
-import com.jarhax.jewelersconstruct.api.part.PartTypeBase;
-import com.jarhax.jewelersconstruct.api.part.PartTypeGem;
-import com.jarhax.jewelersconstruct.api.trinket.TrinketType;
-import com.jarhax.jewelersconstruct.api.trinket.TrinketTypeBase;
-import com.jarhax.jewelersconstruct.blocks.BlockPartForge;
-import com.jarhax.jewelersconstruct.blocks.BlockPartShaper;
-import com.jarhax.jewelersconstruct.item.ItemCreativeModifier;
-import com.jarhax.jewelersconstruct.item.ItemJewelry;
-import com.jarhax.jewelersconstruct.item.ItemPart;
+import com.jarhax.jewelersconstruct.api.material.*;
+import com.jarhax.jewelersconstruct.api.modifier.*;
+import com.jarhax.jewelersconstruct.api.part.*;
+import com.jarhax.jewelersconstruct.api.trinket.*;
+import com.jarhax.jewelersconstruct.blocks.*;
+import com.jarhax.jewelersconstruct.item.*;
 import com.jarhax.jewelersconstruct.modifiers.*;
-import com.jarhax.jewelersconstruct.tileentities.TileEntityPartShaper;
-import com.jarhax.jewelersconstruct.tileentities.TileEntityTrinketForge;
-
-import baubles.api.BaubleType;
+import com.jarhax.jewelersconstruct.tileentities.*;
 import net.darkhax.bookshelf.data.AttributeOperation;
 import net.darkhax.bookshelf.registry.RegistryHelper;
 import net.darkhax.bookshelf.util.OreDictUtils;
 import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
+import net.minecraft.init.*;
 import net.minecraft.item.*;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.registries.IForgeRegistry;
 
 @EventBusSubscriber
@@ -44,10 +35,21 @@ public class Content {
     @SubscribeEvent
     public static void tooltip(ItemTooltipEvent event) {
         
-        for (String s : TempUtils.getOreNames(event.getItemStack())) {
+        for(String s : TempUtils.getOreNames(event.getItemStack())) {
             
             event.getToolTip().add(s);
         }
+        
+        if(JewelryHelper.INPUTS_TO_MODIFIERS.containsKey(event.getItemStack())) {
+            Modifier modifier = JewelryHelper.INPUTS_TO_MODIFIERS.get(event.getItemStack());
+            event.getToolTip().add("JC Modifier: " + JewelersConstruct.PROXY.translate(modifier.getTranslationName()));
+        }
+        
+        if(JewelryHelper.INPUTS_TO_MATERIALS.containsKey(event.getItemStack())) {
+            Material mat = JewelryHelper.INPUTS_TO_MATERIALS.get(event.getItemStack());
+            event.getToolTip().add("JC Material: " + JewelersConstruct.PROXY.translate(mat.getTranslationName()));
+        }
+        
     }
     
     /* ============================== Modifiers =========================== */
@@ -61,10 +63,13 @@ public class Content {
     public static final Modifier MODIFIER_TRAVELER = new ModifierAttribute("traveler", SharedMonsterAttributes.MOVEMENT_SPEED, 0.1d, AttributeOperation.MULTIPLY, 5, "7a87405c-f8e8-4ba7-a235-fd6c0e90ebd2");
     public static final Modifier MODIFIER_STEP_UP = new ModifierStepUp();
     public static final Modifier MODIFIER_FLOAT = new ModifierFloat();
+    public static final Modifier MODIFIER_FOOD = new ModifierFood();
+    public static final Modifier MODIFIER_SATURATION = new ModifierSaturation();
+    public static final Modifier MODIFIER_MAGNET = new ModifierMagnet();
     
     
     @SubscribeEvent
-    public static void registerModifiers (RegistryEvent.Register<Modifier> event) {
+    public static void registerModifiers(RegistryEvent.Register<Modifier> event) {
         
         final IForgeRegistry<Modifier> registry = event.getRegistry();
         registry.register(MODIFIER_VIGOR);
@@ -77,7 +82,25 @@ public class Content {
         registry.register(MODIFIER_TRAVELER);
         registry.register(MODIFIER_STEP_UP);
         registry.register(MODIFIER_FLOAT);
+        registry.register(MODIFIER_FOOD);
+        registry.register(MODIFIER_SATURATION);
+        registry.register(MODIFIER_MAGNET);
+        
         JewelryHelper.associateModifier(new ItemStack(Items.FEATHER), MODIFIER_FLOAT);
+        JewelryHelper.associateModifier(new ItemStack(Items.IRON_SWORD), MODIFIER_VIGOR);
+        JewelryHelper.associateModifier(new ItemStack(Items.GOLDEN_APPLE), MODIFIER_VITALITY);
+        JewelryHelper.associateModifier(new ItemStack(Items.IRON_CHESTPLATE), MODIFIER_FORTITUDE);
+        JewelryHelper.associateModifier(new ItemStack(Blocks.ANVIL), MODIFIER_STURDY);
+        JewelryHelper.associateModifier(new ItemStack(Items.RABBIT_FOOT), MODIFIER_LUCK);
+        JewelryHelper.associateModifier(new ItemStack(Items.FISHING_ROD), MODIFIER_GRASPING);
+        JewelryHelper.associateModifier(new ItemStack(Items.SUGAR), MODIFIER_SWIFT);
+        JewelryHelper.associateModifier(new ItemStack(Items.MINECART), MODIFIER_TRAVELER);
+        JewelryHelper.associateModifier(new ItemStack(Blocks.STONE_SLAB), MODIFIER_STEP_UP);
+        JewelryHelper.associateModifier(new ItemStack(Items.COOKED_BEEF), MODIFIER_FOOD);
+        JewelryHelper.associateModifier(new ItemStack(Items.GOLDEN_CARROT), MODIFIER_SATURATION);
+        JewelryHelper.associateModifier(new ItemStack(Blocks.STICKY_PISTON), MODIFIER_MAGNET);
+        
+        
     }
     
     /* ============================== Materials =========================== */
@@ -102,7 +125,7 @@ public class Content {
     public static final Material MATERIAL_STEEL = new MaterialBase(500, 1, 1, "steel", 0xa7a7a7);
     
     @SubscribeEvent
-    public static void registerMaterials (RegistryEvent.Register<Material> event) {
+    public static void registerMaterials(RegistryEvent.Register<Material> event) {
         
         final IForgeRegistry<Material> registry = event.getRegistry();
         registry.register(MATERIAL_WOOD);
@@ -127,7 +150,7 @@ public class Content {
         AddonManager.getAddons().forEach(addon -> addon.registerMaterials(registry));
     }
     
-    public static void associateItemsToMaterial () {
+    public static void associateItemsToMaterial() {
         
         JewelryHelper.associateMaterial(OreDictUtils.PLANK_WOOD, MATERIAL_WOOD);
         JewelryHelper.associateMaterial(OreDictUtils.BONE, MATERIAL_BONE);
@@ -137,6 +160,10 @@ public class Content {
         JewelryHelper.associateMaterial("plateIron", MATERIAL_IRON);
         JewelryHelper.associateMaterial(OreDictUtils.INGOT_GOLD, MATERIAL_GOLD);
         JewelryHelper.associateMaterial("plateGold", MATERIAL_GOLD);
+        JewelryHelper.associateMaterial("gemDiamond", MATERIAL_DIAMOND);
+        JewelryHelper.associateMaterial("gemEmerald", MATERIAL_EMERALD);
+        JewelryHelper.associateMaterial("gemPrismarine", MATERIAL_PRISMARINE);
+        
         
         // Common mod materials
         JewelryHelper.associateMaterial("ingotCopper", MATERIAL_COPPER);
@@ -163,7 +190,7 @@ public class Content {
     public static final PartType PART_GEM = new PartTypeGem("gem", new ResourceLocation(JewelersConstruct.MOD_ID, "textures/items/part_gem.png"));
     
     @SubscribeEvent
-    public static void registerPartTypes (RegistryEvent.Register<PartType> event) {
+    public static void registerPartTypes(RegistryEvent.Register<PartType> event) {
         
         final IForgeRegistry<PartType> registry = event.getRegistry();
         registry.register(PART_BAND);
@@ -176,22 +203,26 @@ public class Content {
     /* ============================== Trinket Types ======================= */
     public static final TrinketType TYPE_RING = new TrinketTypeBase("ring", new ResourceLocation(JewelersConstruct.MOD_ID, "textures/items/ring.png"));
     public static final TrinketType TYPE_BELT = new TrinketTypeBase("belt", new ResourceLocation(JewelersConstruct.MOD_ID, "textures/items/belt.png"));
+    public static final TrinketType TYPE_NECKLACE = new TrinketTypeBase("necklace", new ResourceLocation(JewelersConstruct.MOD_ID, "textures/items/necklace.png"));
+    
     
     @SubscribeEvent
-    public static void registerTrinketTypes (RegistryEvent.Register<TrinketType> event) {
+    public static void registerTrinketTypes(RegistryEvent.Register<TrinketType> event) {
         
         final IForgeRegistry<TrinketType> registry = event.getRegistry();
         registry.register(TYPE_RING);
-        TYPE_RING.setPartTypes(new PartType[] { PART_BAND, PART_BINDING, PART_GEM });
+        TYPE_RING.setPartTypes(new PartType[]{PART_BAND, PART_BINDING, PART_GEM});
         registry.register(TYPE_BELT);
-        TYPE_BELT.setPartTypes(new PartType[] { PART_BAND, PART_BAND, PART_BUCKLE, PART_GEM });
+        TYPE_BELT.setPartTypes(new PartType[]{PART_BAND, PART_BAND, PART_BUCKLE, PART_GEM});
+        registry.register(TYPE_NECKLACE);
+        TYPE_NECKLACE.setPartTypes(new PartType[]{PART_CHAIN, PART_GEM, PART_BINDING});
     }
     
     /* ============================== Blocks ============================== */
     public static final Block BLOCK_PART_SHAPER = new BlockPartShaper();
     public static final Block BLOCK_PART_FORGE = new BlockPartForge();
     
-    public static void registerBlocks (RegistryHelper registry) {
+    public static void registerBlocks(RegistryHelper registry) {
         
         GameRegistry.registerTileEntity(TileEntityPartShaper.class, "part_shaper");
         GameRegistry.registerTileEntity(TileEntityTrinketForge.class, "trinket_forge");
@@ -205,6 +236,8 @@ public class Content {
     public static final Item ITEM_CREATIVE_MODIFIER = new ItemCreativeModifier();
     public static final Item ITEM_RING = new ItemJewelry(TYPE_RING, BaubleType.RING);
     public static final Item ITEM_BELT = new ItemJewelry(TYPE_BELT, BaubleType.BELT);
+    public static final Item ITEM_NECKLACE = new ItemJewelry(TYPE_NECKLACE, BaubleType.AMULET);
+    
     
     public static final ItemPart ITEM_PART_BAND = new ItemPart(PART_BAND);
     public static final ItemPart ITEM_PART_BINDING = new ItemPart(PART_BINDING);
@@ -212,10 +245,11 @@ public class Content {
     public static final ItemPart ITEM_PART_BUCKLE = new ItemPart(PART_BUCKLE);
     public static final ItemPart ITEM_PART_GEM = new ItemPart(PART_GEM);
     
-    public static void registerItems (RegistryHelper registry) {
+    public static void registerItems(RegistryHelper registry) {
         
         registry.registerItem(ITEM_RING, "ring");
         registry.registerItem(ITEM_BELT, "belt");
+        registry.registerItem(ITEM_NECKLACE, "necklace");
         registry.registerItem(ITEM_PART_BAND, "part_band");
         registry.registerItem(ITEM_PART_BINDING, "part_binding");
         registry.registerItem(ITEM_PART_CHAIN, "part_chain");
@@ -223,4 +257,14 @@ public class Content {
         registry.registerItem(ITEM_PART_GEM, "part_gem");
         registry.registerItem(ITEM_CREATIVE_MODIFIER, "creative_modifier");
     }
+    
+    
+    /* ============================== Recipes =============================== */
+    @SubscribeEvent
+    public static void registerRecipes(RegistryEvent.Register<IRecipe> registry) {
+        registry.getRegistry().register(new ShapedOreRecipe(new ResourceLocation("jewelersconstruct", "part_forge"), new ItemStack(Content.BLOCK_PART_SHAPER), "sis", "s s", "sss", 's', "stone", 'i', Blocks.IRON_BARS).setRegistryName(new ResourceLocation("jewelersconstruct", "part_forge")));
+        registry.getRegistry().register(new ShapedOreRecipe(new ResourceLocation("jewelersconstruct", "part_shaper"), new ItemStack(Content.BLOCK_PART_FORGE), "sss", "pwp", "ppp", 's', "slabWood", 'w', "logWood", 'p', "plankWood").setRegistryName(new ResourceLocation("jewelersconstruct", "part_shaper")));
+        
+    }
+    
 }

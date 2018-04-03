@@ -1,0 +1,24 @@
+[  
+   {  
+      "modid":"jewelersconstruct",
+      "name":"Jewelers Construct",
+      "description":"Tinkers but with baubles",
+      "version":"${version}",
+      "mcversion":"${mcversion}",
+      "url":"",
+      "updateUrl":"",
+      "authorList":[  
+         "Darkhax",
+		 "Jaredlll08"
+      ],
+      "credits":"",
+      "logoFile":"",
+      "screenshots":[  
+
+      ],
+      "parent":"",
+      "dependencies":[  
+
+      ]
+   }
+]

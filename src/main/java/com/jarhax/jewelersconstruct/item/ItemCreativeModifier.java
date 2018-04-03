@@ -8,14 +8,13 @@ import java.util.Set;
 
 import javax.annotation.Nullable;
 
-import com.jarhax.jewelersconstruct.TempUtils;
+import com.jarhax.jewelersconstruct.*;
 import com.jarhax.jewelersconstruct.api.JewelryHelper;
 import com.jarhax.jewelersconstruct.api.modifier.Modifier;
 
 import net.darkhax.bookshelf.item.IColorfulItem;
 import net.darkhax.bookshelf.util.PlayerUtils;
 import net.minecraft.client.renderer.color.IItemColor;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -58,14 +57,14 @@ public class ItemCreativeModifier extends Item implements IColorfulItem {
         
         if (modifiers.isEmpty()) {
             
-            tooltip.add(I18n.format("jewelersconstruct.modifier.missing"));
+            tooltip.add(JewelersConstruct.PROXY.translate("jewelersconstruct.modifier.missing"));
         }
         
         else {
             
             for (final Entry<Modifier, Integer> modifierData : modifiers) {
                 
-                tooltip.add(I18n.format(modifierData.getKey().getTranslationName()) + " " + I18n.format("enchantment.level." + modifierData.getValue()));
+                tooltip.add(JewelersConstruct.PROXY.translate(modifierData.getKey().getTranslationName()) + " " +JewelersConstruct.PROXY.translate("enchantment.level." + modifierData.getValue()));
                 TempUtils.getModifierTooltip(modifierData.getKey().getAttributeModifiers(stack, PlayerUtils.getClientPlayer(), modifierData.getValue()), tooltip);
             }
         }

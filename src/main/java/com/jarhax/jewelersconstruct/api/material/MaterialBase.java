@@ -1,6 +1,6 @@
 package com.jarhax.jewelersconstruct.api.material;
 
-import com.jarhax.jewelersconstruct.api.part.PartType;
+import com.jarhax.jewelersconstruct.api.part.*;
 
 import net.minecraft.item.ItemStack;
 
@@ -47,6 +47,6 @@ public class MaterialBase extends Material {
     @Override
     public boolean isValidForPart (PartType type) {
         
-        return true;
+        return !(type instanceof PartTypeGem);
     }
 }

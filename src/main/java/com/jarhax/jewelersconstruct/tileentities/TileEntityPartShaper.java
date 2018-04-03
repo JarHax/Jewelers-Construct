@@ -56,11 +56,13 @@ public class TileEntityPartShaper extends TileEntityBasicTickable {
                     this.progress = 0;
                     this.processing = false;
                     final Material material = JewelryHelper.getMaterial(this.inventory.getStackInSlot(0));
-                    this.inventory.getStackInSlot(0).shrink(1);
-                    final ItemStack itemStack = new ItemStack(this.lastType.getPartItem());
-                    
-                    JewelryHelper.setMaterial(itemStack, material);
-                    this.inventory.setStackInSlot(2, itemStack);
+                    if(material.isValidForPart(getLastType())) {
+                        this.inventory.getStackInSlot(0).shrink(1);
+                        final ItemStack itemStack = new ItemStack(this.lastType.getPartItem());
+    
+                        JewelryHelper.setMaterial(itemStack, material);
+                        this.inventory.setStackInSlot(2, itemStack);
+                    }
                 }
             }
         }

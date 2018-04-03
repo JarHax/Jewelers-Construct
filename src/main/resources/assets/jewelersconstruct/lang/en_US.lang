@@ -3,6 +3,7 @@
 # Items
 item.jewelersconstruct.ring.name=Ring
 item.jewelersconstruct.belt.name=Belt
+item.jewelersconstruct.necklace.name=Necklace
 item.jewelersconstruct.creative.modifier.name=Creative Modifier
 
 # Blocks
@@ -19,9 +20,13 @@ jewelersconstruct.modifier.jewelersconstruct.luck=Luck
 jewelersconstruct.modifier.jewelersconstruct.grasping=Grasping
 jewelersconstruct.modifier.jewelersconstruct.swift=Swift
 jewelersconstruct.modifier.jewelersconstruct.traveler=Traveler
+jewelersconstruct.modifier.jewelersconstruct.step_up=Step Up
+jewelersconstruct.modifier.jewelersconstruct.float=Lightweight
+jewelersconstruct.modifier.jewelersconstruct.food=Food
+jewelersconstruct.modifier.jewelersconstruct.saturation=Saturation
 
 # Materials
-jewelersconstruct.material.jewelersconstruct.missing=This has no materials!
+jewelersconstruct.material.missing=This has no materials!
 jewelersconstruct.material.jewelersconstruct.wood=Wooden
 jewelersconstruct.material.jewelersconstruct.flint=Flint
 jewelersconstruct.material.jewelersconstruct.bone=Bone
@@ -64,3 +69,5 @@ itemGroup.jewelersconstruct=Jewelers Construct
 
 # Trinkets
 jewelersconstruct.trinket.jewelersconstruct.ring=Ring
+jewelersconstruct.trinket.jewelersconstruct.belt=Belt
+jewelersconstruct.trinket.jewelersconstruct.necklace=Necklace

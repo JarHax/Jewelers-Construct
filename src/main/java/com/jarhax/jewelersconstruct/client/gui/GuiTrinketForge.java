@@ -12,7 +12,6 @@ import com.jarhax.jewelersconstruct.tileentities.TileEntityTrinketForge;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -71,7 +70,7 @@ public class GuiTrinketForge extends GuiContainer {
                 final Slot slot = this.getSlotUnderMouse();
                 if(slot instanceof SlotTrinketforgeInput) {
                     if(this.tile.getLastType().getPartTypes().length > slot.slotNumber) {
-                        this.drawHoveringText(I18n.format(this.tile.getLastType().getPartTypes()[slot.slotNumber].getTranslationName()), mouseX, mouseY);
+                        this.drawHoveringText(JewelersConstruct.PROXY.translate(this.tile.getLastType().getPartTypes()[slot.slotNumber].getTranslationName()), mouseX, mouseY);
                     }
                 } else if(slot instanceof SlotTrinketForgeTrinket) {
                     this.drawHoveringText("Trinkets", mouseX, mouseY);

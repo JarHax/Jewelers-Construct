@@ -6,4 +6,9 @@ public class CommonProxy {
         
     }
     
+    public String translate(String str, Object... objects){
+        return String.format(str, objects);
+    }
+    
+    
 }

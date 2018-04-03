@@ -73,6 +73,7 @@ public class JewelersConstruct {
         
         Content.registerBlocks(REGISTRY);
         Content.registerItems(REGISTRY);
+        
     }
     
     @EventHandler

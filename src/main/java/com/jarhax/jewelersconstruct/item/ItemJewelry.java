@@ -1,34 +1,25 @@
 package com.jarhax.jewelersconstruct.item;
 
-import java.awt.*;
-import java.util.List;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import javax.annotation.Nullable;
-
-import com.jarhax.jewelersconstruct.TempUtils;
+import baubles.api.*;
+import com.jarhax.jewelersconstruct.*;
 import com.jarhax.jewelersconstruct.api.JewelryHelper;
 import com.jarhax.jewelersconstruct.api.material.Material;
 import com.jarhax.jewelersconstruct.api.modifier.Modifier;
 import com.jarhax.jewelersconstruct.api.trinket.TrinketType;
-
-import baubles.api.BaubleType;
-import baubles.api.IBauble;
-import net.darkhax.bookshelf.util.PlayerUtils;
-import net.darkhax.bookshelf.util.StackUtils;
-import net.minecraft.client.resources.I18n;
+import net.darkhax.bookshelf.util.*;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.*;
+
+import javax.annotation.Nullable;
+import java.util.*;
+import java.util.Map.Entry;
 
 public class ItemJewelry extends Item implements IBauble {
     
@@ -46,25 +37,25 @@ public class ItemJewelry extends Item implements IBauble {
     }
     
     @Override
-    public void setDamage (ItemStack stack, int damage) {
+    public void setDamage(ItemStack stack, int damage) {
         
         super.setDamage(stack, damage);
         
-        if (stack.getItemDamage() > stack.getMaxDamage()) {
+        if(stack.getItemDamage() > stack.getMaxDamage()) {
             
             super.setDamage(stack, stack.getMaxDamage());
         }
     }
     
     @Override
-    public int getMaxDamage (ItemStack stack) {
+    public int getMaxDamage(ItemStack stack) {
         
         final int baseDurability = 1;
         
         int durability = 0;
         durability = JewelryHelper.getJewelryMaterials(stack).stream().mapToInt(Material::getDurability).sum();
         
-        for (final Entry<Modifier, Integer> modifierData : JewelryHelper.getModifiers(stack).entrySet()) {
+        for(final Entry<Modifier, Integer> modifierData : JewelryHelper.getModifiers(stack).entrySet()) {
             
             durability += modifierData.getKey().getModifiedDurability(stack, modifierData.getValue(), baseDurability);
         }
@@ -73,17 +64,17 @@ public class ItemJewelry extends Item implements IBauble {
     }
     
     @Override
-    public BaubleType getBaubleType (ItemStack itemstack) {
+    public BaubleType getBaubleType(ItemStack itemstack) {
         
         return this.baubleType;
     }
     
     @Override
-    public void onWornTick (ItemStack stack, EntityLivingBase player) {
+    public void onWornTick(ItemStack stack, EntityLivingBase player) {
         
-        if (player instanceof EntityPlayer) {
+        if(player instanceof EntityPlayer) {
             
-            if (!isLastUser(stack, player)) {
+            if(!isLastUser(stack, player)) {
                 
                 this.onEquipped(stack, player);
             }
@@ -93,9 +84,9 @@ public class ItemJewelry extends Item implements IBauble {
     }
     
     @Override
-    public void onEquipped (ItemStack stack, EntityLivingBase player) {
+    public void onEquipped(ItemStack stack, EntityLivingBase player) {
         
-        if (player instanceof EntityPlayer) {
+        if(player instanceof EntityPlayer) {
             
             JewelryHelper.updatePlayerModifiers((EntityPlayer) player);
             setLastUser(stack, player);
@@ -103,22 +94,22 @@ public class ItemJewelry extends Item implements IBauble {
     }
     
     @Override
-    public void onUnequipped (ItemStack stack, EntityLivingBase player) {
+    public void onUnequipped(ItemStack stack, EntityLivingBase player) {
         
-        if (player instanceof EntityPlayer) {
+        if(player instanceof EntityPlayer) {
             
             JewelryHelper.updatePlayerModifiers((EntityPlayer) player);
         }
     }
     
     @Override
-    public void getSubItems (CreativeTabs tab, NonNullList<ItemStack> items) {
+    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
         
-        if (this.isInCreativeTab(tab)) {
+        if(this.isInCreativeTab(tab)) {
             
-            for (final Modifier modifier : JewelryHelper.MODIFIERS) {
+            for(final Modifier modifier : JewelryHelper.MODIFIERS) {
                 
-                for (int level = 1; level <= modifier.getMaxLevel(); level++) {
+                for(int level = 1; level <= modifier.getMaxLevel(); level++) {
                     
                     final ItemStack stack = new ItemStack(this);
                     JewelryHelper.setModifier(stack, modifier, level);
@@ -130,55 +121,51 @@ public class ItemJewelry extends Item implements IBauble {
     
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation (ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         
         final List<Material> materials = JewelryHelper.getJewelryMaterials(stack);
         
         if(materials.isEmpty()) {
             
-            tooltip.add(I18n.format("jewelryconstruct.material.missing"));
-        }
-        
-        else {
+            tooltip.add(JewelersConstruct.PROXY.translate("jewelersconstruct.material.missing"));
+        } else {
             
-            for (Material material : materials) {
+            for(Material material : materials) {
                 
-                tooltip.add(I18n.format(material.getTranslationName()));
+                tooltip.add(JewelersConstruct.PROXY.translate(material.getTranslationName()));
             }
         }
         
         final Set<Entry<Modifier, Integer>> modifiers = JewelryHelper.getModifiers(stack).entrySet();
         
-        if (modifiers.isEmpty()) {
+        if(modifiers.isEmpty()) {
             
-            tooltip.add(I18n.format("jewelersconstruct.modifier.missing"));
-        }
-        
-        else {
+            tooltip.add(JewelersConstruct.PROXY.translate("jewelersconstruct.modifier.missing"));
+        } else {
             
-            for (final Entry<Modifier, Integer> modifierData : modifiers) {
+            for(final Entry<Modifier, Integer> modifierData : modifiers) {
                 
-                tooltip.add(I18n.format(modifierData.getKey().getTranslationName()) + " " + I18n.format("enchantment.level." + modifierData.getValue()));
+                tooltip.add(JewelersConstruct.PROXY.translate(modifierData.getKey().getTranslationName()) + " " + JewelersConstruct.PROXY.translate("enchantment.level." + modifierData.getValue()));
                 TempUtils.getModifierTooltip(modifierData.getKey().getAttributeModifiers(stack, PlayerUtils.getClientPlayer(), modifierData.getValue()), tooltip);
             }
         }
         
         tooltip.add("Durability: " + getMaxDamage(stack));
         
-        if (flagIn == ITooltipFlag.TooltipFlags.ADVANCED) {
-    
+        if(flagIn == ITooltipFlag.TooltipFlags.ADVANCED) {
+            
             int modifierCount = JewelryHelper.getModifierCount(stack);
             int retention = JewelryHelper.getRetention(stack);
-            tooltip.add((modifierCount > retention ? TextFormatting.RED.toString() : TextFormatting.GRAY )+ I18n.format("tooltip.jewelersconstruct.modifiercout", modifierCount, retention));
+            tooltip.add((modifierCount > retention ? TextFormatting.RED.toString() : TextFormatting.GRAY) + JewelersConstruct.PROXY.translate("tooltip.jewelersconstruct.modifiercout", modifierCount, retention));
         }
     }
     
-    private static void setLastUser (ItemStack stack, EntityLivingBase user) {
+    private static void setLastUser(ItemStack stack, EntityLivingBase user) {
         
         StackUtils.prepareStackTag(stack).setUniqueId(TAG_LAST_PLAYER, user.getUniqueID());
     }
     
-    private static boolean isLastUser (ItemStack stack, EntityLivingBase user) {
+    private static boolean isLastUser(ItemStack stack, EntityLivingBase user) {
         
         return stack.hasTagCompound() ? stack.getTagCompound().getUniqueId(TAG_LAST_PLAYER).equals(user.getUniqueID()) : false;
     }

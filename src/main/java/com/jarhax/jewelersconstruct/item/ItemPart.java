@@ -4,13 +4,13 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import com.jarhax.jewelersconstruct.JewelersConstruct;
 import com.jarhax.jewelersconstruct.api.JewelryHelper;
 import com.jarhax.jewelersconstruct.api.material.Material;
 import com.jarhax.jewelersconstruct.api.part.PartType;
 
 import net.darkhax.bookshelf.item.IColorfulItem;
 import net.minecraft.client.renderer.color.IItemColor;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -40,7 +40,7 @@ public class ItemPart extends Item implements IColorfulItem {
     @Override
     public String getItemStackDisplayName (ItemStack stack) {
         
-        return JewelryHelper.getMaterialName(JewelryHelper.getPartMaterial(stack)) + " " + I18n.format(this.getPartType().getTranslationName());
+        return JewelryHelper.getMaterialName(JewelryHelper.getPartMaterial(stack)) + " " + JewelersConstruct.PROXY.translate(this.getPartType().getTranslationName());
     }
     
     @Override

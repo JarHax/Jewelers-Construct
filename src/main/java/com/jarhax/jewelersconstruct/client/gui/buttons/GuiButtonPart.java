@@ -2,6 +2,7 @@ package com.jarhax.jewelersconstruct.client.gui.buttons;
 
 import java.awt.Color;
 
+import com.jarhax.jewelersconstruct.JewelersConstruct;
 import org.lwjgl.opengl.GL11;
 
 import com.jarhax.jewelersconstruct.api.part.PartType;
@@ -13,7 +14,6 @@ import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 
 public class GuiButtonPart extends GuiButton {
@@ -63,7 +63,7 @@ public class GuiButtonPart extends GuiButton {
             this.mouseDragged(mc, mouseX, mouseY);
             GlStateManager.enableLighting();
             if (this.hovered) {
-                this.parent.drawHoveringText(I18n.format(this.type.getTranslationName()), mouseX, mouseY);
+                this.parent.drawHoveringText(JewelersConstruct.PROXY.translate(this.type.getTranslationName()), mouseX, mouseY);
             }
         }
     }

@@ -10,11 +10,9 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 
 import net.darkhax.bookshelf.util.StackUtils;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -86,13 +84,13 @@ public class TempUtils {
                 
                 if (baseAmount > 0.0D) {
                     
-                    list.add(TextFormatting.BLUE + " " + I18n.format("attribute.modifier.plus." + modifier.getOperation(), ItemStack.DECIMALFORMAT.format(displayAmount), I18n.format("attribute.name." + entry.getKey())));
+                    list.add(TextFormatting.BLUE + " " + JewelersConstruct.PROXY.translate("attribute.modifier.plus." + modifier.getOperation(), ItemStack.DECIMALFORMAT.format(displayAmount), JewelersConstruct.PROXY.translate("attribute.name." + entry.getKey())));
                 }
                 
                 else if (baseAmount < 0.0D) {
                     
                     displayAmount = displayAmount * -1.0D;
-                    list.add(TextFormatting.RED + " " + I18n.format("attribute.modifier.take." + modifier.getOperation(), ItemStack.DECIMALFORMAT.format(displayAmount), I18n.format("attribute.name." + entry.getKey())));
+                    list.add(TextFormatting.RED + " " + JewelersConstruct.PROXY.translate("attribute.modifier.take." + modifier.getOperation(), ItemStack.DECIMALFORMAT.format(displayAmount), JewelersConstruct.PROXY.translate("attribute.name." + entry.getKey())));
                 }
             }
         }
