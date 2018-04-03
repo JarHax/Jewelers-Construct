@@ -45,4 +45,9 @@ public class PartType extends IForgeRegistryEntry.Impl<PartType> {
         
         return true;
     }
+    
+    public boolean hasDifferentMaterials() {
+        
+        return false;
+    }
 }

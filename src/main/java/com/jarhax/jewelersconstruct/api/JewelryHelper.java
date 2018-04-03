@@ -1,8 +1,13 @@
 package com.jarhax.jewelersconstruct.api;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import com.jarhax.jewelersconstruct.api.material.Material;
 import com.jarhax.jewelersconstruct.api.modifier.Modifier;
@@ -21,6 +26,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Tuple;
 import net.minecraftforge.common.util.Constants.NBT;
@@ -42,6 +48,7 @@ public class JewelryHelper {
     private static final String TAG_MODIFIER = "Modifier";
     private static final String TAG_LEVEL = "ModifierLevel";
     private static final String TAG_MATERIAL = "Material";
+    private static final String TAG_MATERIALS = "Materials";
     
     public static Modifier getModifierByName (String name) {
         
@@ -233,5 +240,69 @@ public class JewelryHelper {
     public static Material getMaterial (ItemStack stack) {
         
         return INPUTS_TO_MATERIALS.get(stack);
+    }
+    
+    public static ItemStack setJewelryMaterials(ItemStack stack, Collection<Material> materials) {
+        
+        final NBTTagCompound tag = StackUtils.prepareStackTag(stack);
+        NBTTagList matList = new NBTTagList();
+        
+        for (Material material : materials) {
+            
+            matList.appendTag(new NBTTagString(material.getRegistryName().toString()));
+        }
+        
+        tag.setTag(TAG_MATERIALS, matList);
+        return stack;
+    }
+    
+    public static void setJewelryMaterials(ItemStack stack, Material... materials) {
+        
+        final NBTTagCompound tag = StackUtils.prepareStackTag(stack);
+        NBTTagList matList = new NBTTagList();
+        
+        for (Material material : materials) {
+            
+            matList.appendTag(new NBTTagString(material.getRegistryName().toString()));
+        }
+        
+        tag.setTag(TAG_MATERIALS, matList);
+    }
+    
+    public static List<Material> getJewelryMaterials(ItemStack stack) {
+        
+        final List<Material> materials = new ArrayList<>();
+        
+        if (stack.hasTagCompound() && stack.getTagCompound().hasKey(TAG_MATERIALS)) {
+            
+            final NBTTagList matList = stack.getTagCompound().getTagList(TAG_MATERIALS, NBT.TAG_STRING);
+            
+            for (int i = 0; i < matList.tagCount(); i++) {
+                
+                final Material mat = getMaterialByName(matList.getStringTagAt(i));
+                
+                if (mat != null) {
+                    
+                    materials.add(mat);
+                }
+            }
+        }
+        
+        return materials;
+    }
+    
+    public static List<Material> getValidMaterials(PartType partType) {
+        
+        final List<Material> validMaterials = new ArrayList<>();
+        
+        for (Material mat : MATERIALS) {
+            
+            if (partType.isValidForMaterial(mat) && mat.isValidForPart(partType)) {
+                
+                validMaterials.add(mat);
+            }
+        }
+        
+        return validMaterials;
     }
 }

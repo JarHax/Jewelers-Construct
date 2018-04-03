@@ -8,6 +8,7 @@ import javax.annotation.Nullable;
 
 import com.jarhax.jewelersconstruct.TempUtils;
 import com.jarhax.jewelersconstruct.api.JewelryHelper;
+import com.jarhax.jewelersconstruct.api.material.Material;
 import com.jarhax.jewelersconstruct.api.modifier.Modifier;
 import com.jarhax.jewelersconstruct.api.trinket.TrinketType;
 
@@ -31,14 +32,14 @@ public class ItemJewelry extends Item implements IBauble {
     
     private static final String TAG_LAST_PLAYER = "LastPlayer";
     
-    private final TrinketType type;
+    private final TrinketType partTypes;
     private final BaubleType baubleType;
     
     public ItemJewelry(TrinketType type, BaubleType baubleType) {
         
         this.setMaxStackSize(1);
-        this.type = type;
-        this.type.setTrinketItem(this);
+        this.partTypes = type;
+        this.partTypes.setTrinketItem(this);
         this.baubleType = baubleType;
     }
     
@@ -115,6 +116,21 @@ public class ItemJewelry extends Item implements IBauble {
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation (ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+        
+        final List<Material> materials = JewelryHelper.getJewelryMaterials(stack);
+        
+        if(materials.isEmpty()) {
+            
+            tooltip.add(I18n.format("jewelryconstruct.material.missing"));
+        }
+        
+        else {
+            
+            for (Material material : materials) {
+                
+                tooltip.add(I18n.format(material.getTranslationName()));
+            }
+        }
         
         final Set<Entry<Modifier, Integer>> modifiers = JewelryHelper.getModifiers(stack).entrySet();
         

@@ -151,7 +151,7 @@ public class Content {
         registry.register(PART_GEM);
     }
     
-    /* ============================== Trinket Types ========================== */
+    /* ============================== Trinket Types ======================= */
     public static final TrinketType TYPE_RING = new TrinketTypeBase("ring", new ResourceLocation("jewelersconstruct", "textures/items/ring.png"));
     public static final TrinketType TYPE_BELT = new TrinketTypeBase("belt", new ResourceLocation("jewelersconstruct", "textures/items/belt.png"));
     
@@ -181,16 +181,8 @@ public class Content {
     
     /* ============================== Items =============================== */
     public static final Item ITEM_CREATIVE_MODIFIER = new ItemCreativeModifier();
-    public static final Item ITEM_RING = new ItemJewelry(TYPE_RING, BaubleType.RING); // TODO
-                                                                                      // replace
-                                                                                      // with
-                                                                                      // specific
-                                                                                      // items
-    public static final Item ITEM_BELT = new ItemJewelry(TYPE_BELT, BaubleType.BELT); // TODO
-                                                                                      // replace
-                                                                                      // with
-                                                                                      // specific
-                                                                                      // items
+    public static final Item ITEM_RING = new ItemJewelry(TYPE_RING, BaubleType.RING);
+    public static final Item ITEM_BELT = new ItemJewelry(TYPE_BELT, BaubleType.BELT);
     
     public static final ItemPart ITEM_PART_BAND = new ItemPart(PART_BAND);
     public static final ItemPart ITEM_PART_BINDING = new ItemPart(PART_BINDING);

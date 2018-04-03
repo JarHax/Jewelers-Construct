@@ -17,4 +17,10 @@ public class PartTypeGem extends PartTypeBase {
         
         return material instanceof MaterialGem;
     }
+    
+    @Override
+    public boolean hasDifferentMaterials() {
+        
+        return true;
+    }
 }
