@@ -2,7 +2,12 @@
 
 This mod allows players to create baubles out of the various resources in their game. Modifiers can be applied to the baubles in this mod to give stat boosts and other abilities. 
 
-## ModJam and Future updates
+## ModJam
+This mod was made in four days as part of ModJam 5. Voting for ModJam is now open, you can leave your vote [here](https://docs.google.com/forms/d/e/1FAIpQLSeYHcTSuso40juM8l2H1CUsrATxiMxIfQwZEMfHPVGo50yLRg/viewform). Due to an issue when we submitted, our mod is listed as `ModJam5-1.12.2-1.8.0.jar` in the team category, so if you want to vote for us, that's how we show up on the list. Sorry for the confusion. 
+
+If you have an issue with this mod crashing, please download the latest version on this document. We will be fixing issues as they are reported. 
+
+## Future updates
 The textures, models, content, and general balancing in this mod is largely a proof of concept that was made in 4 days for ModJam 5. We are planning to continue development of this mod but further polish is needed before we will be officially releasing it on Curse. A branch for the polished version has been created and can be found [here](https://github.com/JarHax/ModJam-5/tree/polish). 
 
 ## Downloads
