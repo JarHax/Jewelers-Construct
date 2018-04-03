@@ -1,5 +1,6 @@
 package com.jarhax.jewelersconstruct.item;
 
+import java.awt.*;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -24,6 +25,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -59,7 +61,8 @@ public class ItemJewelry extends Item implements IBauble {
         
         final int baseDurability = 1;
         
-        int durability = 100;
+        int durability = 0;
+        durability = JewelryHelper.getJewelryMaterials(stack).stream().mapToInt(Material::getDurability).sum();
         
         for (final Entry<Modifier, Integer> modifierData : JewelryHelper.getModifiers(stack).entrySet()) {
             
@@ -159,6 +162,8 @@ public class ItemJewelry extends Item implements IBauble {
                 TempUtils.getModifierTooltip(modifierData.getKey().getAttributeModifiers(stack, PlayerUtils.getClientPlayer(), modifierData.getValue()), tooltip);
             }
         }
+        
+        tooltip.add("Durability: " + getMaxDamage(stack));
         
         if (flagIn == ITooltipFlag.TooltipFlags.ADVANCED) {
     
