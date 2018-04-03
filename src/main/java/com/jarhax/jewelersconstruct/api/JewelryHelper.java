@@ -45,6 +45,7 @@ public class JewelryHelper {
     public static final IForgeRegistry<PartType> PART_TYPES = GameRegistry.findRegistry(PartType.class);
     public static final IForgeRegistry<TrinketType> TRINKET_TYPES = GameRegistry.findRegistry(TrinketType.class);
     public static final ItemStackMap<Material> INPUTS_TO_MATERIALS = new ItemStackMap<>(ItemStackMap.SIMILAR);
+    public static final ItemStackMap<Modifier> INPUTS_TO_MODIFIERS = new ItemStackMap<>(ItemStackMap.SIMILAR);
     
     private static final String TAG_MODIFIERS = "Modifiers";
     private static final String TAG_MODIFIER = "Modifier";
@@ -238,7 +239,7 @@ public class JewelryHelper {
         
         for (final ItemStack stack : OreDictionary.getOres(oredict)) {
             
-            System.out.println("Associating " + stack.toString() + oredict);
+            System.out.println("Associating material " + stack.toString() + oredict);
             associateMaterial(stack, material);
         }
     }
@@ -247,6 +248,20 @@ public class JewelryHelper {
         
         INPUTS_TO_MATERIALS.put(stack, material);
     }
+    
+    public static void associateModifier (String oredict, Modifier material) {
+        
+        for (final ItemStack stack : OreDictionary.getOres(oredict)) {
+            
+            System.out.println("Associating modifier" + stack.toString() + oredict);
+            associateModifier(stack, material);
+        }
+    }
+    
+    public static void associateModifier (ItemStack stack, Modifier modifier){
+        INPUTS_TO_MODIFIERS.put(stack, modifier);
+    }
+    
     
     public static Material getMaterial (ItemStack stack) {
         
@@ -325,5 +340,7 @@ public class JewelryHelper {
     public static int getRetention(ItemStack stack){
        return getJewelryMaterials(stack).stream().mapToInt(Material::getRetention).sum();
     }
+    
+    
     
 }

@@ -1,6 +1,5 @@
 package com.jarhax.jewelersconstruct;
 
-import com.jarhax.jewelersconstruct.addons.tcon.Addon;
 import com.jarhax.jewelersconstruct.addons.tcon.AddonManager;
 import com.jarhax.jewelersconstruct.api.JewelryHelper;
 import com.jarhax.jewelersconstruct.api.material.Material;
@@ -18,6 +17,7 @@ import com.jarhax.jewelersconstruct.blocks.BlockPartShaper;
 import com.jarhax.jewelersconstruct.item.ItemCreativeModifier;
 import com.jarhax.jewelersconstruct.item.ItemJewelry;
 import com.jarhax.jewelersconstruct.item.ItemPart;
+import com.jarhax.jewelersconstruct.modifiers.*;
 import com.jarhax.jewelersconstruct.tileentities.TileEntityPartShaper;
 import com.jarhax.jewelersconstruct.tileentities.TileEntityTrinketForge;
 
@@ -29,7 +29,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
+import net.minecraft.item.*;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
@@ -59,6 +59,9 @@ public class Content {
     public static final Modifier MODIFIER_GRASPING = new ModifierAttribute("grasping", EntityPlayer.REACH_DISTANCE, 1.25d, AttributeOperation.ADDITIVE, 3, "15b13705-586d-4b25-9fbf-7dc76613977b");
     public static final Modifier MODIFIER_SWIFT = new ModifierAttribute("swift", SharedMonsterAttributes.ATTACK_SPEED, 0.33d, AttributeOperation.ADDITIVE, 3, "0238fcd1-c252-4389-9022-06215adff31f");
     public static final Modifier MODIFIER_TRAVELER = new ModifierAttribute("traveler", SharedMonsterAttributes.MOVEMENT_SPEED, 0.1d, AttributeOperation.MULTIPLY, 5, "7a87405c-f8e8-4ba7-a235-fd6c0e90ebd2");
+    public static final Modifier MODIFIER_STEP_UP = new ModifierStepUp();
+    public static final Modifier MODIFIER_FLOAT = new ModifierFloat();
+    
     
     @SubscribeEvent
     public static void registerModifiers (RegistryEvent.Register<Modifier> event) {
@@ -72,6 +75,9 @@ public class Content {
         registry.register(MODIFIER_GRASPING);
         registry.register(MODIFIER_SWIFT);
         registry.register(MODIFIER_TRAVELER);
+        registry.register(MODIFIER_STEP_UP);
+        registry.register(MODIFIER_FLOAT);
+        JewelryHelper.associateModifier(new ItemStack(Items.FEATHER), MODIFIER_FLOAT);
     }
     
     /* ============================== Materials =========================== */

@@ -15,7 +15,7 @@ import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
-public class ModifierAttribute extends Modifier {
+public class ModifierAttribute extends ModifierBase {
     
     private final List<Multimap<String, AttributeModifier>> modifiers = new ArrayList<>();
     private final int maxLevel;
@@ -26,8 +26,8 @@ public class ModifierAttribute extends Modifier {
     }
     
     public ModifierAttribute(String name, IAttribute attribute, double amount, AttributeOperation operation, int maxLevel, String uuid) {
-        
-        final ResourceLocation location = TempUtils.getIdForActiveMod(name);
+        super(TempUtils.getIdForActiveMod(name));
+        final ResourceLocation location = getRegistryName();
         
         for (int i = 1; i <= maxLevel; i++) {
             
@@ -37,7 +37,7 @@ public class ModifierAttribute extends Modifier {
         }
         
         this.maxLevel = maxLevel;
-        this.setRegistryName(location);
+        
     }
     
     @Override
