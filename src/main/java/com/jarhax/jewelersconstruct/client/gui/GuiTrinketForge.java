@@ -3,6 +3,7 @@ package com.jarhax.jewelersconstruct.client.gui;
 import java.io.IOException;
 import java.util.Random;
 
+import com.jarhax.jewelersconstruct.client.container.slots.*;
 import org.lwjgl.opengl.GL11;
 
 import com.jarhax.jewelersconstruct.JewelersConstruct;
@@ -10,8 +11,6 @@ import com.jarhax.jewelersconstruct.api.JewelryHelper;
 import com.jarhax.jewelersconstruct.api.part.PartType;
 import com.jarhax.jewelersconstruct.api.trinket.TrinketType;
 import com.jarhax.jewelersconstruct.client.container.ContainerTrinketForge;
-import com.jarhax.jewelersconstruct.client.container.slots.SlotTrinketForgeOutput;
-import com.jarhax.jewelersconstruct.client.container.slots.SlotTrinketforgeInput;
 import com.jarhax.jewelersconstruct.client.gui.buttons.GuiButtonTrinket;
 import com.jarhax.jewelersconstruct.network.PacketSyncTrinketForge;
 import com.jarhax.jewelersconstruct.tileentities.TileEntityTrinketForge;
@@ -70,10 +69,17 @@ public class GuiTrinketForge extends GuiContainer {
         this.drawDefaultBackground();
         super.drawScreen(mouseX, mouseY, partialTicks);
         this.renderHoveredToolTip(mouseX, mouseY);
-        if (this.getSlotUnderMouse() != null && this.getSlotUnderMouse() instanceof SlotTrinketforgeInput && !this.getSlotUnderMouse().getHasStack()) {
-            final Slot slot = this.getSlotUnderMouse();
-            if (this.tile.getLastType().getPartTypes().length > slot.slotNumber) {
-                this.drawHoveringText(I18n.format(this.tile.getLastType().getPartTypes()[slot.slotNumber].getTranslationName()), mouseX, mouseY);
+        if(tile.getInventory().getStackInSlot(5).isEmpty()) {
+            if(this.getSlotUnderMouse() != null  && !this.getSlotUnderMouse().getHasStack()) {
+                final Slot slot = this.getSlotUnderMouse();
+                if(slot instanceof SlotTrinketforgeInput) {
+                    if(this.tile.getLastType().getPartTypes().length > slot.slotNumber) {
+                        this.drawHoveringText(I18n.format(this.tile.getLastType().getPartTypes()[slot.slotNumber].getTranslationName()), mouseX, mouseY);
+                    }
+                }else if(slot instanceof SlotTrinketForgeTrinket){
+                    this.drawHoveringText("Trinkets", mouseX, mouseY);
+                }
+                
             }
         }
     }
@@ -97,16 +103,21 @@ public class GuiTrinketForge extends GuiContainer {
                 this.drawTexturedModalRect(this.left + slot.xPos - 5, this.top + slot.yPos - 5, 58, this.ySize, 26, 26);
                 continue;
             }
-            if (slot instanceof SlotItemHandler) {
+            if(slot instanceof SlotTrinketForgeTrinket){
+                this.drawTexturedModalRect(this.left + slot.xPos - 1, this.top + slot.yPos - 1, 40, this.ySize, 18, 18);
+                continue;
+            }
+            if (slot instanceof SlotTrinketforgeInput) {
+                final boolean modifier = !tile.getInventory().getStackInSlot(5).isEmpty();
                 final boolean enabled = this.tile.getLastType().getPartTypes().length > slotCount;
-                if (!enabled) {
+                if (!enabled && !modifier) {
                     GL11.glColor4d(0.5, 0.5, 0.5, 0.5);
                 }
                 this.drawTexturedModalRect(this.left + slot.xPos - 1, this.top + slot.yPos - 1, 40, this.ySize, 18, 18);
-                if (!enabled) {
+                if (!enabled&& !modifier) {
                     GL11.glColor4d(1, 1, 1, 1);
                 }
-                if (enabled) {
+                if (enabled && !modifier) {
                     final PartType type = this.tile.getLastType().getPartTypes()[slotCount++];
                     this.mc.getTextureManager().bindTexture(type.getIconLocation());
                     GL11.glColor4d(0.2, 0.2, 0.2, 0.2);

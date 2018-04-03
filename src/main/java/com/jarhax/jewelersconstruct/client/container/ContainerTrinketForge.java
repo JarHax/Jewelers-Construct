@@ -3,8 +3,7 @@ package com.jarhax.jewelersconstruct.client.container;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.jarhax.jewelersconstruct.client.container.slots.SlotTrinketForgeOutput;
-import com.jarhax.jewelersconstruct.client.container.slots.SlotTrinketforgeInput;
+import com.jarhax.jewelersconstruct.client.container.slots.*;
 import com.jarhax.jewelersconstruct.tileentities.TileEntityTrinketForge;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,7 +24,9 @@ public class ContainerTrinketForge extends Container {
         this.addSlotToContainer(new SlotTrinketforgeInput(tile, 2, 100 + 60, 35));
         this.addSlotToContainer(new SlotTrinketforgeInput(tile, 3, 100 + 80, 35));
         this.addSlotToContainer(new SlotTrinketForgeOutput(tile, 4, 100 + 120, 35));
-        
+        this.addSlotToContainer(new SlotTrinketForgeTrinket(tile, 5, 100 + 50, 15));
+    
+    
         for (int x = 0; x < 9; x++) {
             this.addSlotToContainer(new Slot(invPlayer, x, 108 + 18 * x, 142));
         }
