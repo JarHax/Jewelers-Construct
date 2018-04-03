@@ -48,6 +48,9 @@ public class ItemPart extends Item implements IColorfulItem {
     public void addInformation (ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         
         tooltip.add(JewelryHelper.getMaterialName(JewelryHelper.getPartMaterial(stack)));
+        tooltip.add("Modifier count: " +JewelryHelper.getPartMaterial(stack).getRetention());
+        tooltip.add("Durability modifier: " +JewelryHelper.getPartMaterial(stack).getDurability());
+    
     }
     
     @Override
