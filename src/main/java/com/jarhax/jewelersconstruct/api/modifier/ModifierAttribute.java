@@ -41,6 +41,15 @@ public class ModifierAttribute extends Modifier {
     }
     
     @Override
+    public void onWearerTick (ItemStack stack, EntityLivingBase user, int level) {
+        
+        if (!user.world.isRemote && user.ticksExisted % 600 == 0) {
+            
+            stack.damageItem(1, user);
+        }
+    }
+    
+    @Override
     public int getMaxLevel () {
         
         return this.maxLevel;

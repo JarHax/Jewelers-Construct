@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import com.google.common.collect.Multimap;
 import com.jarhax.jewelersconstruct.api.material.Material;
 import com.jarhax.jewelersconstruct.api.modifier.Modifier;
 import com.jarhax.jewelersconstruct.api.part.PartType;
@@ -21,6 +22,7 @@ import net.darkhax.bookshelf.lib.ItemStackMap;
 import net.darkhax.bookshelf.util.StackUtils;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -70,39 +72,47 @@ public class JewelryHelper {
         return TRINKET_TYPES.getValue(new ResourceLocation(name));
     }
     
-    public static void tickJewelry (ItemStack stack, EntityLivingBase user) {
+    public static void tickJewelry (ItemStack stack, EntityPlayer user) {
         
-        for (final Entry<Modifier, Integer> modifierData : getModifiers(stack).entrySet()) {
+        if (!isBroken(stack)) {
             
-            modifierData.getKey().onWearerTick(stack, user, modifierData.getValue());
-        }
-    }
-    
-    public static void handleEquip (ItemStack stack, EntityPlayer user) {
-        
-        for (final Entry<Modifier, Integer> modifierData : getModifiers(stack).entrySet()) {
-            
-            user.getAttributeMap().applyAttributeModifiers(modifierData.getKey().getAttributeModifiers(stack, user, modifierData.getValue()));
+            for (final Entry<Modifier, Integer> modifierData : getModifiers(stack).entrySet()) {
+                
+                modifierData.getKey().onWearerTick(stack, user, modifierData.getValue());
+            }
         }
         
-        updatePlayerModifiers(user);
-    }
-    
-    public static void handleUnEquip (ItemStack stack, EntityPlayer user) {
-        
-        for (final Entry<Modifier, Integer> modifierData : getModifiers(stack).entrySet()) {
+        else {
             
-            user.getAttributeMap().removeAttributeModifiers(modifierData.getKey().getAttributeModifiers(stack, user, modifierData.getValue()));
+            updatePlayerModifiers(user);
         }
-        
-        updatePlayerModifiers(user);
     }
     
     public static void updatePlayerModifiers (EntityPlayer player) {
         
+        removeAllModifiers(player);
+        
         for (final Entry<Modifier, Tuple<ItemStack, Integer>> topModifiers : getHighestModifiers(player).entrySet()) {
             
             player.getAttributeMap().applyAttributeModifiers(topModifiers.getKey().getAttributeModifiers(topModifiers.getValue().getFirst(), player, topModifiers.getValue().getSecond()));
+        }
+    }
+    
+    public static void removeAllModifiers(EntityPlayer player) {
+        
+        final IBaublesItemHandler baubles = BaublesApi.getBaublesHandler(player);
+        
+        for (int slot = 0; slot < baubles.getSlots(); slot++) {
+            
+            final ItemStack stack = baubles.getStackInSlot(slot);
+            
+            if (!stack.isEmpty() && stack.getItem() instanceof ItemJewelry) {
+                
+                for (final Entry<Modifier, Integer> modifierData : JewelryHelper.getModifiers(stack).entrySet()) {
+                    
+                    player.getAttributeMap().removeAttributeModifiers(modifierData.getKey().getAttributeModifiers(stack, player, modifierData.getValue()));
+                }
+            }
         }
     }
     
@@ -116,7 +126,7 @@ public class JewelryHelper {
             
             final ItemStack stack = baubles.getStackInSlot(slot);
             
-            if (!stack.isEmpty() && stack.getItem() instanceof ItemJewelry) {
+            if (!stack.isEmpty() && stack.getItem() instanceof ItemJewelry && !isBroken(stack)) {
                 
                 for (final Entry<Modifier, Integer> modifierData : JewelryHelper.getModifiers(stack).entrySet()) {
                     
@@ -304,5 +314,10 @@ public class JewelryHelper {
         }
         
         return validMaterials;
+    }
+    
+    public static boolean isBroken(ItemStack stack) {
+        
+        return stack.getMaxDamage() - stack.getItemDamage() <= 0;
     }
 }

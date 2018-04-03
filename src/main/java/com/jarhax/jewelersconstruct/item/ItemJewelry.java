@@ -59,7 +59,7 @@ public class ItemJewelry extends Item implements IBauble {
         
         final int baseDurability = 1;
         
-        int durability = 0;
+        int durability = 100;
         
         for (final Entry<Modifier, Integer> modifierData : JewelryHelper.getModifiers(stack).entrySet()) {
             
@@ -78,12 +78,15 @@ public class ItemJewelry extends Item implements IBauble {
     @Override
     public void onWornTick (ItemStack stack, EntityLivingBase player) {
         
-        if (!isLastUser(stack, player)) {
+        if (player instanceof EntityPlayer) {
             
-            this.onEquipped(stack, player);
+            if (!isLastUser(stack, player)) {
+                
+                this.onEquipped(stack, player);
+            }
+            
+            JewelryHelper.tickJewelry(stack, (EntityPlayer) player);
         }
-        
-        JewelryHelper.tickJewelry(stack, player);
     }
     
     @Override
@@ -91,7 +94,7 @@ public class ItemJewelry extends Item implements IBauble {
         
         if (player instanceof EntityPlayer) {
             
-            JewelryHelper.handleEquip(stack, (EntityPlayer) player);
+            JewelryHelper.updatePlayerModifiers((EntityPlayer) player);
             setLastUser(stack, player);
         }
     }
@@ -101,7 +104,7 @@ public class ItemJewelry extends Item implements IBauble {
         
         if (player instanceof EntityPlayer) {
             
-            JewelryHelper.handleUnEquip(stack, (EntityPlayer) player);
+            JewelryHelper.updatePlayerModifiers((EntityPlayer) player);
         }
     }
     
@@ -110,6 +113,15 @@ public class ItemJewelry extends Item implements IBauble {
         
         if (this.isInCreativeTab(tab)) {
             
+            for (final Modifier modifier : JewelryHelper.MODIFIERS) {
+                
+                for (int level = 1; level <= modifier.getMaxLevel(); level++) {
+                    
+                    final ItemStack stack = new ItemStack(this);
+                    JewelryHelper.setModifier(stack, modifier, level);
+                    items.add(stack);
+                }
+            }
         }
     }
     
