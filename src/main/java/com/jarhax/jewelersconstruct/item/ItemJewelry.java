@@ -161,8 +161,10 @@ public class ItemJewelry extends Item implements IBauble {
         }
         
         if (flagIn == ITooltipFlag.TooltipFlags.ADVANCED) {
-            
-            tooltip.add(I18n.format("tooltip.jewelersconstruct.modifiercout", JewelryHelper.getModifierCount(stack)));
+    
+            int modifierCount = JewelryHelper.getModifierCount(stack);
+            int retention = JewelryHelper.getRetention(stack);
+            tooltip.add((modifierCount > retention ? TextFormatting.RED.toString() : TextFormatting.GRAY )+ I18n.format("tooltip.jewelersconstruct.modifiercout", modifierCount, retention));
         }
     }
     

@@ -321,4 +321,9 @@ public class JewelryHelper {
         
         return stack.getMaxDamage() - stack.getItemDamage() <= 0;
     }
+    
+    public static int getRetention(ItemStack stack){
+       return getJewelryMaterials(stack).stream().mapToInt(Material::getRetention).sum();
+    }
+    
 }

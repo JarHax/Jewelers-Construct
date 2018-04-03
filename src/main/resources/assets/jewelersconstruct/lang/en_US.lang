@@ -57,7 +57,7 @@ jewelersconstruct.part.jewelersconstruct.buckle=Buckle
 jewelersconstruct.part.jewelersconstruct.gem=Gem
 
 # Tooltips
-tooltip.jewelersconstruct.modifiercout=Modifiers %s / ?
+tooltip.jewelersconstruct.modifiercout=Modifiers %s / %s
 
 # Misc
 itemGroup.jewelersconstruct=Jewelers Construct

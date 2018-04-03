@@ -2,6 +2,8 @@ package com.jarhax.jewelersconstruct.client.container.slots;
 
 import javax.annotation.Nonnull;
 
+import com.jarhax.jewelersconstruct.api.JewelryHelper;
+import com.jarhax.jewelersconstruct.item.ItemJewelry;
 import com.jarhax.jewelersconstruct.tileentities.TileEntityTrinketForge;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,6 +24,16 @@ public class SlotTrinketForgeOutput extends SlotItemHandler {
     public boolean isItemValid (@Nonnull ItemStack stack) {
         
         return false;
+    }
+    
+    @Override
+    public boolean canTakeStack(EntityPlayer playerIn) {
+        if(!getStack().isEmpty()){
+            if(getStack().getItem() instanceof ItemJewelry){
+                return JewelryHelper.getRetention(getStack())>= JewelryHelper.getModifierCount(getStack());
+            }
+        }
+        return super.canTakeStack(playerIn);
     }
     
     @Override
