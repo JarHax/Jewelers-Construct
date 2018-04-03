@@ -1,9 +1,9 @@
 package com.jarhax.jewelersconstruct.tileentities;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import com.jarhax.jewelersconstruct.api.JewelryHelper;
+import com.jarhax.jewelersconstruct.api.material.Material;
 import com.jarhax.jewelersconstruct.api.modifier.Modifier;
 import com.jarhax.jewelersconstruct.api.part.PartType;
 import com.jarhax.jewelersconstruct.api.trinket.TrinketType;
@@ -45,6 +45,7 @@ public class TileEntityTrinketForge extends TileEntityBasicTickable {
             if (valid) {
                 final ItemStack stack = new ItemStack(this.getLastType().getTrinketItem());
                 final Map<Modifier, Integer> modifierMap = new HashMap<>();
+                final List<Material> materials = new LinkedList<>();
                 for (int i = 0; i < this.getInventory().getSlots(); i++) {
                     final ItemStack slot = this.getInventory().getStackInSlot(i);
                     
@@ -55,9 +56,10 @@ public class TileEntityTrinketForge extends TileEntityBasicTickable {
                                 modifierMap.merge(entry.getKey(), entry.getValue(), (integer, integer2) -> integer + integer2);
                             }
                         }
+                        materials.add(JewelryHelper.getPartMaterial(slot));
                     }
                 }
-                
+                JewelryHelper.setJewelryMaterials(stack, materials);
                 JewelryHelper.setModifiers(stack, modifierMap);
                 this.getInventory().setStackInSlot(4, stack);
             }
