@@ -134,11 +134,11 @@ public class Content {
     }
     
     /* ============================== Part Types ========================== */
-    public static final PartType PART_BAND = new PartTypeBase("band", new ResourceLocation("jewelersconstruct", "textures/items/part_band.png"));
-    public static final PartType PART_BINDING = new PartTypeBase("binding", new ResourceLocation("jewelersconstruct", "textures/items/part_binding.png"));
-    public static final PartType PART_CHAIN = new PartTypeBase("chain", new ResourceLocation("jewelersconstruct", "textures/items/part_chain.png"));
-    public static final PartType PART_BUCKLE = new PartTypeBase("buckle", new ResourceLocation("jewelersconstruct", "textures/items/part_buckle.png"));
-    public static final PartType PART_GEM = new PartTypeGem("gem", new ResourceLocation("jewelersconstruct", "textures/items/part_gem.png"));
+    public static final PartType PART_BAND = new PartTypeBase("band", new ResourceLocation(JewelersConstruct.MOD_ID, "textures/items/part_band.png"));
+    public static final PartType PART_BINDING = new PartTypeBase("binding", new ResourceLocation(JewelersConstruct.MOD_ID, "textures/items/part_binding.png"));
+    public static final PartType PART_CHAIN = new PartTypeBase("chain", new ResourceLocation(JewelersConstruct.MOD_ID, "textures/items/part_chain.png"));
+    public static final PartType PART_BUCKLE = new PartTypeBase("buckle", new ResourceLocation(JewelersConstruct.MOD_ID, "textures/items/part_buckle.png"));
+    public static final PartType PART_GEM = new PartTypeGem("gem", new ResourceLocation(JewelersConstruct.MOD_ID, "textures/items/part_gem.png"));
     
     @SubscribeEvent
     public static void registerPartTypes (RegistryEvent.Register<PartType> event) {
@@ -152,8 +152,8 @@ public class Content {
     }
     
     /* ============================== Trinket Types ======================= */
-    public static final TrinketType TYPE_RING = new TrinketTypeBase("ring", new ResourceLocation("jewelersconstruct", "textures/items/ring.png"));
-    public static final TrinketType TYPE_BELT = new TrinketTypeBase("belt", new ResourceLocation("jewelersconstruct", "textures/items/belt.png"));
+    public static final TrinketType TYPE_RING = new TrinketTypeBase("ring", new ResourceLocation(JewelersConstruct.MOD_ID, "textures/items/ring.png"));
+    public static final TrinketType TYPE_BELT = new TrinketTypeBase("belt", new ResourceLocation(JewelersConstruct.MOD_ID, "textures/items/belt.png"));
     
     @SubscribeEvent
     public static void registerTrinketTypes (RegistryEvent.Register<TrinketType> event) {
