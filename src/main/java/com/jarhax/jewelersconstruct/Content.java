@@ -35,11 +35,6 @@ public class Content {
     @SubscribeEvent
     public static void tooltip(ItemTooltipEvent event) {
         
-        for(String s : TempUtils.getOreNames(event.getItemStack())) {
-            
-            event.getToolTip().add(s);
-        }
-        
         if(JewelryHelper.INPUTS_TO_MODIFIERS.containsKey(event.getItemStack())) {
             Modifier modifier = JewelryHelper.INPUTS_TO_MODIFIERS.get(event.getItemStack());
             event.getToolTip().add("JC Modifier: " + JewelersConstruct.PROXY.translate(modifier.getTranslationName()));
