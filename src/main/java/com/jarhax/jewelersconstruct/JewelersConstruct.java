@@ -36,7 +36,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import net.minecraftforge.registries.RegistryBuilder;
 
-@Mod(modid = JewelersConstruct.MOD_ID, name = "Jewelers Construct", version = "@VERSION@")
+@Mod(modid = JewelersConstruct.MOD_ID, name = "Jewelers Construct", version = "@VERSION@", dependencies = "required-after:bookshelf;required-after:baubles;")
 public class JewelersConstruct {
     
     public static final String MOD_ID = "jewelersconstruct";
